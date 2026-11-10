@@ -44,7 +44,7 @@ export class SalePage {
     this.buyerDropdown = page.locator('[aria-labelledby="select2-outletId-container"]');
     this.orderTable = page.locator('#skunitstable');
     this.orderRows = this.orderTable.locator('tbody tr').filter({ has: page.locator('input[id^="cases_"]') });
-    this.orderTableLength = page.locator('select[name="skunitstable_length"]');
+    this.orderTableLength = page.locator('select[aria-controls="skunitstable"]');
 
     this.paymentModeSelect = page.locator('#PaymentMode');
     this.paymentModeButton = page.locator('#PaymentMode ~ .btn-group > button.multiselect');

@@ -21,7 +21,8 @@ export class UsersListPage {
   constructor(private readonly page: Page) {
     this.table = page.locator('#usertable');
     this.rows = this.table.locator('tbody tr');
-    this.pageSizeSelect = page.locator('select[name="usertable_length"]');
+    // aria-controls works in DataTables 1 and 2 (the 2.x upgrade in Oct 2026 dropped name="usertable_length").
+    this.pageSizeSelect = page.locator('select[aria-controls="usertable"]');
     this.summary = page.locator('#usertable_info');
   }
 

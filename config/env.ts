@@ -23,6 +23,10 @@ export const env = {
   get password() {
     return required('BIZOM_PASSWORD');
   },
+  /** Distributor manager account used by role-based UI tests. */
+  get dmUsername() {
+    return required('DM_USERNAME');
+  },
   get dmNewPassword() {
     return required('DM_NEW_PASSWORD');
   },

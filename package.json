@@ -11,6 +11,7 @@
     "spec:check": "node scripts/spec-check.mjs",
     "test:users": "playwright test tests/users --headed",
     "test:sales": "playwright test tests/sales --headed",
+    "test:roles": "playwright test tests/roles --headed",
     "report": "playwright show-report"
   },
   "keywords": [],

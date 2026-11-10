@@ -11,6 +11,8 @@ test.describe('Login & Logout', () => {
 
     await expect(page).toHaveURL(/\/users\/ajaxuserindex/);
     await appShell.expectLoggedIn();
+    // asserstion --  RBAC - login success diff screen
+    // data managements -- with automation
   });
 
   test('AUTH-02 Logged-in user can log out', spec('AUTH-02'), async ({ page, loginPage, appShell }) => {
@@ -53,7 +55,8 @@ test.describe('Login & Logout', () => {
   test('AUTH-06 Protected page requires login', spec('AUTH-06'), async ({ page, loginPage }) => {
     await page.goto('/users/ajaxuserindex');
 
-    await expect(page).toHaveURL(/\/users\/login\?redirect=%2Fusers%2Fajaxuserindex$/);
+    // Since 22 Oct 2026 the app no longer adds ?redirect=… (see the note under AUTH-06 in the spec).
+    await expect(page).toHaveURL(/\/users\/login(\?|$)/);
     await loginPage.expectVisible();
   });
 

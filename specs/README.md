@@ -19,3 +19,4 @@ When behaviour changes, update the spec first, then the test.
 | [Login & Logout](auth/login-logout.md)    | AUTH   | Implemented |
 | [User list → Edit → Change Password](users/user-change-password.md) | USR | Implemented |
 | [Distributor manager: reset password → direct sale](sales/dm-direct-sale.md) | SALE | Implemented |
+| [Role-based UI](roles/role-based-ui.md) (expected UI per role in `data/roles.ts`) | ROLE | Implemented |

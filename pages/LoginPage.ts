@@ -32,8 +32,9 @@ export class LoginPage {
     await this.page.waitForLoadState();
   }
 
+  /** The error banner at the top. (Since Oct 2026 the message is also repeated in red under the form.) */
   errorMessage(text: string) {
-    return this.page.getByText(text);
+    return this.page.locator('#flash_message').getByText(text);
   }
 
   async expectVisible() {

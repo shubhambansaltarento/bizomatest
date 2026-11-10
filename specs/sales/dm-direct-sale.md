@@ -19,6 +19,7 @@ An admin resets a distributor manager's password. That distributor manager then 
 - The distributor manager is picked **at random** from users whose Role is `DISTRIBUTOR MANAGER` **and** who are mapped to at least one distributor (the "For" column is not empty). Unmapped managers (currently Rabbi.DM, Shegal.DM) can't sell and are skipped.
 - The picked username is stored for the rest of the test and recorded in the report, together with the warehouse, buyer, and the invoice ID of the created sale.
 - **Side effects (dev data):** each run sets the picked user's password to `Web@123123`, creates one sale, and reduces stock by 1 case per item sold.
+- **Shared accounts are in use by people.** On 2 Nov 2026, `pradeep.kumar`'s password had been changed by someone else, so this test resetting it to `Web@123123` can lock that person out. Dedicated test accounts are needed (framework proposal, Q5).
 
 ## Pages & URLs
 
@@ -78,6 +79,8 @@ An admin resets a distributor manager's password. That distributor manager then 
 - **When** I click **Finish**
 - **Then** the server confirms the sale (`Result: true`) and returns an invoice ID
 - **And** the wizard resets to Step 1 for a new sale
+
+> **Open defect (2 Nov 2026):** Finish fails on dev with `Result: false` and a database error: `Unknown column 'reference_child_outlet_id'` when inserting into `cdnotes` (seen with pricing.distributor, Pricing Warehouse 2, buyer 222). Looks like a database migration missing on devarun; reported to the dev team. SALE-07 is expected to fail until it is fixed.
 
 ## Out of scope
 
