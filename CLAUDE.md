@@ -15,10 +15,12 @@ Planned framework changes live in `docs/framework-proposal.md`. They are **not i
 - **Selectors must not depend on CSS-framework attributes** (e.g. Bootstrap's `data-toggle`, which became `data-bs-toggle` in Oct 2026). Prefer visible text, roles, ids.
 - **Selectors live in `pages/`** (page objects), never in spec files.
 - Credentials come from `.env` only; never hard-code them.
+- **Automation users:** every user the tests create has a username starting with `e2e.` and is an automation user, not a real person. They are listed in `data/automationUsers.ts` (one fixed account per role for the lifecycle tests); tests change their passwords and status. Create new test users with that prefix (`newUserData` in `data/userRoles.ts`).
 
 ## Commands
 
 - `npm run spec:check`: every criterion has a test, and every test ID exists in a spec
 - `npx playwright test tests/<module> --headed`: run one module in a visible browser
 - `npx playwright test --grep @AUTH-03`: run one criterion
+- `npm run cleanup:e2e-users`: deactivate leftover automation users (`e2e.*`), keeping the fixed accounts in `data/automationUsers.ts`
 - `npm run report`: open the last HTML report

@@ -10,8 +10,10 @@
     "test:ui": "playwright test --ui",
     "spec:check": "node scripts/spec-check.mjs",
     "test:users": "playwright test tests/users --headed",
+    "test:admin": "playwright test tests/admin --headed",
     "test:sales": "playwright test tests/sales --headed",
     "test:roles": "playwright test tests/roles --headed",
+    "cleanup:e2e-users": "E2E_CLEANUP=1 playwright test tests/maintenance --reporter=list",
     "report": "playwright show-report"
   },
   "keywords": [],

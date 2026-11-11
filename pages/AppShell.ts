@@ -51,6 +51,78 @@ export class AppShell {
     );
   }
 
+  /** The section the sidebar is showing (its heading) and that section's items. */
+  async currentSidebarSection(): Promise<{ section: string; items: string[] }> {
+    const panel = this.page.locator('#sidebar #dataToAttach');
+    await expect(panel.locator('h6.current-active-parent')).toBeVisible();
+    return {
+      // textContent, not innerText: CSS shows the heading in capitals ("DASHBOARD").
+      section: (await panel.locator('h6.current-active-parent').textContent())!.trim(),
+      items: (await panel.locator('li.sidebar-item > a').allInnerTexts()).map((t) => t.trim()),
+    };
+  }
+
+  /** Text that means the page failed to load (CakePHP errors, access denied). */
+  readonly errorText = /Missing Controller|Missing Method|Fatal error|Internal Server Error|Page Not Found|Invalid Access|Unauthori[sz]ed access/i;
+
+  /**
+   * Opens a page from the sidebar the way a user does: Main Menu → section → item. Returns the
+   * item's link target (e.g. '/skunits/add') so the caller can check where it landed (the app may
+   * redirect elsewhere).
+   *
+   * The sidebar shows one section's items at a time (`#dataToAttach`, headed by the section name).
+   * Clicking a section in Main Menu opens that section's first page and then shows its items.
+   */
+  async openSidebarItem(section: string, item: string): Promise<string> {
+    const panel = this.page.locator('#sidebar #dataToAttach');
+    const panelTitle = panel.locator('h6.current-active-parent');
+    // Some pages show no section at all (e.g. after a redirect), so don't wait for the heading.
+    const shown = (await panelTitle.count()) ? (await panelTitle.textContent())?.trim() : undefined;
+    if (shown !== section) {
+      await this.mainMenuSections(); // opens Main Menu
+      await this.page.locator('#sidebar #main-navs > li.sidebar-item > a').and(this.page.locator(`[title="${section}"]`)).click();
+      await this.page.waitForLoadState('domcontentloaded');
+      await expect(panelTitle).toHaveText(section, { timeout: 30_000 });
+    }
+    const link = panel.locator('li.sidebar-item > a').and(this.page.locator(`[title="${item}"]`));
+    const href = (await link.getAttribute('href'))!;
+    await Promise.all([
+      this.page.waitForEvent('framenavigated', { predicate: (f) => f === this.page.mainFrame(), timeout: 30_000 }),
+      link.click(),
+    ]);
+    await this.page.waitForLoadState('load');
+    return href;
+  }
+
+  /**
+   * User menu → Change Password: the logged-in user changes their own password. Waits for the
+   * app's "Successfully changed password" Alert and closes it.
+   */
+  async changeOwnPassword(oldPassword: string, newPassword: string) {
+    // :visible because each click adds another copy of the dialog to the page.
+    const dialog = this.page.locator('.ui-dialog:visible').filter({ hasText: 'Password Change' });
+    // The menu item is a plain link (/users/changepwddialog) that page scripts turn into a dialog
+    // once they are ready; clicked too early it opens as a bare page. Go back and try again then.
+    // The dialog's content is loaded from the server, so give it time before clicking again.
+    await expect(async () => {
+      if (this.page.url().includes('/users/changepwddialog')) await this.page.goBack();
+      if (!(await dialog.count())) {
+        await this.userMenuToggle.click();
+        await this.page.locator('#changeownpwd').click();
+      }
+      await expect(dialog).toBeVisible({ timeout: 10_000 });
+    }).toPass({ timeout: 45_000 });
+    await dialog.locator('#oldpwd').fill(oldPassword);
+    await dialog.locator('#changepwd').fill(newPassword);
+    await dialog.locator('#changepwdcnf').fill(newPassword);
+    await dialog.getByRole('button', { name: 'Change Password' }).click();
+
+    const alert = this.page.locator('.ui-dialog').filter({ has: this.page.locator('.ui-dialog-title', { hasText: /^Alert$/ }) });
+    await expect(alert).toContainText('Successfully changed password');
+    await alert.getByRole('button', { name: 'Ok' }).click();
+    await expect(alert).toBeHidden();
+  }
+
   /** Options in the user menu (person icon), read while it is open. */
   async userMenuItems(): Promise<string[]> {
     await this.userMenuToggle.click();

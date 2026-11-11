@@ -37,6 +37,11 @@ export class LoginPage {
     return this.page.locator('#flash_message').getByText(text);
   }
 
+  /** A login error shown anywhere on the page (e.g. "Invalid request url." for refused logins). */
+  message(text: string) {
+    return this.page.getByText(text).first();
+  }
+
   async expectVisible() {
     await expect(this.page).toHaveURL(/\/users\/login/);
     await expect(this.usernameInput).toBeVisible();

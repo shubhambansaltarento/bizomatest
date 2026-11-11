@@ -1,4 +1,4 @@
-import { test as base, expect, type Page } from '@playwright/test';
+import { test as base, expect, type BrowserContext, type Page } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { AppShell } from '../pages/AppShell';
 import { roles, type RoleName } from '../data/roles';
@@ -16,6 +16,13 @@ type AuthFixtures = {
    * Every module spec should use this instead of `page`.
    */
   authedPage: Page;
+  /**
+   * Opens a separate browser (own cookies) and submits the login form there, e.g. for a user the
+   * admin just created, while `authedPage` stays logged in as admin. Does not check the outcome:
+   * use the returned `appShell.expectLoggedIn()` or `loginPage.expectVisible()`.
+   * Browsers opened this way are closed after the test.
+   */
+  loginAs: (username: string, password: string) => Promise<{ page: Page; loginPage: LoginPage; appShell: AppShell }>;
 };
 
 export const test = base.extend<AuthOptions & AuthFixtures>({
@@ -39,6 +46,20 @@ export const test = base.extend<AuthOptions & AuthFixtures>({
 
     await appShell.logout();
     await loginPage.expectVisible();
+  },
+
+  loginAs: async ({ browser, baseURL }, use) => {
+    const contexts: BrowserContext[] = [];
+    await use(async (username, password) => {
+      const context = await browser.newContext({ baseURL });
+      contexts.push(context);
+      const page = await context.newPage();
+      const loginPage = new LoginPage(page);
+      await loginPage.goto();
+      await loginPage.login(username, password);
+      return { page, loginPage, appShell: new AppShell(page) };
+    });
+    await Promise.all(contexts.map((c) => c.close()));
   },
 });
 

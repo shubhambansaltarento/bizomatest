@@ -10,6 +10,9 @@ export class UserEditPage {
   readonly confirmPasswordInput: Locator;
   readonly submitPasswordButton: Locator;
   readonly alertDialog: Locator;
+  /** "active" checkbox: unticked and saved, the user becomes inactive. */
+  readonly activeCheckbox: Locator;
+  readonly saveButton: Locator;
 
   constructor(private readonly page: Page) {
     this.usernameInput = page.locator('#UserUsername');
@@ -20,6 +23,28 @@ export class UserEditPage {
     this.confirmPasswordInput = this.passwordDialog.locator('#changepwdcnf');
     this.submitPasswordButton = this.passwordDialog.getByRole('button', { name: 'Change Password' });
     this.alertDialog = page.locator('.ui-dialog').filter({ has: page.locator('.alert') });
+    this.activeCheckbox = page.locator('#UserActive');
+    this.saveButton = page.locator('#addsubmit');
+  }
+
+  async goto(id: string) {
+    await this.page.goto(`/users/edit/${id}`);
+    await expect(this.usernameInput).toBeVisible();
+  }
+
+  /** Ticks or unticks "active" and saves; the app goes back to the users list. */
+  async saveActive(active: boolean) {
+    await Promise.all([
+      // Unticking loads the "Reason For Inactivating User" options; saving before that finishes
+      // was seen to lose the "saved" message.
+      active ? Promise.resolve() : this.page.waitForResponse((r) => /reason/i.test(r.url()), { timeout: 10_000 }).catch(() => {}),
+      this.activeCheckbox.setChecked(active),
+    ]);
+    await this.page.waitForTimeout(500);
+    // Saving can ask for confirmation (e.g. reporting-manager hierarchy); answer OK.
+    this.page.once('dialog', (d) => d.accept().catch(() => {}));
+    await this.saveButton.click();
+    await expect(this.page).toHaveURL(/\/users\/ajaxuserindex/, { timeout: 45_000 });
   }
 
   async expectLoadedFor(user: { id: string; username: string }) {

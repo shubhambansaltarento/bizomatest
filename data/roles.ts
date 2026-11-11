@@ -20,6 +20,10 @@ export type RoleConfig = {
   sidebar: Record<string, string[]>;
   /** User menu (person icon, top right). */
   userMenu: string[];
+  /** Sidebar items whose link redirects to another URL that is the right page: item → final path. */
+  sidebarRedirects?: Record<string, string>;
+  /** Sidebar items whose page is known to be broken: item → reason. Tested as expected failures (ADM-02). */
+  sidebarKnownIssues?: Record<string, string>;
   /** Pages of other roles that this role must not be able to open by URL. */
   blockedPages: { path: string; name: string; knownIssue?: string }[];
 };
@@ -68,6 +72,11 @@ export const roles = {
       ],
     },
     userMenu: ['Settings', 'Billing', 'Change Password', 'Contact Support', 'Logout'],
+    sidebarRedirects: { 'New Scheme': '/schemes/addscheme' },
+    sidebarKnownIssues: {
+      'Set Outlet Targets':
+        'Page loads without jQuery (10 Nov 2026): "jQuery is not defined", no navbar, sidebar or styles',
+    },
     blockedPages: [],
   },
 

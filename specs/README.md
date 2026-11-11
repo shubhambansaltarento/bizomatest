@@ -20,3 +20,10 @@ When behaviour changes, update the spec first, then the test.
 | [User list → Edit → Change Password](users/user-change-password.md) | USR | Implemented |
 | [Distributor manager: reset password → direct sale](sales/dm-direct-sale.md) | SALE | Implemented |
 | [Role-based UI](roles/role-based-ui.md) (expected UI per role in `data/roles.ts`) | ROLE | Implemented |
+| [Admin: landing page and sidebar navigation](admin/admin-home-navigation.md) | ADM | Implemented |
+| [Users list: controls, pagination and row actions](users/users-list.md) | ULIST | Implemented |
+| [Add user (one per role)](users/add-user.md) (roles in `data/userRoles.ts`) | UADD | Implemented |
+| [Add user: validation](users/add-user-validation.md) | UVAL | Implemented |
+| [User lifecycle: login, password change, deactivate / reactivate](users/user-lifecycle.md) (users in `data/automationUsers.ts`) | ULIFE | Implemented |
+
+Open work for these modules is tracked in [`TODO.md`](../TODO.md).

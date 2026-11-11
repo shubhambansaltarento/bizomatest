@@ -30,4 +30,12 @@ export const env = {
   get dmNewPassword() {
     return required('DM_NEW_PASSWORD');
   },
+  /**
+   * Start of the passwords given to automation users (data/automationUsers.ts); digits are added per
+   * run because the app refuses a user's last 3 passwords. Must hold an upper case letter, a lower
+   * case letter and a special character, e.g. "Web@".
+   */
+  get e2ePasswordPrefix() {
+    return required('E2E_USER_PASSWORD_PREFIX');
+  },
 };
