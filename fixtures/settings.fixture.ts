@@ -15,6 +15,11 @@ export type AppSettings = {
   setForCompany(name: SettingName, value: string): Promise<void>;
   /** Sets a setting for one user only (settings with level 'user'); restored after the test. */
   setForUser(name: SettingName, user: UserRef, value: string): Promise<void>;
+  /**
+   * Puts back everything changed so far, now instead of after the test. Call it before deactivating
+   * a user whose settings were changed: inactive users aren't listed on the settings page.
+   */
+  restoreNow(): Promise<void>;
 };
 
 /**
@@ -46,7 +51,18 @@ export const test = base.extend<{ appSettings: AppSettings }>({
     };
     const note = (text: string) => testInfo.annotations.push({ type: 'setting', description: text });
 
+    // Undo in reverse order; try every one even if one fails, then report the failures.
+    const restoreAll = async () => {
+      const errors: unknown[] = [];
+      for (const undo of restore.splice(0).reverse()) {
+        await undo().catch((e) => errors.push(e));
+      }
+      if (errors.length) throw new Error(`Could not restore ${errors.length} setting(s): ${errors.map(String).join('; ')}`);
+    };
+
     await use({
+      restoreNow: restoreAll,
+
       async companyValue(name) {
         const settings = await asAdmin();
         await settings.goto();
@@ -84,13 +100,11 @@ export const test = base.extend<{ appSettings: AppSettings }>({
       },
     });
 
-    // Undo in reverse order; try every one even if one fails, then report the failures.
-    const errors: unknown[] = [];
-    for (const undo of restore.reverse()) {
-      await undo().catch((e) => errors.push(e));
+    try {
+      await restoreAll();
+    } finally {
+      await context?.close();
     }
-    await context?.close();
-    if (errors.length) throw new Error(`Could not restore ${errors.length} setting(s): ${errors.map(String).join('; ')}`);
   }, { timeout: 5 * 60_000 }],
 });
 

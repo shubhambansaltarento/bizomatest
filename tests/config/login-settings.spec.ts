@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { test, expect } from '../../fixtures/settings.fixture';
+import { test, expect, type AppSettings } from '../../fixtures/settings.fixture';
 import { spec as specFor } from '../../fixtures/spec';
 import { freshPassword } from '../../data/automationUsers';
 import { newUserData } from '../../data/userRoles';
@@ -19,10 +19,11 @@ const role = 'REPORT ADMIN';
 type TestUser = { role: string; username: string; id: string; password: string };
 
 /**
- * Creates a new automation user for one test (the admin is on `page`) and deactivates it after the
- * test body, pass or fail.
+ * Creates a new automation user for one test (the admin is on `page`) and, after the test body, pass
+ * or fail, puts the settings back and deactivates the user (in that order: inactive users aren't
+ * listed on the settings page, so their own settings couldn't be restored afterwards).
  */
-async function withNewUser(page: Page, body: (user: TestUser) => Promise<void>) {
+async function withNewUser(page: Page, appSettings: AppSettings, body: (user: TestUser) => Promise<void>) {
   const addUser = new UserAddPage(page);
   const usersList = new UsersListPage(page);
   const user = { role, username: newUserData.username(role), id: '', password: newUserData.password };
@@ -41,11 +42,15 @@ async function withNewUser(page: Page, body: (user: TestUser) => Promise<void>) 
   try {
     await body(user);
   } finally {
-    await test.step(`Clean up: deactivate ${user.username}`, async () => {
-      const editPage = new UserEditPage(page);
-      await editPage.goto(user.id);
-      await editPage.saveActive(false);
-    });
+    try {
+      await test.step('Clean up: restore settings', () => appSettings.restoreNow());
+    } finally {
+      await test.step(`Clean up: deactivate ${user.username}`, async () => {
+        const editPage = new UserEditPage(page);
+        await editPage.goto(user.id);
+        await editPage.saveActive(false);
+      });
+    }
   }
 }
 
@@ -68,7 +73,7 @@ test.describe('Login settings', () => {
     'LCFG-01..03 With the 24-hour lock, nobody can change the password again',
     spec('LCFG-01', 'LCFG-02', 'LCFG-03'),
     async ({ authedPage, loginAs, appSettings }) => {
-      await withNewUser(authedPage, async (user) => {
+      await withNewUser(authedPage, appSettings, async (user) => {
         // Changed while the lock is still off, so the change itself isn't blocked.
         await adminSetsPassword(authedPage, user);
         await appSettings.setForCompany('passwordresetlock', '1');
@@ -101,7 +106,7 @@ test.describe('Login settings', () => {
     spec('LCFG-04'),
     async ({ authedPage, loginAs, appSettings }) => {
       test.fail(true, notOnWeb('12 Nov 2026: the user stays logged in'));
-      await withNewUser(authedPage, async (user) => {
+      await withNewUser(authedPage, appSettings, async (user) => {
         await appSettings.setForCompany('forceLogoutOnPasswordChange', '1');
         const { page, loginPage, appShell } = await loginAs(user.username, user.password);
         await appShell.expectLoggedIn();
@@ -120,7 +125,7 @@ test.describe('Login settings', () => {
     spec('LCFG-05'),
     async ({ authedPage, loginAs, appSettings }) => {
       test.fail(true, notOnWeb('11 Nov 2026: the first login goes straight to the dashboard'));
-      await withNewUser(authedPage, async (user) => {
+      await withNewUser(authedPage, appSettings, async (user) => {
         await appSettings.setForUser('initialPasswordReset', user, '1');
 
         const { page, appShell } = await loginAs(user.username, user.password);
@@ -135,7 +140,7 @@ test.describe('Login settings', () => {
     spec('LCFG-06'),
     async ({ authedPage, loginAs, appSettings }) => {
       test.fail(true, notOnWeb('11 Nov 2026: no first-login reset on the web (LCFG-05)'));
-      await withNewUser(authedPage, async (user) => {
+      await withNewUser(authedPage, appSettings, async (user) => {
         await appSettings.setForUser('initialPasswordReset', user, '1');
         await appSettings.setForCompany('passwordresetlock', '1');
 
@@ -155,7 +160,7 @@ test.describe('Login settings', () => {
     test(`${id} Alert ${days} day(s) before the password expires`, spec(id), async ({ authedPage, loginAs, appSettings }) => {
       test.fail(true, notOnWeb('12 Nov 2026: no alert, in the page or as a browser pop-up'));
       test.info().annotations.push({ type: 'sheet row', description: String(row) });
-      await withNewUser(authedPage, async (user) => {
+      await withNewUser(authedPage, appSettings, async (user) => {
         await appSettings.setForUser('password_ageing_days', user, String(days));
         await appSettings.setForCompany('changepasswordnotification', '{"enable": 1,"alert_days": [3,1]}');
         // Set now, so it expires in exactly `days` days.

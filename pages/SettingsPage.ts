@@ -95,11 +95,15 @@ export class SettingsPage {
       this.response(/^\/settings\/getUserAccordingRole\//),
       forAllUsers.uncheck(),
     ]);
+    // The role's table is still in the page and is shown again when the user is picked, until the
+    // user's values arrive and replace it. Typing into it in between is lost, so wait for the swap.
+    const roleTable = await this.page.locator('#userAndRoleSettingDiv table').first().elementHandle();
     await Promise.all([
       this.response(/^\/settings\/getCurrentSetting\/\d+\/user$/),
       pickInMultiselect(multiselectButton(this.page, 'userNames'), username, { exact: true }),
     ]);
-    await expect(this.userValueInput('passwordresetlock').or(this.userValueInput('initialPasswordReset')).first()).toBeVisible();
+    if (roleTable) await this.page.waitForFunction((table) => !table.isConnected, roleTable, { timeout: 30_000 });
+    await expect(this.userValueInput('initialPasswordReset')).toBeVisible();
   }
 
   /** Waits for the answer to a request whose path matches (jQuery adds "?_=<time>" to some). */
