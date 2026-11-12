@@ -38,7 +38,24 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      // Config tests change app settings; they never run alongside the rest (see below).
+      testIgnore: '**/config/**',
     },
+
+    /* Config tests (tests/config): change app settings through the `appSettings` fixture, some of them
+       company-wide, which would upset other tests running at the same time. So they run one at a
+       time and only when asked for: `npm run test:config` (sets E2E_CONFIG). */
+    ...(process.env.E2E_CONFIG
+      ? [
+          {
+            name: 'config',
+            use: { ...devices['Desktop Chrome'] },
+            testMatch: 'config/**/*.spec.ts',
+            workers: 1,
+            fullyParallel: false,
+          },
+        ]
+      : []),
 
     /* Enable when cross-browser coverage is needed. */
     // {

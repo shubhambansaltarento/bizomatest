@@ -1,5 +1,7 @@
 import { test, expect } from '../../fixtures/auth.fixture';
 import { spec as specFor } from '../../fixtures/spec';
+import { env } from '../../config/env';
+import { roles } from '../../data/roles';
 
 // Spec: specs/auth/login-logout.md — one test per acceptance criterion.
 const spec = (id: string) => specFor('auth/login-logout', id);
@@ -87,4 +89,39 @@ test.describe('Login & Logout', () => {
       await expect(authedPage).toHaveURL(/\/users\/dashboard/);
     },
   );
+
+  test('AUTH-09 Spaces around the username are ignored', spec('AUTH-09'), async ({ loginAs }) => {
+    for (const [where, username] of [
+      ['after', `${env.username}   `],
+      ['before', `   ${env.username}`],
+      ['on both sides', `  ${env.username}  `],
+    ]) {
+      await test.step(`Spaces ${where} the username`, async () => {
+        // A separate browser per attempt, so each starts logged out.
+        const { page, appShell } = await loginAs(username, env.password);
+        await expect(page).toHaveURL(/\/users\/ajaxuserindex/);
+        await appShell.expectLoggedInAs(roles.admin.label);
+      });
+    }
+  });
+
+  test('AUTH-10 Spaces around the password are ignored', spec('AUTH-10'), async ({ loginAs }) => {
+    const { page, appShell } = await loginAs(env.username, `  ${env.password}  `);
+
+    await expect(page).toHaveURL(/\/users\/ajaxuserindex/);
+    await appShell.expectLoggedInAs(roles.admin.label);
+  });
+
+  test('AUTH-11 Login page offers Google sign-in', spec('AUTH-11'), async ({ loginPage }) => {
+    // On dev google_signin is 1 and microsoft_signin is 0 (see the spec's settings table).
+    await loginPage.goto();
+
+    await expect(loginPage.orSeparator).toBeVisible();
+    await expect(loginPage.googleSignIn).toBeVisible();
+    // Not clicked: a real Google sign-in can't be automated (see the spec).
+    const href = new URL((await loginPage.googleSignIn.getAttribute('href'))!);
+    expect(`${href.origin}${href.pathname}`).toBe('https://accounts.google.com/o/oauth2/auth');
+    expect(href.searchParams.get('response_type')).toBe('code');
+    await expect(loginPage.microsoftSignIn).toHaveCount(0);
+  });
 });

@@ -21,8 +21,13 @@ type AuthFixtures = {
    * admin just created, while `authedPage` stays logged in as admin. Does not check the outcome:
    * use the returned `appShell.expectLoggedIn()` or `loginPage.expectVisible()`.
    * Browsers opened this way are closed after the test.
+   * `nativeDialogs` collects the text of browser alerts/confirms shown from the start (they are
+   * dismissed, as Playwright does by default).
    */
-  loginAs: (username: string, password: string) => Promise<{ page: Page; loginPage: LoginPage; appShell: AppShell }>;
+  loginAs: (
+    username: string,
+    password: string,
+  ) => Promise<{ page: Page; loginPage: LoginPage; appShell: AppShell; nativeDialogs: string[] }>;
 };
 
 export const test = base.extend<AuthOptions & AuthFixtures>({
@@ -54,10 +59,15 @@ export const test = base.extend<AuthOptions & AuthFixtures>({
       const context = await browser.newContext({ baseURL });
       contexts.push(context);
       const page = await context.newPage();
+      const nativeDialogs: string[] = [];
+      page.on('dialog', (d) => {
+        nativeDialogs.push(d.message());
+        d.dismiss().catch(() => {});
+      });
       const loginPage = new LoginPage(page);
       await loginPage.goto();
       await loginPage.login(username, password);
-      return { page, loginPage, appShell: new AppShell(page) };
+      return { page, loginPage, appShell: new AppShell(page), nativeDialogs };
     });
     await Promise.all(contexts.map((c) => c.close()));
   },

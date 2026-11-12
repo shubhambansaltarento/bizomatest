@@ -7,6 +7,13 @@ export class AppShell {
   readonly welcomeBanner: Locator;
   readonly userMenuToggle: Locator;
   readonly logoutLink: Locator;
+  /** Orange banner under the navbar, e.g. "Password was changed in the last 24 hours. …". */
+  readonly warningMessage: Locator;
+  /**
+   * Any visible password field. Inside the app (not on the login page) it means the user is being
+   * asked to set a password, whatever the screen looks like.
+   */
+  readonly newPasswordField: Locator;
 
   constructor(private readonly page: Page) {
     this.welcomeBanner = page.locator('.navbar-right-content').filter({ hasText: /Welcome/ });
@@ -14,6 +21,8 @@ export class AppShell {
     // data-bs-toggle in the Bootstrap 5 upgrade (Oct 2026) and broke every login check.
     this.userMenuToggle = page.locator('.navbar-right-content .material-icons').filter({ hasText: /^person$/ });
     this.logoutLink = page.locator('.navbar-right-content a[href="/users/logout"]');
+    this.warningMessage = page.locator('#warning_message');
+    this.newPasswordField = page.locator('input[type="password"]:visible');
   }
 
   async expectLoggedIn() {
@@ -121,6 +130,18 @@ export class AppShell {
     await expect(alert).toContainText('Successfully changed password');
     await alert.getByRole('button', { name: 'Ok' }).click();
     await expect(alert).toBeHidden();
+  }
+
+  /**
+   * User menu → Change Password when the app refuses it (setting passwordresetlock): instead of the
+   * dialog, the page reloads with a warning banner. Returns once the banner is shown.
+   */
+  async changeOwnPasswordRefused() {
+    await expect(async () => {
+      await this.userMenuToggle.click();
+      await this.page.locator('#changeownpwd').click();
+      await expect(this.warningMessage).toBeVisible({ timeout: 15_000 });
+    }).toPass({ timeout: 45_000 });
   }
 
   /** Options in the user menu (person icon), read while it is open. */

@@ -25,5 +25,6 @@ When behaviour changes, update the spec first, then the test.
 | [Add user (one per role)](users/add-user.md) (roles in `data/userRoles.ts`) | UADD | Implemented |
 | [Add user: validation](users/add-user-validation.md) | UVAL | Implemented |
 | [User lifecycle: login, password change, deactivate / reactivate](users/user-lifecycle.md) (users in `data/automationUsers.ts`) | ULIFE | Implemented |
+| [Login settings (config)](config/login-settings.md) (`npm run test:config`; settings in `data/settings.ts`) | LCFG | Implemented |
 
 Open work for these modules is tracked in [`TODO.md`](../TODO.md).

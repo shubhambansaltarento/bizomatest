@@ -1,5 +1,6 @@
 import { expect, type Dialog, type Locator, type Page } from '@playwright/test';
 import type { MappingStep } from '../data/userRoles';
+import { multiselectButton, pickInMultiselect } from './multiselect';
 
 /**
  * Add User form at /users/add (Users list → New User).
@@ -33,7 +34,7 @@ export class UserAddPage {
     this.nameInput = page.locator('#UserName');
     this.usernameMessage = page.locator('#displaymsg #signal');
     this.roleSelect = page.locator('#UserRole');
-    this.roleButton = this.multiselectButton('UserRole');
+    this.roleButton = multiselectButton(page, 'UserRole');
     this.addButton = page.locator('#addsubmit');
     this.alertDialog = page.locator('.ui-dialog').filter({ has: page.locator('.ui-dialog-title', { hasText: /^Alert$/ }) });
   }
@@ -78,7 +79,7 @@ export class UserAddPage {
   }
 
   async selectRole(label: string) {
-    await this.pickInMultiselect(this.roleButton, label, { exact: true });
+    await pickInMultiselect(this.roleButton, label, { exact: true });
     await expect(this.roleButton).toHaveText(label);
     await this.page.waitForLoadState('networkidle');
   }
@@ -87,7 +88,7 @@ export class UserAddPage {
   async fillMapping(steps: readonly MappingStep[]) {
     for (const { field, option } of steps) {
       const button = await this.mappingButton(field);
-      await this.pickInMultiselect(button, option);
+      await pickInMultiselect(button, option);
       await expect(button).toContainText(option);
       // The next dropdown is built from an Ajax answer to this choice.
       await this.page.waitForLoadState('networkidle');
@@ -149,32 +150,7 @@ export class UserAddPage {
     // The select sits next to its label; it has no stable id across roles (e.g. ZONE is
     // #Rolespecificid for ZONE MANAGER but #zoneaddsalesman for the others).
     const selectId = await label.evaluate((l) => l.parentElement!.querySelector('select')!.id);
-    return this.multiselectButton(selectId);
-  }
-
-  private multiselectButton(selectId: string): Locator {
-    return this.page.locator(`#${selectId} ~ .btn-group > button.multiselect`);
-  }
-
-  /** Opens a bootstrap-multiselect dropdown, picks one option, and closes it again. */
-  private async pickInMultiselect(button: Locator, text: string, { exact = false } = {}) {
-    const menu = button.locator('xpath=following-sibling::*[contains(@class, "multiselect-container")]');
-    const option = menu
-      .locator('label')
-      .filter({ hasText: exact ? new RegExp(`^\\s*${escapeRegExp(text)}\\s*$`) : text })
-      .first();
-    // Options are loaded by Ajax; reopen until the wanted one is there.
-    await expect(async () => {
-      if (!(await menu.isVisible())) await button.click();
-      await expect(option).toBeVisible({ timeout: 2_000 });
-    }).toPass({ timeout: 15_000 });
-    await option.click();
-    // Multi-select dropdowns stay open after a click; single-select ones close.
-    if (await menu.isVisible()) await button.click();
-    await expect(menu).toBeHidden();
+    return multiselectButton(this.page, selectId);
   }
 }
 
-function escapeRegExp(text: string) {
-  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}

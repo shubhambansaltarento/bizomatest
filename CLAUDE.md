@@ -15,6 +15,7 @@ Planned framework changes live in `docs/framework-proposal.md`. They are **not i
 - **Selectors must not depend on CSS-framework attributes** (e.g. Bootstrap's `data-toggle`, which became `data-bs-toggle` in Oct 2026). Prefer visible text, roles, ids.
 - **Selectors live in `pages/`** (page objects), never in spec files.
 - Credentials come from `.env` only; never hard-code them.
+- **Config (settings) test cases:** app settings live on Settings → All Settings (`/settings/allsettings`), which **only an ADMIN can open**. A test that needs a setting changed uses the `appSettings` fixture (`fixtures/settings.fixture.ts`): it opens that page as admin in its own browser, edits the value, clicks **Review** then **Save**, and restores the original value after the test, pass or fail. Never change settings any other way. Known settings and whether they can be set for one user or only for the whole company are in `data/settings.ts`; prefer setting it for one automation user. Config tests live in `tests/config/` (specs in `specs/config/`) and run only with `npm run test:config`, one at a time, never alongside the normal suite.
 - **Automation users:** every user the tests create has a username starting with `e2e.` and is an automation user, not a real person. They are listed in `data/automationUsers.ts` (one fixed account per role for the lifecycle tests); tests change their passwords and status. Create new test users with that prefix (`newUserData` in `data/userRoles.ts`).
 
 ## Commands
@@ -22,5 +23,6 @@ Planned framework changes live in `docs/framework-proposal.md`. They are **not i
 - `npm run spec:check`: every criterion has a test, and every test ID exists in a spec
 - `npx playwright test tests/<module> --headed`: run one module in a visible browser
 - `npx playwright test --grep @AUTH-03`: run one criterion
+- `npm run test:config`: config tests (`tests/config`), one at a time; they change app settings and put them back
 - `npm run cleanup:e2e-users`: deactivate leftover automation users (`e2e.*`), keeping the fixed accounts in `data/automationUsers.ts`
 - `npm run report`: open the last HTML report

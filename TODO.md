@@ -99,3 +99,11 @@ Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/auto
 - [ ] Date of birth in the future ("Date should not be greater than today date")
 - [ ] Username longer than 191 characters (field max length)
 - [ ] Two users submitted with the same username at once (server-side duplicate check)
+
+## 5. Login test sheet (`docs/login test cases.xlsx`)
+
+- [x] Spaces around username / password are ignored; Google sign-in shown (AUTH-09..11)
+- [x] Rows 7, 10: 24-hour password lock (LCFG-01..03, `npm run test:config`)
+- [ ] Rows 47, 14, 17, 30, 32 (forced logout, first-login reset, expiry alerts) don't happen on the web: LCFG-04..08 are expected failures. Confirm with product whether they are app-only.
+- [ ] Ask product: the 24-hour lock also blocks the **admin** from resetting the user's password (LCFG-02). Intended?
+- [ ] 20 mobile-only cases: `docs/mobile-login-test-cases.xlsx` (manual, or a future mobile suite). Rows 22–26 need their steps recovered from the source.

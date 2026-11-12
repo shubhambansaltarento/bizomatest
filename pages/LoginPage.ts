@@ -5,11 +5,23 @@ export class LoginPage {
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly submitButton: Locator;
+  /** "OR" between the Login button and the single sign-on buttons. */
+  readonly orSeparator: Locator;
+  /** Google sign-in (shown when the setting google_signin is 1): an icon linking to Google. */
+  readonly googleSignIn: Locator;
+  /** Microsoft sign-in (setting microsoft_signin); not shown on dev. */
+  readonly microsoftSignIn: Locator;
 
   constructor(private readonly page: Page) {
     this.usernameInput = page.locator('input[name="User[username]"]');
     this.passwordInput = page.locator('input[name="User[password]"]');
     this.submitButton = page.locator('#loginBtn');
+    this.orSeparator = page.getByText('OR', { exact: true });
+    this.googleSignIn = page.getByRole('link').filter({ has: page.getByAltText(/google sign ?in/i) });
+    this.microsoftSignIn = page
+      .getByRole('link')
+      .filter({ has: page.getByAltText(/microsoft/i) })
+      .or(page.locator('a[href*="login.microsoftonline.com"]'));
   }
 
   async goto() {

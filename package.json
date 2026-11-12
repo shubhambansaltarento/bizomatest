@@ -13,6 +13,7 @@
     "test:admin": "playwright test tests/admin --headed",
     "test:sales": "playwright test tests/sales --headed",
     "test:roles": "playwright test tests/roles --headed",
+    "test:config": "E2E_CONFIG=1 playwright test --project=config",
     "cleanup:e2e-users": "E2E_CLEANUP=1 playwright test tests/maintenance --reporter=list",
     "report": "playwright show-report"
   },
