@@ -42,9 +42,12 @@ export const test = base.extend<{ appSettings: AppSettings }>({
         const page = await context.newPage();
         const { username, password } = roles.admin.credentials();
         const loginPage = new LoginPage(page);
-        await loginPage.goto();
-        await loginPage.login(username, password);
-        await new AppShell(page).expectLoggedIn();
+        // The slow dev server sometimes drops a login (blank page); try again rather than fail the test.
+        await expect(async () => {
+          await loginPage.goto();
+          await loginPage.login(username, password);
+          await new AppShell(page).expectLoggedIn();
+        }).toPass({ timeout: 3 * 60_000 });
         settingsPage = new SettingsPage(page);
       }
       return settingsPage;
