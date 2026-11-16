@@ -5,7 +5,7 @@
 | Module      | Users                                                      |
 | ID prefix   | `UADD`                                                     |
 | Status      | Implemented (criteria awaiting team review)                |
-| Tests       | `tests/users/add-user.spec.ts`                             |
+| Tests       | `tests/user-creation/add-user.spec.ts`                             |
 | Roles       | **`data/userRoles.ts`** (role list and what each is mapped to) |
 | Environment | `BASE_URL` from `.env` (dev: devarun)                      |
 
@@ -71,6 +71,6 @@ Checked once **for every role** in `data/userRoles.ts`.
 
 ## Out of scope
 
-- Validation messages: see `specs/users/add-user-validation.md`.
+- Validation messages: see `specs/user-creation/add-user-validation.md`.
 - Optional fields (phone, email, designation, reporting manager, images, date of birth).
 - Logging in as the new user (see `TODO.md`).

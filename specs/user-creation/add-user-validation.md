@@ -5,7 +5,7 @@
 | Module      | Users                                          |
 | ID prefix   | `UVAL`                                         |
 | Status      | Implemented (criteria awaiting team review)    |
-| Tests       | `tests/users/add-user-validation.spec.ts`      |
+| Tests       | `tests/user-creation/add-user-validation.spec.ts`      |
 | Environment | `BASE_URL` from `.env` (dev: devarun)          |
 
 ## Purpose

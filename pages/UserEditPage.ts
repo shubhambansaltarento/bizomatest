@@ -13,6 +13,16 @@ export class UserEditPage {
   /** "active" checkbox: unticked and saved, the user becomes inactive. */
   readonly activeCheckbox: Locator;
   readonly saveButton: Locator;
+  /** "User Attendance Verification Images": only there when attendanceFaceVerification is on for the user. */
+  readonly imageUploadRow: Locator;
+  /** File input (several files at once); hidden once 5 images are uploaded. */
+  readonly imageUploadInput: Locator;
+  /** One per uploaded image; its hidden input holds the stored image's URL once the upload is done. */
+  readonly uploadedImages: Locator;
+  /** "You have uploaded 5 images. No more uploads allowed." */
+  readonly imageLimitMessage: Locator;
+  /** The app's "Alert" dialog for validation errors on Save. */
+  readonly validationAlert: Locator;
 
   constructor(private readonly page: Page) {
     this.usernameInput = page.locator('#UserUsername');
@@ -26,6 +36,47 @@ export class UserEditPage {
     this.alertDialog = page.locator('.ui-dialog').filter({ has: page.locator('.alert') });
     this.activeCheckbox = page.locator('#UserActive');
     this.saveButton = page.locator('#addsubmit');
+    this.imageUploadRow = page.locator('#imageUploadRow');
+    this.imageUploadInput = page.locator('#imageUploadInput');
+    this.uploadedImages = page.locator('#imageUploadContainer .uploaded-file');
+    this.imageLimitMessage = page.locator('#imageLimitMessage');
+    this.validationAlert = page.locator('.ui-dialog:visible').filter({ has: page.locator('.ui-dialog-title', { hasText: /^Alert$/ }) });
+  }
+
+  /** Opens the collapsed "User Attendance Verification Images" section. */
+  async openImages() {
+    const header = this.imageUploadRow.locator('.ui-accordion-header');
+    await expect(header).toHaveText('User Attendance Verification Images');
+    if ((await header.getAttribute('aria-expanded')) !== 'true') await header.click();
+    await expect(this.imageUploadRow.locator('.ui-accordion-content')).toBeVisible();
+  }
+
+  /** Uploads image files and waits until every one is stored (its URL is filled in). */
+  async uploadImages(files: string[]) {
+    const before = await this.uploadedImages.count();
+    await this.imageUploadInput.setInputFiles(files);
+    await expect(this.uploadedImages).toHaveCount(before + files.length, { timeout: 30_000 });
+    for (let i = before; i < before + files.length; i++) {
+      await expect(this.uploadedImages.nth(i).locator('input[type="hidden"]'), `image ${i + 1} stored`).not.toHaveValue('', { timeout: 30_000 });
+    }
+  }
+
+  /** Clicks Save and waits for the users list (answers OK if the app asks for confirmation). */
+  async save() {
+    this.page.once('dialog', (d) => d.accept().catch(() => {}));
+    await this.saveButton.click();
+    await expect(this.page).toHaveURL(/\/users\/ajaxuserindex/, { timeout: 45_000 });
+  }
+
+  /** Clicks Save when it should be refused; returns the Alert text and closes it. */
+  async saveExpectingAlert(): Promise<string> {
+    await this.saveButton.click();
+    await expect(this.validationAlert.first()).toBeVisible();
+    const message = (await this.validationAlert.last().locator('.ui-dialog-content').innerText()).trim();
+    while (await this.validationAlert.count()) {
+      await this.validationAlert.last().getByRole('button', { name: 'Ok' }).click();
+    }
+    return message;
   }
 
   async goto(id: string) {

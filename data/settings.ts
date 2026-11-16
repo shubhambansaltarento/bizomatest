@@ -66,6 +66,11 @@ export const appSettings = {
     devValue: '0',
     about: 'Requires a photo when marking attendance',
   },
+  attendanceFaceVerification: {
+    level: 'user',
+    devValue: '0',
+    about: "Shows User Attendance Verification Images (3–5) on the user's Add / Edit form (seen 16 Nov 2026)",
+  },
 } as const satisfies Record<string, { level: SettingLevel; devValue: string; about: string }>;
 
 export type SettingName = keyof typeof appSettings;

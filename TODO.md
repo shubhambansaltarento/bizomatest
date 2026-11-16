@@ -2,12 +2,14 @@
 
 Tracks what is covered and what is still to do. Tick an item when its test is in and green; link the criterion ID. New items go under the matching heading.
 
-Specs: [admin home & navigation](specs/admin/admin-home-navigation.md) · [users list](specs/users/users-list.md) · [add user](specs/users/add-user.md) · [add user validation](specs/users/add-user-validation.md)
+Specs: [admin home & navigation](specs/admin/admin-home-navigation.md) · [users list](specs/users/users-list.md) · [add user](specs/user-creation/add-user.md) · [add user validation](specs/user-creation/add-user-validation.md) · [add user form](specs/user-creation/add-user-form.md) · [user images (config)](specs/user-creation/config/user-images.md)
 Role config for Add User: [`data/userRoles.ts`](data/userRoles.ts)
 Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/automationUsers.ts)
 
 ## App issues found (raise with product / dev)
 
+- [ ] **Blank username is sent to the server** (Add User, 16 Nov 2026): clear the username after the check and click Add; nothing in the browser stops it, and the server answers "Username already taken, please try with other name" on an emptied form. No user is created. Tested as a known issue (UFORM-03).
+- [ ] **Image limit shown too late** (Edit user, attendanceFaceVerification = 1, 16 Nov 2026): right after the 5th image the file input is still offered and "No more uploads allowed" is missing; it only shows when a 6th is tried or after reopening. Tested as a known issue (UIMG-05).
 - [ ] **Set Outlet Targets is broken** (Dashboard → Set Outlet Targets, `/outlettargets/settarget`, 10 Nov 2026): "jQuery is not defined", page has no navbar, sidebar or styles. Tested as a known issue (ADM-02); remove it from `sidebarKnownIssues` in `data/roles.ts` once fixed.
 - [ ] **New Scheme link redirects** (`/schemes/add` → `/schemes/addscheme`), and the sidebar then loses its section. Could link straight to the final URL.
 - [ ] **Username check accepts illegal characters**: "User name is Available" for `e2e bad#1`; only Add rejects it (UVAL-01).
@@ -35,18 +37,23 @@ Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/auto
 
 ## 2. Add user
 
+Module **user-creation** (`npm run test:user-creation`, config: `npm run test:user-creation:config`). QA sheet cases (web only, no API / mobile) and the criterion for each: [`data/userCreationCases.ts`](data/userCreationCases.ts); open ones in `openCases`.
+
+- [x] All 29 web cases of the sheet have a test (UADD, UVAL, UFORM, UIMG); 2 are known app bugs (UFORM-03, UIMG-05)
+- [ ] User custom fields order (UFORM-13, TC9442/TC9443): needs user custom fields on devarun (Settings → Form Settings → User Form)
+
 - [x] Role list in a config file: `data/userRoles.ts` (13 roles, with the zone / warehouse / area each needs)
 - [x] Taken username is refused, also in other case (UADD-01)
 - [x] Free username shows the Role dropdown with exactly the configured roles (UADD-02)
 - [x] Create one user for every role, then find it in the list with the right role, name and status (UADD-03)
 - [ ] **Clean up created users**: UADD-03 adds 13 `e2e.*` users per run. Deactivate them after the test (now easy: `UserEditPage.saveActive(false)`), or reuse the automation users instead of creating new ones
 - [ ] Create the automation users of `data/automationUsers.ts` automatically when missing (needed for any environment other than devarun)
-- [ ] Log in as each newly created user and check the landing page / banner (ties into `data/roles.ts`)
-- [ ] Fill optional fields: phone, email, Gmail, address, IMEI, designation, employee ID, date of birth; check they show on Edit
+- [ ] Log in as each newly created user and check the landing page / banner (ties into `data/roles.ts`); REPORT ADMIN done (UFORM-14)
+- [ ] Fill optional fields: phone, email, Gmail, address, IMEI, designation, employee ID, date of birth; check they show on Edit (phone, designation and date of birth input are tested: UFORM-06..10)
 - [ ] Pick a **Reporting To** manager and check it is saved (today the test answers OK to "continue without a reporting manager?")
 - [ ] Map one user to several zones / warehouses / areas (the dropdowns are multi-select)
 - [ ] ADMIN "Integration Admin" checkbox and its Get / Post / All method
-- [ ] User images (max 5; minimum 3 when the setting requires it)
+- [x] User images: minimum 3, maximum 5, saved without 5xx (UIMG-01..05, `attendanceFaceVerification` per user)
 - [ ] Per-environment mapping data if tests run outside devarun (zones/warehouses in `data/userRoles.ts` are devarun's)
 
 ## 2b. User login (automation users)

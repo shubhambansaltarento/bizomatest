@@ -22,8 +22,10 @@ When behaviour changes, update the spec first, then the test.
 | [Role-based UI](roles/role-based-ui.md) (expected UI per role in `data/roles.ts`) | ROLE | Implemented |
 | [Admin: landing page and sidebar navigation](admin/admin-home-navigation.md) | ADM | Implemented |
 | [Users list: controls, pagination and row actions](users/users-list.md) | ULIST | Implemented |
-| [Add user (one per role)](users/add-user.md) (roles in `data/userRoles.ts`) | UADD | Implemented |
-| [Add user: validation](users/add-user-validation.md) | UVAL | Implemented |
+| [User creation: add user (one per role)](user-creation/add-user.md) (roles in `data/userRoles.ts`) | UADD | Implemented |
+| [User creation: validation](user-creation/add-user-validation.md) | UVAL | Implemented |
+| [User creation: form fields](user-creation/add-user-form.md) (sheet cases in `data/userCreationCases.ts`) | UFORM | Implemented |
+| [User creation: attendance images (config)](user-creation/config/user-images.md) (`npm run test:user-creation:config`) | UIMG | Implemented |
 | [User lifecycle: login, password change, deactivate / reactivate](users/user-lifecycle.md) (users in `data/automationUsers.ts`) | ULIFE | Implemented |
 | [Login settings (config)](config/login-settings.md) (`npm run test:config`; settings in `data/settings.ts`) | LCFG | Implemented |
 

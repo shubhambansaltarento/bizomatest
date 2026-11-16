@@ -6,9 +6,9 @@ import { UsersListPage } from '../../pages/UsersListPage';
 import { UserAddPage } from '../../pages/UserAddPage';
 import { UserEditPage } from '../../pages/UserEditPage';
 
-// Spec: specs/users/add-user.md. Roles and their mappings: data/userRoles.ts.
+// Spec: specs/user-creation/add-user.md. Roles and their mappings: data/userRoles.ts.
 // UADD-03 creates real users (one per role) on the environment, then deactivates them (the app has no delete).
-const spec = (id: string) => specFor('users/add-user', id);
+const spec = (id: string) => specFor('user-creation/add-user', id);
 
 test.describe('Add user', () => {
   test('UADD-01 A username that is taken is refused', spec('UADD-01'), async ({ authedPage }) => {

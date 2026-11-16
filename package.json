@@ -10,6 +10,8 @@
     "test:ui": "playwright test --ui",
     "spec:check": "node scripts/spec-check.mjs",
     "test:users": "playwright test tests/users --headed",
+    "test:user-creation": "playwright test tests/user-creation",
+    "test:user-creation:config": "E2E_CONFIG=1 playwright test --project=config tests/user-creation/config",
     "test:admin": "playwright test tests/admin --headed",
     "test:sales": "playwright test tests/sales --headed",
     "test:roles": "playwright test tests/roles --headed",

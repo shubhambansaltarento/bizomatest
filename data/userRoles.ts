@@ -2,11 +2,11 @@ import { automationUserPrefix, freshPassword } from './automationUsers';
 
 /**
  * Roles an admin can give a new user on Users → New User (/users/add), and what each role must be
- * mapped to before the form can be saved. Source of truth for specs/users/add-user.md.
+ * mapped to before the form can be saved. Source of truth for specs/user-creation/add-user.md.
  *
  * Not the same as data/roles.ts: that file describes what a *logged-in* role should see; this one
  * describes the roles offered in the Add User form. To cover a new role, add an entry here; the
- * tests in tests/users/add-user.spec.ts pick up every entry automatically.
+ * tests in tests/user-creation/add-user.spec.ts pick up every entry automatically.
  *
  * `mapping` lists the dropdowns that appear after picking the role, in the order they appear.
  * `field` is the dropdown's label without "Select" and "*" (e.g. "Select ZONE *" → 'ZONE'), and

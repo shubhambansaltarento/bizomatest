@@ -1,0 +1,920 @@
+﻿"Module Name","Case Key","Case code","Logged User","Title","Description","Type","Priorities","Estimate","Reference","Precondition","Steps","ExpectedResult","BDD Scripts","Feature Scripts","Mode","Shareable TestCase Details","Tags","New Tags","Test Suite","CreatedDate","UpdatedDate"
+"AD_Users","PgkWrq","TC8979","Lokesh devamuthu","verify user can access, users/view and users/dashboard page.","<p>Verify user can access users/view and users/dashboard pages by navigating to them using the appropriate URLs and ensuring that the user is able to view the content of both pages without any access restrictions or errors.</p>","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/""
+1. Go to page, ""/users/dashboard""","User should be able to access the page.
+User should be able to access the page."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/PgkWrq","creation,sanity,smoke","WEB","-","2024-01-25 06:40:10","2026-09-03 12:16:39"
+"AD_Users","68Vv65","TC8980","Lokesh devamuthu","Verify clicking on, ""New user,"" button will redirect to new user creation page.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/""
+2. Click on ""New User,""
+3.Observe that user is redirecting to /users/add/xx page.","User should able to redirect to /users page.
+New User Button should be clickable.
+User should be able to redirect to /users/add/xx page."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/68Vv65","creation,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:02"
+"AD_Users","7EJb7d","TC8981","Lokesh devamuthu","Verify that user name is a mandatory field for creation of user.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/add""
+2. Observe that  Add button is available.
+3.Type unique User name.
+4.Observe that User Name is Available green message is under User name field.
+5.Observe that Add button is available.
+6.Remove User name from username field.
+7.Click on Add Button.
+8.Observe the validation is coming","User should able to redirect to /users/add/xx page.
+Submit Button should not be available.
+User should able to type username in username field.
+User should able to view User Name is Available green message is under User name field
+Add button should be available.
+User should able to remove user name from user name field.
+Add button should be clickable.
+User should not be allowed to Add, with a alert prompt, ""User Name"" cannot be left blank."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/7EJb7d","creation,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:02"
+"AD_Users","9eqR38","TC8982","Lokesh devamuthu","Verify that validation error messages are displayed when the Roles details fields are left empty.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/add""
+2. Pick a valid username.
+3. Fill Name, HQ details in User Add form.
+4.Click On Add Button.
+5.Observe that Validation error for leave Role details.","User should able to redirect to /users/add page.
+User should able to view User Name is Available green message under user name field.
+User should able to fill Name, HQ details in User add form.
+Add button should be clickable.
+User should not be allowed to submit, with a pop up prompt, ""Please select role details."""," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/9eqR38","creation,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","qzBl40","TC8983","Lokesh devamuthu","Verify that validation error messages are displayed when the  Password  field is  left empty.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/add""
+2. Pick a valid username, Name, HQ and choose role details.
+3.Click On Add Button.
+3. Observe that Validation error for Password leave empty.","User should able to redirect to /users/add page.
+User should able to fill fields for user add form.
+Add button should be clickable.
+User should not be allowed to submit, with a pop up prompt, ""Please add User Password"""," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/qzBl40","creation,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","XGD8wr","TC8984","Lokesh devamuthu","Verify that the user can view a red warning message when the password does not meet the required conditions.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/add""
+2. Pick a valid username, and choose role details.
+3. Enter a password, ""Mobisy""
+4.Observe red warning message under password.
+4.make password field empty.
+5.Enter password as ""mobisy""","User should able to redirect to /users/add page.
+User should able to fill fields for user add form.
+User should able to fill password.
+1. User should not able to  create with a warning in red, ""1 Digit Needed, 1 Special Character Needed,""
+Minimum 6 Characters requires, 1 Lower Case Letter Needed, 1 Upper Case Letter Needed, 1 Digit Needed, 1 Special Character Needed, this red message should display.
+1 Upper Case Letter Needed, 1 Digit Needed, 1 Special Character Needed, this red message should display."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/XGD8wr","creation,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","3gRMVW","TC8985","Lokesh devamuthu","Verify user can sucessfully create an user.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/add""
+2. Pick a valid username, and choose role details, enter a valid password and HQ
+3.Click On Add Button.
+4.Observe that success message is displaying on top of the page.","User should able to redirect to /users/add page.
+User should able to fill fields for user add form.
+Add button should be clickable.
+User added successfully message should display."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/3gRMVW","creation,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","zvdy4R","TC8986","Lokesh devamuthu","Verify user can view the user map  when clicking on Location icon under Actions Column in Users list page.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on the location icon, from the action column
+3.Observe that user is redirect to respective page.","User should able to navigate to /users page.
+Location icon should be clickable.
+﻿User should be able to view the user map"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/zvdy4R","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","mBxn08","TC8987","Lokesh devamuthu","Verify user can view the user pjp plan under Actions column in Users page.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on the pjp icon, from the action column
+3.Observe that user is redirect to respective page.","User should able to redirect to /users page.
+Pjp icon should be clickable.
+User should be able to see the pjp plan of the respective user"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/mBxn08","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","n8Vg2g","TC8988","Lokesh devamuthu","Verify that the user can search for a specific user using the search field in the user list.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Enter username/name/userid on the search field.
+3.Observe that  the system filters the list and shows items as per the search input","User should able to redirect to /users page.
+User should able to type/search username ,user id or name on search field.
+User should be able to see the items list as per the search value."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/n8Vg2g","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:03"
+"AD_Users","gQe9Jr","TC8989","Lokesh devamuthu","Verify user can download, the user list by clicking on Download button.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2.Observe that Default radio button enable for Active Users.
+2. Click on the Download button
+3.Check All active User present in the downloaded sheet.
+4.Click on Inactive Users Radio button.
+5.Click on Download button.
+6.Check Inactive User present in the downloaded sheet.
+7.Click on All Users Radio button.
+8.Click on Download button.
+9.Check All Users(Active and Inactive) present in the downloaded sheet.","User should able redirect to /users page.
+Active Radio button should enable defaultly.
+An excel file should be downloaded with user list that corresponds to the user in the page.
+All Active user should be present in the downloaded sheet.
+Inactive Radio Button should be clickable.
+An excel file should be downloaded with user list that corresponds to the user in the page.
+Inactive user should be present in the downloaded sheet.
+All users Radio Button should be clickable.
+An excel file should be downloaded with user list that corresponds to the user in the page.
+Active and Inactive users should be present in the downloaded sheet."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/gQe9Jr","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","Gdkn3Q","TC8990","Lokesh devamuthu","Verify user can  inactivate an user using Edit button.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on edit button from actions column.
+3.Observe that user is redirect to /users/edit/xx page.
+3. Uncheck the ""Active,"" check box
+4. Click on  Save button.
+5.Observe that validation message is displayed on top of the screen.","User should able redirect to /users page.
+Edit button should be clickable.
+User should able to   redirect to /users/edit/xx page.
+User should able to uncheck Active checkbox
+Save button should be clickable
+The user has been saved message should be display."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Gdkn3Q","edit,sanity,smoke","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","Eeqz3D","TC8991","Lokesh devamuthu","Verify user can update the username and Role details for the user using Edit button.","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on edit button from actions column.
+3. Make changes in the username and role details
+4. Click on Save Button
+5.Observe that user is saved.
+6.Click on user name of the user.
+7.Observe the changes.","User should able redirect to /users page.
+Edit button should be clickable.
+User should able to update Username and role details of the user.
+Save button should be clickable
+The User has been saved message should display on top of the screen.
+Username should be clickable.
+User should be able to see the changes made in the respective field, from page, ""/users/view/xx"""," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Eeqz3D","edit,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","lRdm4r","TC8992","Lokesh devamuthu","Verify user can View all the active users by choosing radio button,""Active users""","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on the radio button, ""Active users.""
+3.Obsereve that All Active Users list.","User should able redirect to /users page.
+User should able to click on Active users radio button
+User should be able to view, all the acitve users, and no inactive user should be part of the list"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/lRdm4r","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","rG8r4P","TC8993","Lokesh devamuthu","Verify user can View all the active users by choosing radio button,""Inactive users""","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on the radio button, ""Inactive users.""
+3.Obsereve that All  Inactive Users list.","User should able redirect to /users page.
+User should able to click on Inactive users radio button
+User should be able to view, all the inactive users, and no active user should be part of the list"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/rG8r4P","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","NjkK0v","TC8994","Lokesh devamuthu","Verify user can View all the users irrespective of their, status. by choosing the radio button, ""All Users""","","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on the radio button, ""All Users.""
+3.Obsereve that All  Users(Active and Inactive) list.","User should able redirect to /users page.
+User should able to click on All Users radio button
+User should be able to view, all  users, and active and  inactive users should be part of the list"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/NjkK0v","ui,sanity","-","-","2024-01-25 06:40:10","2026-08-28 08:23:04"
+"AD_Users","K4kl5M","TC8995","Lokesh devamuthu","Verify the newly created user can login from the web application","","acceptance","critical","","","User should be logged in as admin.
+
+1. A new user must have been created.","1. Go to page. ""users/login""
+2.Click on Profile .
+3.Click on Logout
+2. Try loging in with the username and password of the newly created user.","User should able redirect to /users page.
+Profile should be clickable.
+Logout should be clickable.
+The new user should be able to login and his respective profile should reflect on top of the screen."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/K4kl5M","login,sanity,smoke","-","-","2024-01-25 06:40:11","2026-08-28 08:23:05"
+"AD_Users","jPZ3xP","TC8996","Lokesh devamuthu","Verify the newly created user can login from the mobile application","","acceptance","critical","","","User should be logged in as admin.
+
+1. A new user must have been created.","1. Download the mobile app.
+2. Try loging in with the username and password of the newly created user.","Mobile app should be downloaded.
+The new user should be able to login and his respective profile should reflect on top of the screen."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/jPZ3xP","login,sanity","-","-","2024-01-25 06:40:11","2026-08-28 08:23:05"
+"AD_Users","41dD0a","TC8997","Lokesh devamuthu","Verify that the page shows only the Edit User heading along with the edit form.","<p>Title: Verify the page displays only the Edit User heading and edit form Description: This test case ensures that when accessing the page, only the Edit User heading and corresponding edit form are visible, without any other unnecessary elements or distractions, to maintain focus on the user editing functionality.</p>","acceptance","critical","","","1.Login As Admin","1.Click on ""Users"" link or navigate to ""/users"" page.
+2.Click ""Edit"" button on any user.
+3.Update any data .
+4.Click Save button.","User should be redirect to /users page.
+Edit button should be clickable.
+User should be able to update the data.
+Save button should be clickable."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/41dD0a","","-","-","2025-09-01 08:19:09","2026-08-28 08:23:05"
+"AD_Users","pDPE92","TC8998","Lokesh devamuthu","Bug id-130313-Verify that the Admin sees a blank user creation form when creating a new user, without any prefilled data.","<p>Test case title: Verification of a blank user creation form for Admin during new user creation to ensure no prefilled data exists.</p>","acceptance","critical","","","
+Login as Admin in web.","1.Go to /users/add page.
+2.Observe every fields are blank or not.","User should able to redirect to /users page.
+The Admin should see a blank user creation form in which all fields are empty and no data is prefilled."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/pDPE92","","-","-","2025-12-23 13:38:42","2026-08-28 08:23:05"
+"AD_Users","LD2rl3","TC8999","Lokesh devamuthu","Verify Active User Count and Total User Entries Match in Users Page and Downloaded Data","<p>Title: Verify Active User Count and Total User Entries Match in Users Page and Downloaded Data Description: This test case verifies that the number of active users displayed on the user interface matches the total number of user entries in the downloaded data file, ensuring data consistency and accuracy across different sources.</p>","acceptance","critical","","","1.Login as Admin","1.  Go to the /users/ajaxuserindex link in the web portal.
+2.Compare the active user count with the total number of user entries displayed.
+3.  Download the user data dump from the UI.
+4.  Compare the number of users in the downloaded file with the total user count in the portal","User should be able to redirect to /users page.
+Active and Inactive users counts should be display.
+Download button should be clickable then sheet should be downloaded.
+The active user count and total user entries in the /users link should match. The number of users in the downloaded data should match the total user count in the portal."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/LD2rl3","","-","-","2025-12-31 08:05:38","2026-08-28 08:23:05"
+"AD_Users","wmbp3z","TC9000","Lokesh devamuthu","Verify that user can view latitude and longitude captured in Activities Report in user view page.","<p>Verify that latitude and longitude values are displayed accurately in the Activities Report on the user view page, ensuring that location data is accurately captured and presented to the user for reference and analysis purposes.</p>","acceptance","critical","","","1.Login as Admin.2.Go to Users page.3.Select One salesman user.4.Click on username link.
+
+","1.Redirected to user view page.
+2.Click on Activities report.
+3.Give date and click on Update button.
+4.All activities will display.
+5.Click on Latest call made (orderadd under Activity Type ) Location column.","User should be redirect to /users page.
+Activities Report should be clickable.
+Update button should be clickable.
+All Activities should be display.
+﻿User should be view latitude and longitude of updated location where order call made."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/wmbp3z","","-","-","2026-02-06 10:00:48","2026-08-28 08:23:05"
+"AD_Users","yaRwgn","TC9001","Lokesh devamuthu","Verify user can edit and change the email details","<p>Test case title: Verify user can edit and change the email details Description: This test case verifies the functionality of allowing users to edit and change their email details within the system. It includes steps to access the email settings, modify the existing email address, and save the changes successfully to ensure accurate and updated information can be maintained by the user.</p>","acceptance","critical","","","User should be logged in as admin.","1. Go to page, ""/users/ajaxuserindex""
+2. Click on edit button from actions column.
+3. Make changes in the email details
+4. Click on Save button.","User should be redirect to /users page.
+Edit button should be clickable.
+User should able to change email details.
+User should be able to see the changes made in the respective field."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/yaRwgn","","-","-","2026-03-30 13:56:27","2026-08-28 08:23:06"
+"AD_Users","0rvk09","TC9002","Lokesh devamuthu","Verify after inactivating a user , the user is not able to login from web","","acceptance","critical","","","1.Login as Admin in web.","1.Click on profile
+2.Click on Logout
+3.Fill username and password
+4.Click on Login
+5.Observe red error message on top of the screen.","Profile should be clickable.
+Logout should be clickable.
+Username and password should be fill
+Login button should be clickable
+Invalid/Inactive user credentials message should be display."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/0rvk09","","-","-","2026-04-07 10:12:09","2026-08-28 08:23:06"
+"AD_Users","kpRzVg","TC9003","Lokesh devamuthu","Verify that  validation error can display when User  enter already existing user name","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Click on user name text box and enter already existing name","Error message ""User name is not Available. Please Try Again with different Username."" should be displayed"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/kpRzVg","","-","-","2026-04-07 10:36:09","2026-08-28 08:23:06"
+"AD_Users","11bB0R","TC9004","Lokesh devamuthu","Verify that validation is success for user name accept alphanumeric with special character","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Click on user name text box and enter name as alphanumeric with special char","Message ""User name is Available"" should be displayed under username text box in green colour"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/11bB0R","","-","-","2026-04-07 10:42:03","2026-08-28 08:23:06"
+"AD_Users","5Bxe0E","TC9005","Lokesh devamuthu","Verify that user can enter already existing password ","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Click on the name text box and enter name which is already existing in the system","No error message should be displayed"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/5Bxe0E","","-","-","2026-04-07 10:45:28","2026-08-28 08:23:07"
+"AD_Users","21Z80M","TC9006","Lokesh devamuthu","Verify that validation error is display on invalid phone number ","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Click on the phone no. text box and enter 8 digit numeric","Error message ""Invalid number"" should be displayed below phone no. text box"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/21Z80M","","-","-","2026-04-07 10:47:29","2026-08-28 08:23:07"
+"AD_Users","ajJx8W","TC9007","Lokesh devamuthu","Verify that user can enter 10 digit number on phone number field.","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1.Click on the phone no. text box and enter 10 digit numeric","Message ""✓ Valid"" should be displayed"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/ajJx8W","","-","-","2026-04-07 10:48:52","2026-08-28 08:23:07"
+"AD_Users","QGkp0k","TC9008","Lokesh devamuthu","Verify that User can select designation from Designation dropdown.","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1.Fill Username field.
+2.Observe that Role details and Add button popup.
+3.Select Designation dropdown
+4.Observe that data are in Designation dropdown.
+5.Select Role dropdown.
+6.Select any Role.
+7.Click on Designation dropdown.
+8.Observe data are in Designation dropdown.","User should able to fill username
+Role details and Add button  should popup.
+Designation dropdown should clickable.
+Data should be there in designation dropdown.
+Role dropdown should be clickable.
+Role should be select from Role Dropdown.
+Designation dropdown should be clickable.
+Data should be in Designation dropdown."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/QGkp0k","","-","-","2026-04-07 10:56:40","2026-08-28 08:23:07"
+"AD_Users","WEWB0Q","TC9009","Lokesh devamuthu","Verify that user can select Date of Birth  from calendar.","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Click on Date of Birth field
+2.Observe that calendar is popup
+3.Select date in format dd-mm-yyyy","Date of Birth field should be clickable.
+Calendar should be popup
+User should able to select the required date"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/WEWB0Q","","-","-","2026-04-07 11:00:25","2026-08-28 08:23:07"
+"AD_Users","B81qlE","TC9010","Lokesh devamuthu","Verify that User can not select future date for Date of Birth","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1.Click on Date of Birth field
+2.select date in format dd-mm-yyyy
+3.Select future date","Date of Birth field should be clickable.
+User should able to select date.
+User should not able to select the future dates"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/B81qlE","","-","-","2026-04-07 11:03:00","2026-08-28 08:23:07"
+"AD_Users","8VPZ09","TC9011","Lokesh devamuthu","Verify that user can select Zone and Subzone for the user","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Enter user name, password, name and phone no
+2. Click on role drop down
+3.Select Distributor Salesman as role for the user
+4.Observe that Zone field is popup
+5.Select Zone from dropdown.
+6.Observe that After selecting Zone from dropdown Subzone field is popup
+7.Select Subzone from dropdown.","User should able to enter user name, password ,name and phone no.
+Role dropdown should be clickable
+User should able to select Distributor Salesman as role from dropdown.
+Zone field should popup after selecting Role.
+Zone dropdown should be clickable.
+Subzone field should popup.
+Subzone dropdown should be clickable."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/8VPZ09","","-","-","2026-04-07 11:15:43","2026-08-28 08:23:07"
+"AD_Users","M7kNll","TC9012","Lokesh devamuthu","Verify that User can select warehouse and Reporting to from dropdown.","","acceptance","critical","","","1. Login to bizom web as admin
+2. Admin lands on User's page
+3. Click on new user button","1. Enter user name, password, name and phone no
+2. Click on role drop down and select Distributor Salesman as role for the user
+3. Click on Zone and subzone dropdown and select required ones
+4.Observe that Select Distributor Dropdown is displayed.
+5.Select Distributor from distributor dropdown.
+6 Observe that Area Dropdown is displayed.
+7.Select Area from dropdown.","User should able to fill user name, password ,name and phone no.
+User should able to select role as Distributor salesman from Role Dropdown.
+User should able to select Zone and Subzone from dropdowns.
+Select Distributor dropdown should display.
+User should able to select Distributor from distributor dropdown.
+Area dropdown should be display.
+User should able to select Area from dropdown."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/M7kNll","","-","-","2026-04-07 11:40:56","2026-08-28 08:23:08"
+"AD_Users","Drq30V","TC9013","Lokesh devamuthu","Verify User View page functionality","<p>""Verify that all elements and functionality of the User View page, including user information display, profile editing, and navigation, work as expected without any errors or issues, ensuring a seamless and user-friendly experience.""</p>","acceptance","critical","","","Login as Admin","1.go to /users
+2.Click One User","Admin should be able to redirected to the user list page
+User Should be able to redirected to user view page"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Drq30V","","-","-","2026-06-22 09:01:33","2026-08-28 08:23:08"
+"AD_Users","0rvk5N","TC9431","Lokesh devamuthu","Verify that the ""Reporting To"" field is correctly populated for a distributor sales manager on the user edit page.","141286","acceptance","critical","","Users, Login","TGI tenant on the fixed build, distributor sales manager role configured with a reporting hierarchy, admin web login with access to the user add/edit page containing the 'select reporting to' field. (Confirmed against the Bizom schema: users.reportingto is a real, populated column.)","1. Log in to the web app as admin.
+2. Navigate to the user edit page for the distributor sales manager (e.g. users/edit/2778).
+3. Locate the ""Reporting To"" field.
+4. Check whether it shows the correct reporting hierarchy value.
+5. Save the page without changes and reload.
+6. Repeat the check for a second distributor sales manager user.","1. User should be able to log in successfully.
+2. User should be able to see the user edit page open for the distributor sales manager.
+3. User should be able to confirm that the ""Reporting To"" field is present on the page.
+4. User should be able to confirm that the field is populated with the correct reporting manager, not blank.
+5. User should be able to confirm that reloading the page still shows the correct value.
+6. User should be able to confirm that the second user's ""Reporting To"" field also shows correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/0rvk5N","","WEB","-","2026-08-28 08:56:57","2026-08-31 18:35:05"
+"AD_Users","kpRzxP","TC9432","Lokesh devamuthu","Verify that the user creation API returns a proper email validation error message in the response body when an invalid email address is submitted.","142549","acceptance","critical","","Users, Login","RB POD test environment on the fixed build, user creation API accessible with valid authentication using the shared curl, a request payload prepared with an invalid email address.","1. Import the provided curl command for the user creation API.
+2. Prepare the request payload with an invalid email address format.
+3. Send the API request.
+4. Check the HTTP status code of the response.
+5. Inspect the response body for a validation message.
+6. Correct the email to a valid format and resend for comparison.","1. System should ensure that the curl command is imported successfully.
+2. System should ensure that the invalid email payload is prepared.
+3. User should be able to confirm that the request is sent.
+4. System should ensure that the response returns an appropriate client error status.
+5. System should ensure that the response body contains a clear email validation error message, not a generic/blank response.
+6. User should be able to confirm that with a valid email, the request completes successfully."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/kpRzxP","","WEB","-","2026-08-28 08:56:57","2026-08-31 18:35:05"
+"AD_Users","11bB5K","TC9433","Lokesh devamuthu","User should be able to create user","139174","acceptance","critical","","Users, Login","BAT Indo B2B staging on master (fixed build), admin web login with access to /users and the New User form, roles, designations and all mandatory user master data configured for the company.","1. Log in to the admin web portal.
+2. Navigate to /users.
+3. Click the ""New User"" button.
+4. Fill in the required user details, role and designation.
+5. Click the ""Submit"" button.
+6. Check the users list for the newly created user.","1. User should be able to log in successfully.
+2. User should be able to see the users page open with the list of existing users.
+3. User should be able to see the New User form open.
+4. User should be able to confirm that all required fields accept the entered values.
+5. User should be able to confirm that the user is created successfully with no error on submission.
+6. User should be able to confirm that the new user appears in the users list."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/11bB5K","","WEB","-","2026-08-28 08:56:57","2026-08-31 18:35:06"
+"AD_Users","5Bxe5b","TC9434","Lokesh devamuthu","he Sales Report data is refreshed automatically after placing a sale.","141328","acceptance","critical","","Users, Login","RB tenant on the fixed build, Sales Report page enabled, SKU units configured for the products, app/web user with a beat and outlet where a sale can be placed and data synced.","1. Log in to the web app as the DM (Distributor Manager).
+2. Place a sale order successfully for the current date.
+3. Log in as admin (in a separate session or after logging out).
+4. Navigate to User View.
+5. Click on ""Sales Report"" from the side menu.
+6. Observe the displayed sales data for the current date.","1. User should be able to log in successfully.
+2. User should be able to confirm that the sale order is placed successfully.
+3. User should be able to log in successfully.
+4. User should be able to see the User View page open.
+5. User should be able to see the Sales Report page open.
+6. User should be able to confirm that the Sales Report data is refreshed automatically and shows the newly placed sale without requiring a manual refresh."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/5Bxe5b","","WEB","-","2026-08-28 08:56:57","2026-08-31 18:35:06"
+"AD_Users","21Z854","TC9435","Lokesh devamuthu","Sales Report data is not refreshed after placing a sale.","141328","acceptance","critical","","Users, Login","RB tenant on the fixed build, Sales Report page enabled with existing sales data, a sale just placed for the outlet so the report can be re-checked without a manual refresh.","1. Log in to the web app as the DM.
+2. Place a sale order successfully for the current date.
+3. Without refreshing the browser, log in as admin in a new session.
+4. Navigate to User View and open the Sales Report page immediately.
+5. Check the sales data shown without performing any manual refresh action.
+6. Manually refresh the page and compare the data before and after.","1. User should be able to log in successfully.
+2. User should be able to confirm that the sale order is placed successfully.
+3. User should be able to log in successfully and in the new session.
+4. User should be able to see the Sales Report page open.
+5. User should be able to confirm that the newly placed sale is already reflected without any manual refresh being needed.
+6. User should be able to confirm that the data before and after a manual refresh is identical, confirming the report does not depend on a manual refresh to show current data."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/21Z854","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:06"
+"AD_Users","ajJxBv","TC9436","Lokesh devamuthu","Verify that an admin can successfully create a new user with all mandatory user details filled, without encountering a 500 error due to missing role details.","141495","acceptance","critical","","Users, Login","RB dev environment on the fixed build, admin web login with access to /users/add, roles and role-related master data configured for the company, all mandatory user details prepared.","1. Log in as admin.
+2. Navigate to /users/add.
+3. Enter all mandatory user details, including role.
+4. Click ""Add.""
+5. Observe the app's response.
+6. Check the users list for the newly created user.","1. User should be able to log in successfully.
+2. User should be able to see the Add User page open.
+3. User should be able to confirm that all mandatory fields, including role, accept the entered data.
+4. User should be able to confirm that the Add action is triggered.
+5. System should ensure that the user is created successfully with no 500 error.
+6. User should be able to confirm that the new user appears correctly in the users list."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/ajJxBv","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:06"
+"AD_Users","QGkp66","TC9437","Lokesh devamuthu","NA","141495","acceptance","critical","","Users, Login","RB dev environment on the fixed build, admin web login on /users/add, user creation attempted where role details are missing or not loaded in the form.","1. Log in to the admin web portal.
+2. Navigate to /users/add.
+3. Open the form when the role dropdown/details are missing or fail to load.
+4. Enter the remaining mandatory user details.
+5. Click the ""Add"" button.
+6. Observe the app's response.","1. User should be able to log in successfully.
+2. User should be able to see the /users/add page open.
+3. User should be able to confirm that the role field shows a clear empty/loading state rather than silently failing.
+4. User should be able to confirm that the remaining mandatory fields accept the entered values.
+5. System should ensure that clicking ""Add"" does not throw a 500 Internal Server Error.
+6. User should be able to confirm that the app either blocks submission with a clear message about the missing role, or completes gracefully, no server error or crash occurs."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/QGkp66","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:06"
+"AD_Users","WEWBzx","TC9438","Lokesh devamuthu","NA","141826","acceptance","critical","","Users, Login","RB tenant on the fixed build, forgot credentials flow available on the login page, an unregistered username or an email/phone that is not mapped to any user prepared for submission.","1. Navigate to the login page.
+2. Tap on the ""Forgot Password"" link.
+3. Enter an unregistered username and an email/phone number not mapped to any user.
+4. Tap ""Submit.""
+5. Observe the app's response.
+6. Retry with a valid, registered username for comparison.","1. User should be able to see the login page open.
+2. User should be able to see the forgot password flow open.
+3. User should be able to confirm that the unregistered details are entered.
+4. User should be able to confirm that the submission is processed.
+5. System should ensure that the app returns a clear ""user not found"" style message rather than a 504 Gateway Timeout error.
+6. User should be able to confirm that submitting with a valid username proceeds normally, confirming the fix is specific to the timeout issue."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/WEWBzx","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:06"
+"AD_Users","B81q5x","TC9439","Lokesh devamuthu","Verify that User should be able to edit successfully","141924","acceptance","critical","","Users, Login","GCPL Indo staging on master (fixed build), admin web login with access to the user edit page, a warehouse manager user (e.g. user id 2279) with the reporting hierarchy and mandatory fields configured.","1. Log in to the admin web portal.
+2. Navigate to the user page.
+4. Edit the user's details.
+5. Click the ""Save"" button.
+6. Reopen the user 2279 record to confirm the changes were saved.","1. User should be able to log in successfully.
+2. User should be able to see the user page open with the list of users.
+3. User should be able to confirm that user 2279's profile opens for editing.
+4. User should be able to confirm that the edits are accepted on the form.
+5. User should be able to confirm that the user is saved successfully with no reporting validation error.
+6. User should be able to confirm that the reopened record shows the saved changes correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/B81q5x","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","8VPZ52","TC9440","Lokesh devamuthu","Verify that error message will be visible as Please provide username if username is not provided.","142544","acceptance","critical","","Users, Login","RB POD test environment on the fixed build, user creation API accessible with valid authentication using the shared curl, request payload prepared without the username tag.","1. Import the provided curl command for the user creation API.
+2. Remove the ""username"" tag from the request payload.
+3. Send the API request.
+4. Observe the HTTP status code of the response.
+5. Inspect the response body.
+6. Add the username tag back and resend the request for comparison.","1. System should ensure that the curl command is imported successfully.
+2. System should ensure that the payload is prepared without the username tag.
+3. System should ensure that the API request is sent.
+4. System should ensure that the response returns a proper client error status, not a raw code-level exception.
+5. System should ensure that the response body contains a clear JSON message: ""Please provide username."".
+6. User should be able to confirm that with the username tag included, the request succeeds normally."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/8VPZ52","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","M7kNx9","TC9441","Lokesh devamuthu","Verify that the user creation API completes successfully with a proper JSON response when the username tag and all mandatory fields are included.","142544","acceptance","critical","","Users, Login","RB POD test environment on the fixed build, user creation API accessible with valid authentication, a complete payload including the username tag and all mandatory user fields.","1. Import the provided curl command for the user creation API.
+2. Prepare a complete payload including the username tag and all mandatory user fields.
+3. Send the API request.
+4. Check the HTTP status code of the response.
+5. Inspect the response body.
+6. Confirm the user was created successfully.","1. System should ensure that the curl command is imported successfully.
+2. System should ensure that the complete payload is prepared.
+3. User should be able to confirm that the request is sent successfully.
+4. System should ensure that the response returns a success status code.
+5. System should ensure that the response body is a proper JSON response, not a raw code-level error.
+6. User should be able to confirm that the user is created successfully in the system."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/M7kNx9","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","Drq38L","TC9442","Lokesh devamuthu","Verify the sequence of the Custom field on the view, edit and add users page.","143316","acceptance","critical","","Users, Login","Swastiks tenant on the fixed build, user custom fields created in the custom form (customfields/editCustomform) in a defined sequence, a user with values entered for those custom fields, admin access to the user view, edit and add pages.","1. Log in to the admin web portal.
+2. Navigate to /users and click ""Add User.""
+3. Check the sequence of the custom fields on the Add User page.
+4. Navigate to /users/view/143.
+5. Check the sequence of the custom fields on the View page.
+6. Click ""Edit"" and check the sequence of the custom fields on the Edit page.","1. User should be able to log in successfully.
+2. User should be able to see the Add User page open.
+3. User should be able to confirm that the custom fields appear in the same sequence as configured in the custom form.
+4. User should be able to see the View page open for user 143.
+5. User should be able to confirm that the custom fields appear in the same configured sequence on the View page.
+6. User should be able to confirm that the Edit page also shows the custom fields in the same configured sequence, consistent across all three pages."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Drq38L","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","eJM6eg","TC9443","Lokesh devamuthu","Verify the sequence of the Custom field on the view, edit and add users page.","143316","acceptance","critical","","Users, Login","Swastiks tenant on the fixed build, user custom form with the field sequence re-ordered and saved from web, a user with values entered in those fields, admin access to the user view, edit and add pages after sync.","1. In the admin web portal, re-order the custom field sequence in the custom user form and save.
+2. Navigate to /users and click ""Add User.""
+3. Check the sequence of the custom fields on the Add User page against the new order.
+4. Navigate to /users/view/143.
+5. Check the sequence of the custom fields on the View page against the new order.
+6. Click ""Edit"" and check the sequence of the custom fields on the Edit page against the new order.","1. User should be able to confirm that the custom field sequence is re-ordered and saved successfully.
+2. User should be able to see the Add User page open.
+3. User should be able to confirm that the custom fields on Add User reflect the newly saved order.
+4. User should be able to see the View page open for user 143.
+5. User should be able to confirm that the custom fields on the View page also reflect the newly saved order, not the old one.
+6. User should be able to confirm that the Edit page shows the same newly saved order, consistent across all three pages after the re-order."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/eJM6eg","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","vav4Wx","TC9444","Lokesh devamuthu","Verify user can modify and save changes to existing user profile successfully","143611","acceptance","critical","","Users, Login","BAT PNG staging on the fixed build, admin web login with access to the user edit page, an existing user with all mandatory details and role mappings configured.","1. Log in to the admin web portal.
+2. Navigate to the user edit page (e.g. /users/edit/36).
+3. Add or modify information such as an email address.
+4. Click the ""Save"" button.
+5. Check whether the save completes successfully.
+6. Reopen the user record to confirm the changes were saved.","1. User should be able to log in successfully.
+2. User should be able to see the user edit page open with the existing details.
+3. User should be able to confirm that the new/modified information is accepted on the form.
+4. User should be able to confirm that the Save button is active (not greyed out) and clicking it triggers the save.
+5. User should be able to confirm that the save completes successfully with no silent failure.
+6. User should be able to confirm that the reopened record shows the saved changes correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/vav4Wx","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","bjPV8V","TC9445","Lokesh devamuthu","Verify error is displayed when saving user profile with invalid or missing details","143611","acceptance","critical","","Users, Login","BAT PNG staging on the fixed build, admin web login on the user edit page, an existing user record where mandatory details can be cleared or invalid values entered before saving.","1. Log in to the admin web portal.
+2. Navigate to the user edit page for an existing user.
+3. Clear a mandatory field or enter an invalid value (e.g. malformed email).
+4. Click the ""Save"" button.
+5. Observe the app's response.
+6. Correct the field and save again.","1. User should be able to log in successfully.
+2. User should be able to see the user edit page open.
+3. User should be able to confirm that the mandatory field is cleared/invalid.
+4. User should be able to confirm that the save attempt is made.
+5. User should be able to confirm that a clear validation error is displayed and the record is not saved with invalid data, the save button behaves correctly (not just silently greyed out).
+6. User should be able to confirm that after correcting the field, the save completes successfully."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/bjPV8V","","WEB","-","2026-08-28 08:56:58","2026-08-31 18:35:07"
+"AD_Users","dy8PDw","TC9448","Lokesh devamuthu","Check that the system correctly identifies and rejects an invalid Microsoft email ID format.","143880","acceptance","critical","","Users, Login","BAT Global portal on the fixed build, SSO login configured for the tenant, a user record where the Microsoft Mail field holds an invalid or incorrectly formatted email id. (Confirmed against the Bizom schema: users.microsoftmail_id is a real, populated column.)","1. Log in to the admin portal and navigate to the SSO configuration section.
+2. Enter an invalid/incorrectly formatted value in the ""Microsoft Mail"" field (e.g. missing @ or domain).
+3. Attempt to save the configuration.
+4. Observe the app's response.
+5. Attempt to log in via Microsoft SSO with the invalid email configured.
+6. Correct the email format and retry.","1. User should be able to see the SSO configuration section open.
+2. User should be able to confirm that the invalid email format is entered.
+3. User should be able to see the save is blocked, or a validation error shown for the invalid format.
+4. User should be able to confirm that a clear error message identifies the invalid format.
+5. User should be able to confirm that the SSO login attempt fails gracefully with a clear message, not a silent failure.
+6. User should be able to confirm that after correcting the format, the save and login succeed."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/dy8PDw","","WEB","-","2026-08-28 08:56:59","2026-08-31 18:35:08"
+"AD_Users","xmZLg5","TC9449","Lokesh devamuthu","Verify user count match between portal and UI report Verify UI report reflects latest active users","144171","acceptance","critical","","Users, Login","Polycab tenant on the fixed build, user master containing active and inactive users, admin/web user (e.g. Polycab.CEE4) with access to the portal user list and to download the UI user report.","1. Log in as admin Polycab.CEE4.
+2. Navigate to /users/ajaxuserindex.
+3. Note the active user count displayed on the web portal.
+4. Download the UI report that shows active user count.
+5. Compare the two counts.
+6. Update a user's active status and repeat the comparison.","1. User should be able to log in successfully and see the portal loaded.
+2. User should be able to see the user index page open.
+3. User should be able to see the active user count displayed on the portal.
+4. User should be able to confirm that the UI report downloads successfully.
+5. User should be able to confirm that the portal count and the UI report count match exactly.
+6. User should be able to confirm that after the status update, both figures update consistently and still match."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/xmZLg5","","WEB","-","2026-08-28 08:56:59","2026-08-31 18:35:08"
+"AD_Users","VK8k3B","TC9450","Lokesh devamuthu","Verify behavior when no active users present Verify report generation during concurrent user updates","144171","acceptance","critical","","Users, Login","Polycab tenant on the fixed build, access to both the portal user count and the UI report, a filter/company scenario with no active users and the ability to update users while the report is generated.","1. Log in as admin and filter to a company/scenario with no active users.
+2. Check the active user count displayed on the portal.
+3. Download the UI report for this scenario.
+4. Compare the portal count (should be 0) against the report.
+5. In a separate session, update a user's status while triggering another report generation.
+6. Check the resulting report for consistency.","1. User should be able to log in successfully and see the filtered scenario loaded.
+2. User should be able to confirm that the portal shows a count of 0 active users.
+3. User should be able to confirm that the UI report downloads successfully, showing 0 as well, with no error.
+4. User should be able to confirm that the counts match, with no crash on the empty case.
+5. User should be able to confirm that the concurrent update does not corrupt the report generation.
+6. User should be able to confirm that the resulting report accurately reflects the state at generation time, with no inconsistency."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/VK8k3B","","WEB","-","2026-08-28 08:56:59","2026-08-31 18:35:08"
+"AD_Users","B81qzR","TC9451","Lokesh devamuthu","Verify that the user can login, change outlet type, submit, and then the approver can successfully approve or reject the outlet.","146617","acceptance","critical","","Users, Login","RB tenant on the fixed build, edit approval workflow (editApproval) enabled with an approver mapped to the user, an outlet type change submitted by the user and pending in the approval queue, approver login available. (Confirmed against the Bizom schema: `editApproval` is confirmed as a real setting/config name in this tenant's DB export.)","1. Log in as DS_Abishek/Mobisy@123.
+2. Go to outlet 221 and change the outlet type.
+3. Click ""Submit.""
+4. Log in as approver WM_Guruswamy/Mobisy@123.
+5. Navigate to https://devrunique.bizomdev.in/users/approveEditRequest.
+6. Click ""Approve"" (or ""Reject"") for the outlet.","1. User should be able to log in successfully and for DS_Abishek.
+2. User should be able to confirm that the outlet type change is accepted on the form.
+3. User should be able to confirm that the submission completes successfully with the Submit button working.
+4. User should be able to log in successfully.
+5. User should be able to see the approveEditRequest page open with the pending request.
+6. User should be able to confirm that the Approve/Reject action completes successfully with no unresponsive button."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/B81qzR","","WEB","-","2026-08-28 08:56:59","2026-08-31 18:35:08"
+"AD_Users","mBxnkV","TC9472","Lokesh devamuthu","Verify that the submit button remains unclickable if the outlet type change is not handled correctly.","146617","acceptance","critical","","Users, Login","RB tenant on the fixed build, editApproval page with a pending outlet type change request, approver and requestor mapped in different user-under-user hierarchies to cover the failure path. (Confirmed against the Bizom schema: `editApproval` is confirmed as a real setting/config name in this tenant's DB export.)","1. Log in as DS_Abishek/Mobisy@123 and go to outlet 221.
+2. Change the outlet type but simulate a scenario where the hierarchy mapping between requestor and approver is inconsistent.
+3. Click ""Submit.""
+4. Log in as approver WM_Guruswamy/Mobisy@123.
+5. Navigate to the approveEditRequest page.
+6. Attempt to click ""Approve"" or ""Reject"" for this request.","1. User should be able to log in successfully and for DS_Abishek.
+2. User should be able to confirm that the outlet type change is entered, with the hierarchy mismatch scenario in place.
+3. User should be able to confirm that the submission is attempted.
+4. User should be able to log in successfully.
+5. User should be able to see the approveEditRequest page open.
+6. User should be able to confirm that the submit button behaves correctly for the scenario: either the request is properly rejected/blocked with a clear message, or it processes correctly without becoming permanently unresponsive."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/mBxnkV","","WEB","-","2026-08-28 08:57:01","2026-08-31 18:35:08"
+"AD_Users","lRdmkn","TC9477","Lokesh devamuthu","user should be able to change the password successfully","148900","acceptance","critical","","Users, Login","RB dev (devarya) on release20260417 (fixed build), admin web login with access to /users, a user selected for the change credential action so the success message and Change/Cancel buttons can be verified.","1. Log in as Admin.
+2. Navigate to /users.
+3. Select a user and click ""Edit.""
+4. On the edit user page, click ""Change Password.""
+5. Update the password and submit ""Change Password.""
+6. Check for the success message and the Change/Cancel buttons' behavior.","1. User should be able to log in successfully.
+2. User should be able to see the users page open.
+3. User should be able to see the user's edit page open.
+4. User should be able to see the Change Password form open.
+5. User should be able to confirm that the password updates successfully.
+6. User should be able to confirm that a success message is displayed, and the Change/Cancel buttons work correctly afterward."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/lRdmkn","","WEB","-","2026-08-28 08:57:01","2026-08-31 18:35:09"
+"AD_Users","rG8rkW","TC9478","Lokesh devamuthu","User should be able to login DM Profile with no error","149282","acceptance","critical","","Users, Login","RB dev (devajisha) on release20260417 (fixed build), admin able to change a DM user's credentials from the user edit page, the DM account available to attempt a fresh login with the new credentials on web/app.","1. Log in as Admin.
+2. Select a DM user and click ""Edit.""
+3. Go to the user edit page and click ""Change Password.""
+4. Enter a new password and click ""Submit.""
+5. Confirm the password updates successfully, then log out the admin.
+6. Log in as the DM using the new password.","1. User should be able to log in successfully.
+2. User should be able to see the DM's edit page open.
+3. User should be able to see the Change Password form open.
+4. User should be able to confirm that the new password submits successfully.
+5. User should be able to confirm that the password update is confirmed, and admin logs out.
+6. User should be able to confirm that the DM logs in successfully with the new password, with no error."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/rG8rkW","","WEB","-","2026-08-28 08:57:01","2026-08-31 18:35:09"
+"AD_Users","kpRzj0","TC9488","Lokesh devamuthu","Verify that a successful response is received with updated user information when editing a user via the /users/editapi.","150170","acceptance","critical","","Users, Login","RB dev (devuitest / devapi) on release20260504 (fixed build), /users/editapi accessible with valid authentication, an existing user and a correctly formed XML payload with all required user details.","1. Obtain a valid access token for /users/editapi.
+2. Prepare a correctly formed XML payload with all required user detail keys for an existing user.
+3. Send a POST request to /users/editapi with the token and payload.
+4. Check the HTTP status code of the response.
+5. Inspect the response body.
+6. Verify the user's updated information in the backend.","1. User should be able to confirm that the access token is obtained successfully.
+2. System should ensure that the XML payload is prepared with all required keys.
+3. User should be able to confirm that the POST request is sent successfully.
+4. System should ensure that the response returns a success status code.
+5. System should ensure that the response body contains proper confirmation or updated user data, not a null response.
+6. System should ensure that the user's information in the backend reflects the update correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/kpRzj0","","WEB","-","2026-08-28 08:57:02","2026-08-31 18:35:09"
+"AD_Users","WEWBxM","TC9494","Lokesh devamuthu","Check that a null response is NOT returned when attempting to edit a user via the /users/editapi with correct data.","150170","acceptance","critical","","Users, Login","RB dev (devuitest / devapi) on the fixed build, /users/editapi accessible with valid authentication, correct user data payload prepared so the response body can be verified as non-null.","1. Obtain a valid access token for /users/editapi.
+2. Prepare a correct, complete user data payload.
+3. Send a POST request to /users/editapi with the token and payload.
+4. Check the HTTP status code of the response.
+5. Inspect the response body content.
+6. Repeat with a second valid user payload.","1. User should be able to confirm that the access token is obtained successfully.
+2. System should ensure that the payload is prepared correctly.
+3. User should be able to confirm that the request is sent successfully.
+4. System should ensure that the response returns a success status code.
+5. System should ensure that the response body is not null, it contains proper confirmation/updated data.
+6. System should ensure that the repeat request also returns a non-null, valid response."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/WEWBxM","","WEB","-","2026-08-28 08:57:03","2026-08-31 18:35:09"
+"AD_Users","B81qxR","TC9495","Lokesh devamuthu","Verify that a new user can be successfully added without any errors after filling in the mandatory information.","150622","acceptance","critical","","Users, Login","Laravel dev environment (e.g. devskincareproducts, branch user_parity2) on the fixed build, Laravel enabled for the users module, admin web login with access to /users/add, checkusername API working and all mandatory user details ready.","1. Log in to Bizom web as an admin.
+2. Navigate to the users/add page.
+3. Fill in all the required mandatory information.
+4. Click ""Submit.""
+5. Observe the app's response.
+6. Check the users list for the newly added user.","1. User should be able to log in successfully.
+2. User should be able to see the users/add page open.
+3. User should be able to confirm that all mandatory fields accept the entered data.
+4. User should be able to confirm that the submission is triggered.
+5. User should be able to confirm that the user is added successfully with no error.
+6. User should be able to confirm that the new user appears in the users list."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/B81qxR","","WEB","-","2026-08-28 08:57:03","2026-08-31 18:35:09"
+"AD_Users","dy8PJZ","TC9504","Lokesh devamuthu","Check that the 5xx error is no longer displayed when attempting to add a user.","150622","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build with the users module enabled, admin web login on /users/add, the same user data set that previously produced the 5xx error available for re-testing.","1. Log in to Bizom web as an admin.
+2. Navigate to the users/add page.
+3. Fill in the same user data set that previously caused the 5xx error.
+4. Click ""Submit.""
+5. Observe the app's response.
+6. Check the users list for the newly added user.","1. User should be able to log in successfully.
+2. User should be able to see the users/add page open.
+3. User should be able to confirm that the previously problematic data set is entered.
+4. User should be able to confirm that the submission is triggered.
+5. User should be able to confirm that no 5xx error occurs, the submission completes successfully.
+6. User should be able to confirm that the user appears correctly in the users list."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/dy8PJZ","","WEB","-","2026-08-28 08:57:03","2026-08-31 18:35:09"
+"AD_Users","xmZLB1","TC9505","Lokesh devamuthu","Verify that user details can be edited successfully, including the selection and saving of roles, without encountering any errors.","150624","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, roles configured for the company so the role dropdown is populated, admin web login with access to the user edit page, an existing user available.","1. Log in to the admin panel of Bizom web.
+2. Navigate to the ""Users"" section.
+3. Select a user and click ""Edit.""
+4. Modify user details, including selecting a role from the dropdown.
+5. Save the changes.
+6. Reopen the user to confirm the saved details.","1. User should be able to log in successfully.
+2. User should be able to see the Users section open.
+3. User should be able to see the user's edit page open.
+4. User should be able to confirm that the role dropdown is populated and a role can be selected.
+5. User should be able to confirm that the changes save successfully with no error.
+6. User should be able to confirm that the reopened user shows the correctly saved details including the role."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/xmZLB1","","WEB","-","2026-08-28 08:57:03","2026-08-31 18:35:09"
+"AD_Users","VK8kjP","TC9506","Lokesh devamuthu","Check that attempting to edit a user with an incomplete or erroneous role selection does not result in a 5xx error.","150624","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, admin web login on the user edit page, an existing user edited with an incomplete or erroneous role selection.","1. Log in to the admin panel of Bizom web.
+2. Navigate to the Users section and select a user to edit.
+3. Leave the role selection incomplete or select an erroneous/invalid role combination.
+4. Attempt to save.
+5. Observe the app's response.
+6. Correct the role selection and save again.","1. User should be able to log in successfully.
+2. User should be able to see the Users section open.
+3. User should be able to confirm that the incomplete/erroneous role selection is made.
+4. User should be able to confirm that the save is attempted.
+5. User should be able to confirm that a clear validation message is shown instead of a 5xx error, the app does not crash.
+6. User should be able to confirm that correcting the role allows the save to complete successfully."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/VK8kjP","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","J85EXL","TC9507","Lokesh devamuthu","Verify that the Users page loads correctly.","150628","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, Laravel enabled for the users module, admin web login with access to /users index, user records available in the company.","1. Log in to Bizom web as admin.
+2. Navigate to the Users index page (users/ajaxuserindex).
+3. Wait for the page to load.
+4. Check the list of users displayed.
+5. Check pagination/sorting controls if present.
+6. Reload the page to confirm consistency.","1. User should be able to log in successfully.
+2. User should be able to confirm that navigation to the Users page is triggered.
+3. User should be able to see the page loaded successfully with no error.
+4. User should be able to confirm that the user records are listed correctly.
+5. User should be able to confirm that the controls function correctly.
+6. User should be able to see the reload also loaded the page successfully and consistently."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/J85EXL","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","PgkWGm","TC9508","Lokesh devamuthu","Check that the Users page does not show any errors and displays all user information.","150628","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, admin web login opening the Users page with a large set of user records so listing and details can be verified.","1. Log in to Bizom web as admin, for a company with a large number of user records.
+2. Navigate to the Users index page.
+3. Wait for the page to load fully.
+4. Check for any error messages.
+5. Scroll/paginate through the full list of users.
+6. Open a user's details to confirm the information displays correctly.","1. User should be able to log in successfully.
+2. User should be able to confirm that the Users page navigation is triggered.
+3. User should be able to see the page loaded fully with no error, even with the large data set.
+4. User should be able to confirm that no error messages appear.
+5. User should be able to confirm that all users are listed correctly across pages.
+6. User should be able to confirm that the user details open and display correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/PgkWGm","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","68VvjV","TC9509","Lokesh devamuthu","Verify that the `users/getaccesstoken` endpoint now loads correctly without any ""Invalid request url"" errors.","150632","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, admin logged into Bizom web, the users/getaccesstoken route enabled and reachable.","1. Log in to Bizom web as an admin.
+2. Navigate to the users/getaccesstoken URL.
+3. Wait for the page/response to load.
+4. Check the response for the expected JSON structure.
+5. Confirm no ""Invalid request url"" error appears.
+6. Check that the response contains the expected data fields (accesstoken, clientsecret, refreshtoken, client, lmsfrontendurl).","1. User should be able to log in successfully.
+2. User should be able to confirm that the URL is accessed.
+3. User should be able to see the response loaded successfully.
+4. System should ensure that the response is well-formed JSON with ""result"": true.
+5. User should be able to confirm that no ""Invalid request url"" error is shown.
+6. System should ensure that all the expected data fields are present in the response."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/68VvjV","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","7EJb4e","TC9510","Lokesh devamuthu","Check that attempting to access an incorrect or non-existent route still results in an appropriate error message, confirming the fix is specific to the `getaccesstoken` endpoint.","150632","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, admin logged into Bizom web, an incorrect or non-existent route prepared to confirm the proper error handling.","1. Log in to Bizom web as an admin.
+2. Navigate to a deliberately incorrect or non-existent route (e.g. users/getaccesstokenxyz).
+3. Observe the app's response.
+4. Check the error message shown.
+5. Navigate to the correct users/getaccesstoken route for comparison.
+6. Confirm the correct route works while the incorrect one still errors appropriately.","1. User should be able to log in successfully.
+2. User should be able to confirm that the incorrect route is accessed.
+3. User should be able to confirm that the app responds with an appropriate error, not a silent failure or crash.
+4. User should be able to confirm that a clear, appropriate error message is shown for the non-existent route.
+5. User should be able to see the correct getaccesstoken route loaded successfully.
+6. System should ensure that this confirms the fix is scoped specifically to the getaccesstoken endpoint, and unrelated invalid routes still error appropriately."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/7EJb4e","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","9eqR8Z","TC9511","Lokesh devamuthu","Verify that the password is changed successfully and a pop-up appears indicating the change.","150655","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, change credential option available for a user (e.g. user id 15), admin logged in, signup/credential DB updated by the fix.","1. Log in to the web application as an admin.
+2. Navigate to a user's edit screen and click ""Change Password.""
+3. Enter a new password (e.g. Mobisy@123) and confirm it.
+4. Click ""Change Password.""
+5. Observe whether a confirmation popup appears.
+6. Log out and log in as the user with the new password.","1. User should be able to log in successfully.
+2. User should be able to see the user's edit screen open with the Change Password option.
+3. User should be able to confirm that the new password and confirmation are accepted.
+4. User should be able to confirm that the change password action is submitted.
+5. User should be able to confirm that a popup appears confirming the password was changed successfully.
+6. User should be able to confirm that the user logs in successfully with the new password."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/9eqR8Z","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:09"
+"AD_Users","qzBlE4","TC9512","Lokesh devamuthu","Check that if an invalid password is entered, an error message ""Please enter valid password!"" is displayed.","150655","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, change credential screen available for a user, an invalid value prepared so the validation message can be verified.","1. Log in to the web application as an admin.
+2. Navigate to a user's edit screen and click ""Change Password.""
+3. Enter an invalid password (e.g. too short or with disallowed characters).
+4. Confirm the password field and click ""Change Password.""
+5. Observe the app's response.
+6. Correct the password to a valid one and submit again.","1. User should be able to log in successfully.
+2. User should be able to see the Change Password form open.
+3. User should be able to confirm that the invalid password is entered.
+4. User should be able to confirm that the submission is attempted.
+5. User should be able to see the error message ""Please enter valid password!"" displayed and the change is not saved.
+6. User should be able to confirm that correcting the password allows the change to complete successfully."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/qzBlE4","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:10"
+"AD_Users","XGD8B0","TC9513","Lokesh devamuthu","Verify that the API response structure for user information is identical between the Laravel and CakePHP versions.","150669","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, getuserinfo API accessible with valid authentication on both the Laravel and CakePHP versions, the same user and company data available on both for comparison.","1. Access the getuserinfo API endpoint on the Laravel version.
+2. Capture the JSON response.
+3. Access the same getuserinfo API endpoint on the CakePHP version for the same user.
+4. Capture that JSON response.
+5. Compare the two responses' structure (keys and data types).
+6. Confirm the responses are identical in structure.","1. System should ensure that the Laravel API call completes successfully.
+2. System should ensure that a valid JSON response is captured.
+3. System should ensure that the CakePHP API call completes successfully.
+4. System should ensure that a valid JSON response is captured.
+5. User should be able to confirm that the comparison shows matching keys and data types.
+6. User should be able to confirm that both responses are structurally identical."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/XGD8B0","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:10"
+"AD_Users","zvdyM9","TC9515","Lokesh devamuthu","Check that the API response JSON file does not show any discrepancies in the keys or data types for the user information between Laravel and CakePHP.","150669","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, getuserinfo API responses captured from Laravel and CakePHP for the same user, JSON comparison tooling available to check keys and data types.","1. Capture the getuserinfo API response from Laravel for a specific user.
+2. Capture the getuserinfo API response from CakePHP for the same user.
+3. Load both responses into a JSON comparison tool.
+4. Check for any missing/extra keys between the two.
+5. Check for any data type mismatches (e.g. string vs integer) for the same key.
+6. Repeat the comparison for a second user with different data.","1. System should ensure that the Laravel response is captured successfully.
+2. System should ensure that the CakePHP response is captured successfully.
+3. User should be able to confirm that both load into the comparison tool.
+4. User should be able to confirm that no missing or extra keys are found between the two.
+5. User should be able to confirm that no data type mismatches are found for any key.
+6. User should be able to confirm that the second user's comparison also shows no discrepancies."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/zvdyM9","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:10"
+"AD_Users","mBxnmV","TC9516","Lokesh devamuthu","Verify that the user view page loads without any errors.","150672","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, Laravel configuration correct for the users module, admin web login with access to the users/view (master list) page, user records available.","1. Log in to Bizom web as admin.
+2. Navigate to the user view page (e.g. users/details/8).
+3. Wait for the page to load.
+4. Check that the user details are displayed correctly.
+5. Click the ""Home"" button.
+6. Confirm no error occurs after returning home.","1. User should be able to log in successfully.
+2. User should be able to confirm that the user view page is accessed.
+3. User should be able to see the page loaded successfully with no error.
+4. User should be able to see the user details displayed correctly.
+5. User should be able to confirm that the Home button navigates away successfully.
+6. User should be able to confirm that no 5xx error occurs at any point in the flow."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/mBxnmV","","WEB","-","2026-08-28 08:57:04","2026-08-31 18:35:10"
+"AD_Users","lRdmzn","TC9521","Lokesh devamuthu","Verify that  no 5xx errors are displayed when accessing the user view page.","","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build with correct Laravel configuration, admin web login opening the user view page for existing users.","1. Log in to Bizom web as admin.
+2. Navigate to the user view page for a different existing user (e.g. users/details/8).
+3. Reload the page a few times.
+4. Check the browser network tab for any 5xx status codes.
+5. Click through related links on the page (e.g. Home button).
+6. Repeat for a second user record.","1. Admin login succeeds.
+2. The user view page loads for the user.
+3. Reloading does not produce any error.
+4. No 5xx status codes appear in the network tab.
+5. Navigating through related links works without error.
+6. The second user's view page also loads with no 5xx errors."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/lRdmzn","","WEB","-","2026-08-28 08:57:05","2026-08-28 11:26:31"
+"AD_Users","rG8rlW","TC9522","Lokesh devamuthu","Verify that a new user can be successfully added using the provided Curl request with the updated password and post data processing. Curl: postman request POST ' \ --header 'Content-Type: application/json' \ --header 'Cookie: BizomOAuth[device_id]=9e54d703c4dac5df7e8d22ae11b13494f8a0d4f1, CAKEPHP=d6007ftbehoigrh1jc0c629iii' \ --body '<User> <username>IntegrationAPIadnewuser</username> <employeeid>017898</employeeid> <password>Mobisy@123</password> <warehouse_erp_id>01</warehouse_erp_id> <name>Abhishek</name> <Role>7</Role> <Rolespecificid>2</Rolespecificid> <RolespecificErpId></RolespecificErpId> <email>anilkumar.mundawad@mobisy.com</email> <phoneno>9916225512</phoneno> <address>2nd A Main Vignan Nagar Bangalore</address> <balance>10000</balance> <creditlimit>0</creditlimit> <active>1</active> <reportingto>3</reportingto> <reportingtoemployeeid/> <designation_id>4</designation_id> <designation_erpid></designation_erpid> <headquarter_id>1</headquarter_id> <isrolespecificid>1</isrolespecificid> <state_id>16</state_id> <state_erp_id>78</state_erp_id> <state_code>12</state_code> <customfielddata> <department>CHIKKAMANGALURU</department> <singleLineText1>test21212</singleLineText1> <checkBox1>1</checkBox1> <radioButton1>12</radioButton1> </customfielddata> <!--<Userworkflow> <sale>1</sale> <order>1</order> <salereturn>1</salereturn> <stockatoutlet>1</stockatoutlet> <collection>1</collection> <print>1</print> <adhocads>1</adhocads> <addoutlet>1</addoutlet> <activity>1</activity> <attendance>1</attendance> <attendanceimage>1</attendanceimage> <collaterals>1</collaterals> <pop>1</pop> <claims>1</claims> <genericform>1</genericform> <outletageing>1</outletageing> <vendorbid>1</vendorbid> <activitypicture>1</activitypicture> <activitycomment>1</activitycomment> <activityform>1</activityform> <outletenrollment>1</outletenrollment> <emailtoretailer>1</emailtoretailer> <lms>1</lms> <readgeolocation>1</readgeolocation> <assettrack>1</assettrack> <orderfulfil>1</orderfulfil> <outletedit>1</outletedit> <tasks>1</tasks> <assetorder>1</assetorder> <existingasset>1</existingasset> <reqfordiscount>1</reqfordiscount> <assetaudit>1</assetaudit> <addtask>1</addtask> <emailpacreport>1</emailpacreport> <searchoutletonline>1</searchoutletonline> <shownearestoutlets>1</shownearestoutlets> <printertype>1</printertype> <primaryorder>1</primaryorder> <primarysalereturn>1</primarysalereturn> <primarycollections>1</primarycollections> <editoutletlocation>1</editoutletlocation> <enterskuprice>1</enterskuprice> <edituserlocvisibility>1</edituserlocvisibility> <txnsinsinglescreen>1</txnsinsinglescreen> <enrolwithtarget>1</enrolwithtarget> <sampling>1</sampling> <edituserinfo>1</edituserinfo> <beatplanning>1</beatplanning> <stock_transfer>1</stock_transfer> <primaryactivityform>1</primaryactivityform> <reporteeview>1</reporteeview> <trainer>1</trainer> <taskapprover>1</taskapprover> <addevent>1</addevent> <secondarygrn>1</secondarygrn> <claim_auditor>1</claim_auditor> <assetderegister>1</assetderegister> <assetapprover>1</assetapprover> </Userworkflow>--> </User> ' Response { ""Result"": ""true"", ""Reason"": ""User added successfully."" }","150673","acceptance","critical","","Users, Login","Laravel dev environment (devapi) on the fixed build, Integration API for add user accessible with valid authentication, payload prepared with username, employee id, warehouse erp id, name and role details. (Confirmed against the Bizom schema: erp_id is a real column on both outlets and warehouses.)","1. Prepare the Integration API add-user request with the required fields (username, employee id, password, warehouse ERP ID, name, role, and related details).
+2. Send the request using the provided curl command with valid authentication.
+3. Check the HTTP status code of the response.
+4. Inspect the response body.
+5. Confirm the user was created successfully in the system.
+6. Log in as the new user to verify the account works.","1. System should ensure that the payload is prepared correctly with all required fields.
+2. User should be able to confirm that the request is sent successfully.
+3. System should ensure that the response returns a success status code.
+4. System should ensure that the response body shows {""Result"": ""true"", ""Reason"": ""User added successfully.""}.
+5. User should be able to confirm that the new user is found in the system.
+6. User should be able to confirm that the new user can log in successfully with the provided credentials."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/rG8rlW","","WEB","-","2026-08-28 08:57:05","2026-08-31 18:35:10"
+"AD_Users","NjkKne","TC9523","Lokesh devamuthu","Check that no errors are returned when attempting to add a user via the Integration API after the fix.","150673","acceptance","critical","","Users, Login","Laravel dev environment (devapi) on the fixed build, add user Integration API accessible with valid authentication, the same request that previously failed available for re-testing.","1. Prepare the same Integration API add-user request that previously failed.
+2. Send the request using the curl command with valid authentication.
+3. Check the HTTP status code of the response.
+4. Inspect the response body for any error.
+5. Confirm the user was created successfully.
+6. Retry the same request a second time to check for consistency.","1. System should ensure that the payload is prepared with the previously-failing data.
+2. User should be able to confirm that the request is sent successfully.
+3. System should ensure that the response returns a success status code, not an error.
+4. System should ensure that the response body shows a success message, with no error returned.
+5. User should be able to confirm that the user is created successfully in the system.
+6. User should be able to confirm that the retry also completes without error, confirming consistent behavior."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/NjkKne","","WEB","-","2026-08-28 08:57:05","2026-08-31 18:35:10"
+"AD_Users","K4kl3J","TC9524","Lokesh devamuthu","Verify that after uploading 3 images in the User Attendance Verification Images field on the user edit screen (URL: and submitting, the images are saved successfully without any 5xx errors.","151076","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, User Attendance Verification Images field enabled on the user edit screen, admin web login, up to 3 valid image files ready for upload.","1. Log in to Bizom web as admin.
+2. Navigate to users/edit/18 (HDSM user, attendanceFaceVerification=1).
+3. Go to the ""User Attendance Verification Images"" field.
+4. Upload 3 valid images.
+5. Submit the form.
+6. Check for a successful save with no error.","1. User should be able to log in successfully.
+2. User should be able to see the user edit page open for user 18.
+3. User should be able to confirm that the images field is accessible.
+4. User should be able to confirm that the 3 images upload successfully.
+5. User should be able to confirm that the submission completes.
+6. User should be able to confirm that the images save successfully with no 5xx error."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/K4kl3J","","WEB","-","2026-08-28 08:57:05","2026-08-31 18:35:10"
+"AD_Users","0rvkGb","TC9531","Lokesh devamuthu","Check that no 5xx errors are displayed when attempting to upload images for user attendance verification.","151076","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, User Attendance Verification Images field enabled on the user edit screen, admin web login with valid image files ready to upload and save.","1. Log in to Bizom web as admin.
+2. Navigate to a user's edit screen with attendanceFaceVerification enabled.
+3. Go to the ""User Attendance Verification Images"" field.
+4. Upload multiple images (e.g. 3).
+5. Submit and observe the network response.
+6. Repeat the upload and submit a second time.","1. User should be able to log in successfully.
+2. User should be able to see the user edit page open.
+3. User should be able to confirm that the images field is accessible.
+4. User should be able to confirm that the images upload successfully.
+5. User should be able to confirm that the submission completes with no 5xx error.
+6. User should be able to confirm that the repeat attempt also completes without a 5xx error."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/0rvkGb","","WEB","-","2026-08-28 08:57:06","2026-08-31 18:35:10"
+"AD_Users","kpRz30","TC9532","Lokesh devamuthu","Verify that after uploading 5 images, the option to select a 6th image is disabled and the correct message ""You have uploaded 5 images. No more uploads allowed"" is displayed in red.","151079","acceptance","critical","","Users, Login","Laravel dev environment (branch user_parity2) on the fixed build, User Attendance Verification Images limited to 5 images as in CakePHP, admin web login with 6 image files available for the upload attempt.","1. Log in to Bizom web as admin.
+2. Navigate to a user's edit screen with the Attendance Verification Images field.
+3. Upload 5 images successfully.
+4. Attempt to select/upload a 6th image.
+5. Observe whether the option to add more images is disabled.
+6. Check the message displayed.","1. User should be able to log in successfully.
+2. User should be able to see the user edit screen open.
+3. User should be able to confirm that the 5 images upload successfully.
+4. User should be able to confirm that the 6th image upload attempt is blocked.
+5. User should be able to confirm that the option to select more images is disabled.
+6. User should be able to see the message ""You have uploaded 5 images. No more uploads allowed"" shown in red."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/kpRz30","","WEB","-","2026-08-28 08:57:06","2026-08-31 18:35:10"
+"AD_Users","QGkpEB","TC9537","Lokesh devamuthu","Verify that users can successfully submit user images, including cases with 3 images, without encountering a 5xx error.","151079","acceptance","critical","","Users, Login","Laravel dev environment on the fixed build, User Attendance Verification Images field on the user edit screen, admin web login with 3 valid images ready to submit.","1. Log in to Bizom web as admin.
+2. Navigate to a user's edit screen with the Attendance Verification Images field.
+3. Upload 3 images (below the 5-image limit).
+4. Submit the form.
+5. Observe the app's response.
+6. Confirm the images save correctly.","1. User should be able to log in successfully.
+2. User should be able to see the user edit screen open.
+3. User should be able to confirm that the 3 images are uploaded successfully.
+4. User should be able to confirm that the submission is triggered.
+5. User should be able to confirm that no 5xx error occurs.
+6. User should be able to see the 3 images save correctly and visible on reload."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/QGkpEB","","WEB","-","2026-08-28 08:57:06","2026-08-31 18:35:10"
+"AD_Users","WEWB4M","TC9538","Lokesh devamuthu","Verify that when calling the API with the correct parameters, both active and inactive users are returned","156613","acceptance","critical","","Users, Login","Happilo tenant on the fixed build, get users API accessible with valid authentication and the correct company id, the company having both active and inactive users in the master.","1. Confirm Laravel is enabled for the apiGetUsersForThisUser continuation.
+2. Call the /users/forwardMultipleRequests/ API endpoint with a valid access token and the correct company id parameter.
+3. Inspect the response for the list of users returned.
+4. Check for active users in the response.
+5. Check for inactive users in the response.
+6. Confirm the counts match the expected active/inactive user totals in the master.","1. User should be able to confirm that laravel is confirmed enabled.
+2. System should ensure that the API call completes successfully.
+3. System should ensure that the response contains a list of users.
+4. System should ensure that active users are present in the response.
+5. System should ensure that inactive users are also present in the response.
+6. User should be able to confirm that the counts match the master data, confirming both statuses are correctly returned."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/WEWB4M","","WEB","-","2026-08-28 08:57:06","2026-08-31 18:35:10"
+"AD_Users","dy8PWM","TC9560","Lokesh devamuthu","Verify that if the incorrect API call is made or if there's an issue with the company ID, it does not crash the system and appropriate error handling is in place.","156613","acceptance","critical","","Users, Login","Happilo tenant on the fixed build, get users API accessible with valid authentication, a request prepared with an incorrect company id or missing/incorrect parameters.","1. Confirm Laravel is enabled for the apiGetUsersForThisUser continuation.
+2. Prepare a request to /users/forwardMultipleRequests/ with an incorrect or missing company id parameter.
+3. Send the request with a valid access token.
+4. Check the HTTP status code of the response.
+5. Inspect the response body for an appropriate error message.
+6. Confirm the system does not crash and remains usable for subsequent valid requests.","1. User should be able to confirm that laravel is confirmed enabled.
+2. User should be able to confirm that the malformed request is prepared.
+3. User should be able to confirm that the request is sent.
+4. System should ensure that the response returns an appropriate error status, not a raw crash.
+5. System should ensure that a clear error message is returned in the response body.
+6. User should be able to confirm that the system remains stable and a subsequent valid request completes successfully."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/dy8PWM","","WEB","-","2026-08-28 08:57:08","2026-08-31 18:35:11"
+"AD_Users","xmZLyl","TC9561","Lokesh devamuthu","The /users pages should load successfully without displaying any DataTables warning messages.","157735","acceptance","critical","","Users, Login","RB dev (devmileena) on the PHP 8.5 build (fixed), admin web login with access to /users and users/ajaxuserindex, user records available and the search box usable.","1. Log in as admin.
+2. Navigate to users/ajaxuserindex.
+3. Wait for the page to load.
+4. Check for any DataTables warning messages.
+5. Use the search box to filter records.
+6. Confirm the table reloads correctly.","1. User should be able to log in successfully.
+2. User should be able to see the users page loaded.
+3. User should be able to see the page loaded successfully.
+4. User should be able to confirm that no DataTables warning messages appear.
+5. User should be able to confirm that the search box filters the records.
+6. System should ensure that the table reloads with the filtered records correctly."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/xmZLyl","","WEB","-","2026-08-28 08:57:08","2026-08-31 18:35:11"
+"AD_Users","VK8k62","TC9562","Lokesh devamuthu","When the user navigates to the /users page, the data table should load and display the records correctly without any warnings or errors.","157735","acceptance","critical","","Users, Login","RB dev (devmileena) on the PHP 8.5 build, admin web login on the /users page, a search keyword entered so the data table reloads with filtered records.","1. Log in as admin.
+2. Navigate to the /users page.
+3. Enter a search keyword in the search box.
+4. Observe the data table reload.
+5. Check for any warnings or errors during the reload.
+6. Clear the search and check the full list reloads correctly.","1. User should be able to log in successfully.
+2. User should be able to see the users page open.
+3. User should be able to confirm that the keyword is entered.
+4. System should ensure that the table reloads with the filtered records.
+5. User should be able to confirm that no warnings or errors appear during the reload.
+6. User should be able to confirm that clearing the search correctly reloads the full list with no error."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/VK8k62","","WEB","-","2026-08-28 08:57:08","2026-08-31 18:35:11"
+"AD_Users","J85EM2","TC9563","Lokesh devamuthu","Success message should display after updating user form","158203","acceptance","critical","","Users, Login","RB dev (devrumaisa) on laravel_12_master with PHP 8.5 (fixed build), admin web login with access to the user create/update form, mandatory user details ready.","1. Log in as admin.
+2. Navigate to /settings and click ""Form Settings"" tab.
+3. Click ""User Form"" button.
+4. Add fields for the user form and click ""Update.""
+5. Check for the success message.
+6. Repeat by editing fields again and clicking ""Update.""","1. User should be able to log in successfully.
+2. User should be able to see the Form Settings tab open.
+3. User should be able to see the User Form editor open.
+4. User should be able to confirm that the fields are added and the update is submitted.
+5. User should be able to confirm that a success message is displayed for the form creation.
+6. User should be able to confirm that the repeat update also shows the success message."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/J85EM2","","WEB","-","2026-08-28 08:57:08","2026-08-31 18:35:11"
+"AD_Users","9eqR24","TC9567","Lokesh devamuthu","Success message not displaying after updating user form *Impact on Related Areas: User form","158203","acceptance","critical","","Users, Login","RB dev (devrumaisa) on the PHP 8.5 build, admin web login on the user form, an existing user updated with valid data so the post-save success message can be verified.","1. Log in as admin.
+2. Navigate to /settings > ""Form Settings"" > ""User Form.""
+3. Edit an existing field and click ""Update.""
+4. Check whether a success message appears.
+5. Repeat the edit and update a second time.
+6. Confirm the message appears consistently.","1. User should be able to log in successfully.
+2. User should be able to see the User Form editor open.
+3. User should be able to confirm that the field edit and update are submitted.
+4. User should be able to see the success message displayed correctly, not missing.
+5. User should be able to confirm that the second update is submitted.
+6. User should be able to confirm that the success message appears again consistently."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/9eqR24","","WEB","-","2026-08-28 08:57:09","2026-08-31 18:35:11"
+"AD_Users","qzBl0m","TC9568","Lokesh devamuthu","Verify Warehouse Edit Page Loads Successfully","141054","acceptance","critical","","Warehouse / Distributors","BAT Test staging on master (fixed build), admin web login, a valid warehouse (e.g. warehouse id 4) with complete master data, /warehouses/edit page accessible.","1. Log in to the admin web portal.
+2. Navigate to /warehouses/edit/4.
+3. Wait for the warehouse edit page to load.
+4. Check that the warehouse's master data fields are populated correctly.
+5. Make a minor edit and save.
+6. Reopen the warehouse edit page for warehouse id 4.","1. User should be able to log in successfully.
+2. User should be able to see the warehouse edit page loaded successfully with no error.
+3. User should be able to see the page loaded within a reasonable time with no 500 error.
+4. User should be able to confirm that all warehouse master data fields are populated correctly.
+5. User should be able to confirm that the edit is saved successfully.
+6. User should be able to confirm that the page reopens correctly with the updated data."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/qzBl0m","","WEB","-","2026-08-28 08:57:09","2026-08-31 18:34:59"
+"AD_Users","RgQZX1","TC10592","Lokesh devamuthu","Verify last web login details are updated in Login details section and Last Login version is been removed.
+Screen : Users/view","","acceptance","medium","","PR1-T10580","Custom branch should be available","1. Login to web from the given user
+2. Now, login to web from admin and go to users/view screen.
+3. Check Login Details data.
+4. Check Last Login Version should be removed.","1. User should be logged in successfully.
+2. Admin should be logged in and users/view screen should be visible.
+3. Below should be the Login Details.
+Last Login Date Time : 2026-01-08 15:46:45
+4. Last Login Version should be hidden or removed"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/RgQZX1","web","WEB,App(KMM-Android)","-","2026-01-18 16:56:46","2026-09-05 09:45:02"
+"AD_Users","dyXZk0","TC10593","Lokesh devamuthu","Verify when user logs out from web last logout time should be updated in the section login details in the user view screen.
+Screen : Users/view","","acceptance","medium","","PR1-T10580","Custom branch should be available","1. Login to web from the given user
+2. Logout from web from the same user and note the timestamp.
+2. Now, login to web from admin and go to users/view screen.
+3. Check Login Details data.
+4. Check Last Login Version should be removed.
+5. Both Last Login and Last Logout time in the login details section should be updated.","1. User should be logged in successfully.
+2. User shoud be logged out and timestamp should be noted.
+2. Admin should be logged in and users/view screen should be visible.
+3. Below should be the Login Details.
+Last Login Date Time : 2026-01-08 15:46:45
+4. Last Login Version should be hidden or removed
+5. Both Last Login and Last Logout time in the login details section should be updated."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/dyXZk0","web","WEB,App(KMM-Android)","-","2026-01-18 16:56:46","2026-09-05 09:45:02"
+"AD_Users","xmdqVZ","TC10594","Lokesh devamuthu","Verify when user logs out from App last logout time should be updated in the section login details in the user view screen.
+Screen : Users/view","","acceptance","medium","","PR1-T10580","Custom branch should be available","1. Login to App from the given user
+2. Logout from App  from the same user and note the timestamp.
+2. Now, login to web from admin and go to users/view screen.
+3. Check Login Details data.
+4. Check Last Login Version should be removed.
+5. Both Last Login and Last Logout time in the login details section should be updated.","1. User should be logged in successfully.
+2. User shoud be logged out and timestamp should be noted.
+2. Admin should be logged in and users/view screen should be visible.
+3. Below should be the Login Details.
+Last Login Version : 3.0.21.004
+Last Login Date Time : 2026-01-08 15:46:45
+4. Last Login Version should be visible for APP.
+5. Both Last Login and Last Logout time in the login details section should be updated."," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/xmdqVZ","web","WEB,App(KMM-Android)","-","2026-01-18 16:56:47","2026-09-05 09:45:02"
+"AD_Users","VKQwLQ","TC10595","Lokesh devamuthu","To Verify that the Admin or Reporting Manager can successfully see and use the Unblock option to unblock a user whose account was blocked due to progressive lockout","<p>Verify that the Admin or Reporting Manager can successfully see and use the ""Unblock"" option to unblock a user whose account was blocked due to progressive lockout.</p><p><br></p>","acceptance","critical","","","Precondition: The Admin or Reporting Manager must have necessary permissions and access rights to unblock a user, and the user's account must have been blocked due to progressive lockout.","Login to the Admin or Reporting Manager account using valid credentials.
+Navigate to the user management section where the list of users is displayed.
+Locate the specific user whose account is blocked due to progressive lockout.
+Find and click on the 'Unblock' option next to the blocked user's account.
+Verify that the user's account status changes to unblocked.","Admin or Reporting Manager should be successfully logged in and able to view the dashboard.
+Admin or Reporting Manager should be able to see the list of users in the system.
+Admin or Reporting Manager should be able to identify the user account that is blocked.
+Admin or Reporting Manager should be able to successfully unblock the user's account.
+Admin or Reporting Manager should see that the user's account is now unblocked and accessible."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/VKQwLQ","","WEB,App(KMM-Android)","-","2026-06-17 07:08:26","2026-09-05 09:45:02"
+"AD_Users","B89VPE","TC10596","Lokesh devamuthu","Verify latest login details(App)  are updated in Login Details section.
+Screen : Users/view","","acceptance","medium","","PR1-T12694","Custom branch should be available","1. Login to App from requestor(DS_Abishek/Mobisy@1)
+2. Login to web from admin and go to users/view screen.
+3. Check Login Details data.","1. User should be logged in.
+2. Users/view screen should be displayed.
+3. Below should be the Login Details.
+Last Login Version : 3.0.21.004
+Last Login Date Time : 2026-01-08 15:46:45"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/B89VPE","","WEB,App(KMM-Android)","-","2026-06-24 10:31:36","2026-09-05 09:45:02"
+"AD_Users","M7wMjl","TC10597","Lokesh devamuthu","Verify first incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the first time","A error ""Invalid User Credentials.."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/M7wMjl","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","Dr96PV","TC10598","Lokesh devamuthu","Verify second incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the second time","A error ""Invalid User Credentials.."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Dr96PV","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","eJXRLl","TC10599","Lokesh devamuthu","Verify third incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the third time","A error ""Your account has been blocked for next 3 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/eJXRLl","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","vaZp6z","TC10600","Lokesh devamuthu","Verify 4th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 4th time","A error ""Your account has been blocked for next 4 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/vaZp6z","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","bjXvKR","TC10601","Lokesh devamuthu","Verify 5th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 5th time","A error ""Your account has been blocked for next 5 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/bjXvKR","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","Z8QLk2","TC10602","Lokesh devamuthu","Verify 6th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 6th time","A error ""Your account has been blocked for next 6 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Z8QLk2","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","RgQZXW","TC10603","Lokesh devamuthu","Verify 7th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for 7th third time","A error ""Your account has been blocked for next 7 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/RgQZXW","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","dyXZkb","TC10604","Lokesh devamuthu","Verify 8th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 8th time","A error ""Your account has been blocked for next 8 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/dyXZkb","","WEB,App(KMM-Android)","-","2026-09-05 10:09:14","2026-09-05 10:09:14"
+"AD_Users","xmdqVR","TC10605","Lokesh devamuthu","Verify 9th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 9th time","A error ""Your account has been blocked for next 9 minutes."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/xmdqVR","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","VKQwLN","TC10606","Lokesh devamuthu","Verify 10th incorrect login attempts when Progressivelockout=1","","acceptance","critical","","","Progressivelockout=1","Login with a user with incorrect password for the 10th time","A error ""Your account has been blocked."" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/VKQwLN","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","J89KwB","TC10607","Lokesh devamuthu","Verify that the correct login attempt after 9 failure attempts does not lock out user","","acceptance","critical","","","Progressivelockout=1 user will wait for the block time to over after 9 consecutive failure attempts","Login with a user with incorrect password for the 9 times
+Login with a user with correct password for the tenth time","A error ""Invalid User Credentials.."" should show
+User should be able to login successfully in both web and app"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/J89KwB","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","Pg9vXq","TC10608","Lokesh devamuthu","Verify user login with valid credentials on app and web when progressivelockout=0","","acceptance","critical","","","Progressivelockout=0","Login with a user with correct password and username","User should be able to login successfully in both web and app"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Pg9vXq","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","68DXg5","TC10609","Lokesh devamuthu","Verify user can perform all regular transactions and activites in app and web when progressivelockout=0","","acceptance","critical","","","Progressivelockout=0","Login with a user with correct password and username and able to place calls and activities","User should be able to login successfully in both web and app and perform all activities without any hinderance"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/68DXg5","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","7Ee6Ld","TC10610","Lokesh devamuthu","Verify blocked user cannot login via app or web","","acceptance","critical","","","Progressivelockout=0","Login with a user with incorrect password for the first time","A error ""Your account has been blocked for next n minutes"" should show"," "," ","","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/7Ee6Ld","","WEB,App(KMM-Android)","-","2026-09-05 10:09:15","2026-09-05 10:09:15"
+"AD_Users","Z8QLZ2","TC10611","Lokesh devamuthu","Verify that the user is successfully inactivated without displaying any Error","<p>""Verify successful inactivation of users without errors - ensure user is deactivated without any system notifications or validation issues""</p>","acceptance","critical","","","Precondition: The user must be logged in as an admin, the user to be inactivated must exist in the system, and there should be no errors or issues present in the user management system.","Go to the user/ajaxuserindex url in the web
+Select the specific user to be inactivated
+Click on the 'activate' checkbox and save
+Verify that the user is now inactivated by checking the user view","User index page should be successfully loaded
+The selected user should be highlighted or marked
+User should be successfully inactivated without any error message displayed
+User status should show as 'Inactive'"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/Z8QLZ2","","WEB,App(KMM-Android)","-","2026-09-05 18:10:58","2026-09-05 18:10:58"
+"AD_Users","RgQZdW","TC10612","Lokesh devamuthu","Check that attempting to inactivate a user with duplicate ID entries in the managed list now completes without errors.","<p>Test case title: Verify successful inactivation of a user with duplicate ID entries in managed list Description: This test case validates the system's ability to inactivate a user with duplicate ID entries in the managed list without encountering any errors, ensuring data integrity and uninterrupted functionality.</p>","acceptance","critical","","","The precondition for this test case is that there are duplicate ID entries in the managed list of users, and the system allows attempting to inactivate a user with duplicate ID entries without throwing errors.","Add a user with a duplicate ID entry to the managed list.
+Attempt to inactivate the user with the duplicate ID entry.","User with duplicate ID entry is successfully added to the managed list.
+System allows for inactivation of user with duplicate ID entry without errors."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/RgQZdW","","WEB","-","2026-09-05 18:34:14","2026-09-05 18:34:14"
+"AD_Users","n8Q1r3","TC10613","Lokesh devamuthu","Verify that the ""Change password"" pop-up loads correctly and displays default password settings for a user without an assigned role.","<p>Verify that the ""Change password"" pop-up loads correctly and displays default password settings for a user without an assigned role.</p>","acceptance","critical","","","User should be active and user should be logged in with admin","Login as admin and go to users/edit/id
+Click on change password and observe the pop up","User should be able to go to the users/edit screen
+""Change password"" pop-up loads correctly and displays default password settings for a user without an assigned role."," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/n8Q1r3","","WEB","-","2026-09-06 11:39:52","2026-09-06 11:39:52"
+"AD_Users","gQXg53","TC10614","Lokesh devamuthu","Verify that no error messages are displayed in the ""Change password"" pop-up when attempting to change the password for a user without an assigned role.","<p>Verify that no error messages are displayed in the ""Change password"" pop-up when attempting to change the password for a user without an assigned role.</p>","acceptance","critical","","","User should be active and user should be logged in with admin","Login as admin and go to users/edit/id
+Click on change password and observe the pop up","User should be able to go to the users/edit screen
+No error messages should be displayed in the ""Change password"" pop-up when it opens"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/gQXg53","","WEB","-","2026-09-06 11:40:50","2026-09-06 11:40:50"
+"AD_Users","ajy3Gb","TC10931","Lokesh devamuthu","Verify that when the attendance_audit setting is OFF, the Designation column on the Users list page displays only the designation (e.g., ""NATIONAL HEAD"").","<p>Verify that when the attendance_audit setting is OFF, the Designation column on the Users list page displays only the designation (e.g., ""NATIONAL HEAD"").</p>","acceptance","critical","","","go to settings/all settings and set attendance_audit setting to 0","Login as admin and go to  users/ajaxuserindex
+when the attendance_audit setting is 0, the Designation column on the Users list page displays only the designation","User should be able to go to the  users/ajaxuserindex screen
+User should only see Designation column on the Users list page displays only the designation"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/ajy3Gb","","WEB","-","2026-09-17 04:36:41","2026-09-17 04:36:41"
+"AD_Users","QGQDq0","TC10932","Lokesh devamuthu","Verify that when the attendance_audit setting is ON, the Designation column on the Users list page still displays only the designation (e.g., ""NATIONAL HEAD"").","<p>Verify that when the attendance_audit setting is ON, the Designation column on the Users list page still displays only the designation (e.g., ""NATIONAL HEAD"").</p>","acceptance","critical","","","go to settings/all settings and set attendance_audit setting to 1","Login as admin and go to  users/ajaxuserindex
+when the attendance_audit setting is 1, the Designation column on the Users list page displays only the designation","User should be able to go to the  users/ajaxuserindex screen
+User should only see Designation column on the Users list page displays only the designation"," "," ","manual","https://mobisy.qatouch.com/case/shareable/p/wQgn/cid/QGQDq0","","WEB","-","2026-09-17 04:37:46","2026-09-17 04:37:46"

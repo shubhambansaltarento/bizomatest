@@ -4,8 +4,8 @@ import { addUserRoles, newUserData, type AddUserRoleLabel, type MappingStep } fr
 import { UsersListPage } from '../../pages/UsersListPage';
 import { UserAddPage } from '../../pages/UserAddPage';
 
-// Spec: specs/users/add-user-validation.md. Every case is rejected in the browser; nothing is saved.
-const spec = (...ids: string[]) => specFor('users/add-user-validation', ...ids);
+// Spec: specs/user-creation/add-user-validation.md. Every case is rejected in the browser; nothing is saved.
+const spec = (...ids: string[]) => specFor('user-creation/add-user-validation', ...ids);
 
 type Form = { username: string; password: string; name: string; role?: AddUserRoleLabel; mapping?: readonly MappingStep[] };
 

@@ -12,7 +12,7 @@ import type { AddUserRoleLabel } from './userRoles';
  * - `automationUsers`: one fixed account per role, reused by the user lifecycle tests
  *   (tests/users/user-lifecycle.spec.ts: login, password change, deactivate / reactivate).
  * - `createdByEarlierRuns`: other e2e users already on devarun (now inactive). UADD-03
- *   (tests/users/add-user.spec.ts) adds one more per role on every run, named `e2e.<role>.<unique
+ *   (tests/user-creation/add-user.spec.ts) adds one more per role on every run, named `e2e.<role>.<unique
  *   suffix>`, and deactivates it at the end; those are not listed here.
  * - `npm run cleanup:e2e-users` deactivates every active e2e user except `automationUsers`, e.g. after
  *   an interrupted run.
