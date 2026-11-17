@@ -7,14 +7,16 @@ import { UsersListPage } from '../pages/UsersListPage';
 /** A user a test created for itself (automation prefix `e2e.`). */
 export type TestUser = { id: string; username: string; password: string; name: string; role: AddUserRoleLabel };
 
+export type NewTestUserOptions = { role: AddUserRoleLabel; designation?: string };
+
 /**
  * Creates a user through Users → New User as the logged-in admin, with the role's mapping from
- * data/userRoles.ts. Deactivate it at the end of the test with `deactivateTestUser`.
+ * data/userRoles.ts.
+ *
+ * Tests don't call this directly: they use the `newTestUser` fixture (fixtures/auth.fixture.ts),
+ * which also deactivates the user after the test.
  */
-export async function createTestUser(
-  page: Page,
-  { role, designation }: { role: AddUserRoleLabel; designation?: string },
-): Promise<TestUser> {
+export async function createTestUser(page: Page, { role, designation }: NewTestUserOptions): Promise<TestUser> {
   const user: TestUser = { id: '', username: newUserData.username(role), password: newUserData.password, name: newUserData.name(role), role };
   await test.step(`Admin creates ${user.username} (${role})`, async () => {
     const addUser = new UserAddPage(page);

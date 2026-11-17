@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { userMessages } from '../data/userMessages';
 
 export type UserRow = {
   id: string;
@@ -48,8 +49,13 @@ export class UsersListPage {
   readonly statusFilter: Record<'active' | 'inactive' | 'all', Locator>;
   readonly activeCount: Locator;
   readonly inactiveCount: Locator;
-  /** Message shown after a save, e.g. "User added successfully". Hides itself after ~5 s. */
+  /**
+   * Message shown after a save, e.g. "User added successfully". Hides itself after ~5 s, so check it
+   * right after saving: `expectUserAdded()` / `expectUserSaved()`.
+   */
   readonly flashMessage: Locator;
+  /** DataTables' own error text ("DataTables warning: …"), shown when the table's data is broken. */
+  readonly dataTablesWarning: Locator;
 
   constructor(private readonly page: Page) {
     this.heading = page.getByRole('heading', { name: 'Users', exact: true });
@@ -70,6 +76,17 @@ export class UsersListPage {
     this.activeCount = page.getByText(/^Active Count : \d+$/);
     this.inactiveCount = page.getByText(/^Inactive Count : \d+$/);
     this.flashMessage = page.locator('#flash-message');
+    this.dataTablesWarning = page.getByText(/DataTables warning/i);
+  }
+
+  /** After Users → New User → Add: the list says the user was added. */
+  async expectUserAdded() {
+    await expect(this.flashMessage).toContainText(userMessages.added);
+  }
+
+  /** After Save on a user's Edit page: the list says the user was saved. */
+  async expectUserSaved() {
+    await expect(this.flashMessage).toContainText(userMessages.saved);
   }
 
   async goto() {
@@ -135,6 +152,11 @@ export class UsersListPage {
   }
 
   /** Text of one column for every visible row. */
+  /** One cell of a row, by column header, e.g. cell(user.row, 'Status'). */
+  static cell(row: Locator, column: string): Locator {
+    return row.locator('td').nth(UsersListPage.columns.indexOf(column));
+  }
+
   async columnValues(column: string): Promise<string[]> {
     const index = UsersListPage.columns.indexOf(column);
     return this.rows.evaluateAll(

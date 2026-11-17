@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/auth.fixture';
+import { test } from '../../fixtures/auth.fixture';
 import { automationUserPrefix, automationUsers, isAutomationUser } from '../../data/automationUsers';
 import { UsersListPage } from '../../pages/UsersListPage';
 import { UserEditPage } from '../../pages/UserEditPage';
@@ -34,7 +34,7 @@ test('Deactivate leftover automation users', async ({ authedPage }) => {
         await editPage.goto(id);
         await editPage.expectLoadedFor({ id, username });
         await editPage.saveActive(false);
-        await expect(usersList.flashMessage).toContainText('The user has been saved');
+        await usersList.expectUserSaved();
         test.info().annotations.push({ type: 'deactivated', description: `${username} (ID ${id})` });
       });
     }

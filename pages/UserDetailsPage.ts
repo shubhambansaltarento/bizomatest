@@ -9,12 +9,15 @@ export class UserDetailsPage {
   readonly loginDetails: Locator;
   /** "Last Logout Time : <yyyy-mm-dd hh:mm>" ("N/A" when never recorded). */
   readonly logoutDetails: Locator;
+  /** "Last Login Version": only shown for app (mobile) logins, never after a web login. */
+  readonly loginVersion: Locator;
 
   constructor(private readonly page: Page) {
     this.editButton = page.getByRole('link', { name: 'Edit', exact: true });
     this.homeLink = page.locator('a#home');
     this.loginDetails = this.field('Login Details');
     this.logoutDetails = this.field('Logout Details');
+    this.loginVersion = page.getByText(/Last Login Version/i);
   }
 
   /** Clicks Edit, which opens the Edit page in a new tab; returns that tab. */

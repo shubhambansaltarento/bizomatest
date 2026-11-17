@@ -75,6 +75,14 @@ export class AppShell {
   readonly errorText = /Missing Controller|Missing Method|Fatal error|Internal Server Error|Page Not Found|Invalid Access|Unauthori[sz]ed access/i;
 
   /**
+   * The page shows none of the app's error texts (`errorText`). `soft`: report and carry on, for
+   * tests that check many pages in one go.
+   */
+  async expectNoErrorPage({ soft = false, message = 'page loads without errors' } = {}) {
+    await (soft ? expect.soft : expect)(this.page.locator('body'), message).not.toContainText(this.errorText);
+  }
+
+  /**
    * Opens a page from the sidebar the way a user does: Main Menu → section → item. Returns the
    * item's link target (e.g. '/skunits/add') so the caller can check where it landed (the app may
    * redirect elsewhere).

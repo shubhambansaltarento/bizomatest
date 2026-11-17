@@ -174,6 +174,12 @@ Before writing something new, look at what already exists:
 | Navbar, user menu, sidebar, "is logged in", logout | `pages/AppShell.ts` |
 | A bootstrap-multiselect dropdown (most dropdowns in Bizom) | `pages/multiselect.ts` (`multiselectButton`, `pickInMultiselect`) |
 | Users list / add / edit / details, settings, login | the matching file in `pages/` |
+| A user of the test's own | the `newTestUser` fixture (see 3.8) |
+| "No server errors" | the `serverErrors` fixture: `serverErrors.expectNone()` |
+| "The page loaded, no error page" | `appShell.expectNoErrorPage()` |
+| "The user was added / saved" | `usersList.expectUserAdded()` / `usersList.expectUserSaved()` |
+
+If you are about to write the same check or action in a second test, add it here instead: a method on the page object (or a fixture for setup and clean-up), with its expected text in `data/`.
 
 Selector preference, best first: `getByRole` / `getByLabel` / `getByText` → a stable `id` → a `name` attribute → a short CSS path. Avoid long CSS chains, `nth-child`, and Bootstrap attributes.
 
@@ -187,6 +193,7 @@ Keep values the test compares against (expected menu items, messages, roles, set
 - app settings → `data/settings.ts`
 - roles for Add User and new user data → `data/userRoles.ts`
 - fixed automation accounts → `data/automationUsers.ts`
+- messages after adding / saving a user → `data/userMessages.ts`
 
 For a new module, create `data/<module>.ts` when you have more than a couple of values.
 
@@ -229,7 +236,7 @@ test.describe('Outlets list', () => {
 What matters here:
 
 - **Import `test` and `expect` from the fixture file**, not from `@playwright/test`:
-  - `fixtures/auth.fixture.ts` for normal tests (gives `authedPage`, `loginPage`, `appShell`, `loginAs`)
+  - `fixtures/auth.fixture.ts` for normal tests (gives `authedPage`, `loginPage`, `appShell`, `loginAs`, `newTestUser`, `serverErrors`)
   - `fixtures/settings.fixture.ts` for config tests (adds `appSettings`, see 3.8)
 - **The title starts with the ID**, and `spec('<module>/<flow>', '<ID>')` is the second argument. This tags the test `@OUT-01`.
 - **Use `authedPage`** for anything behind login. It logs in as admin before the test and logs out afterwards.
@@ -281,16 +288,12 @@ await appShell.expectLoggedIn();
 
 #### The test needs its own user
 
-```ts
-import { createTestUser, deactivateTestUser } from '../../fixtures/testUsers';
+Ask for the `newTestUser` fixture. It creates an automation user (`e2e.…`) as the admin and deactivates it after the test, pass or fail, so the test needs no `try` / `finally`:
 
-test('OUT-11 …', spec('OUT-11'), async ({ authedPage }) => {
-  const user = await createTestUser(authedPage, { role: 'REPORT ADMIN' });
-  try {
-    // … test with user.username / user.password …
-  } finally {
-    await deactivateTestUser(authedPage, user);
-  }
+```ts
+test('OUT-11 …', spec('OUT-11'), async ({ authedPage, newTestUser }) => {
+  const user = await newTestUser({ role: 'REPORT ADMIN' }); // optional: designation
+  // … test with user.username / user.password / user.id …
 });
 ```
 
@@ -305,21 +308,15 @@ Settings live on Settings → All Settings, which only an admin can open. Changi
 3. Import from the settings fixture and use `appSettings`:
    ```ts
    import { test, expect } from '../../../fixtures/settings.fixture';
-   import { createTestUser, deactivateTestUser } from '../../../fixtures/testUsers';
 
-   test('OUTC-01 …', spec('OUTC-01'), async ({ authedPage, appSettings }) => {
-     const user = await createTestUser(authedPage, { role: 'REPORT ADMIN' });
-     try {
-       await appSettings.setForUser('password_ageing_days', { role: user.role, username: user.username }, '30');
-       // or, whole company: await appSettings.setForCompany('passwordresetlock', '1');
-       // … the test …
-     } finally {
-       await appSettings.restoreNow(); // put settings back before the user is deactivated
-       await deactivateTestUser(authedPage, user);
-     }
+   test('OUTC-01 …', spec('OUTC-01'), async ({ authedPage, appSettings, newTestUser }) => {
+     const user = await newTestUser({ role: 'REPORT ADMIN' });
+     await appSettings.setForUser('password_ageing_days', user, '30');
+     // or, whole company: await appSettings.setForCompany('passwordresetlock', '1');
+     // … the test …
    });
    ```
-   Changed settings are put back after the test, pass or fail. Call `restoreNow()` yourself only before deactivating a user whose settings you changed (inactive users aren't listed on the settings page).
+   Changed settings are put back after the test, pass or fail, and **before** the test's users are deactivated (inactive users aren't listed on the settings page, so their settings couldn't be restored afterwards). The fixtures handle that order; the test needs no clean-up code.
 4. Add a script: `"test:outlets:config": "E2E_CONFIG=1 playwright test --project=config tests/outlets/config"`.
 5. Run it with `npm run test:config` or your new script, never alongside the normal suite.
 
@@ -361,7 +358,8 @@ Other modules don't have a sheet mapping yet. Until they do, put the case codes 
 - [ ] No selectors in test files; new selectors are in `pages/`
 - [ ] No login code in tests (`authedPage` / `loginAs` only)
 - [ ] No `waitForTimeout`, no hard-coded credentials, no `test.only`
-- [ ] Everything the test creates is cleaned up (`try` / `finally`)
+- [ ] Everything the test creates is cleaned up (`newTestUser` / `appSettings` do it for you; `try` / `finally` for anything else)
+- [ ] No check or action copied from another test: reuse the page-object method or fixture, or add one
 - [ ] Known bugs are `test.fail` with a reason, and listed in `TODO.md`
 - [ ] `npm run spec:check` passes
 - [ ] New tests pass 3 runs in a row (`npx playwright test tests/<module> --repeat-each=3`)

@@ -57,7 +57,7 @@ test.describe('Add user', () => {
       await test.step('Add saves the user', async () => {
         await addUser.submit();
         // Checked first: the message hides itself after a few seconds.
-        await expect(usersList.flashMessage).toContainText('User added successfully');
+        await usersList.expectUserAdded();
         await expect(usersList.flashMessage).toHaveClass(/success-message/);
         await usersList.expectLoaded();
       });
@@ -68,8 +68,8 @@ test.describe('Add user', () => {
         expect(found, `rows for ${user.username}`).toHaveLength(1);
         expect(found[0].role).toBe(role.label);
         const row = found[0].row;
-        await expect(row.locator('td').nth(UsersListPage.columns.indexOf('Name'))).toHaveText(user.name);
-        await expect(row.locator('td').nth(UsersListPage.columns.indexOf('Status'))).toHaveText('Active');
+        await expect(UsersListPage.cell(row, 'Name')).toHaveText(user.name);
+        await expect(UsersListPage.cell(row, 'Status')).toHaveText('Active');
         return found[0].id;
       });
 
@@ -79,7 +79,7 @@ test.describe('Add user', () => {
         await editPage.goto(id);
         await editPage.expectLoadedFor({ id, username: user.username });
         await editPage.saveActive(false);
-        await expect(usersList.flashMessage).toContainText('The user has been saved');
+        await usersList.expectUserSaved();
       });
     });
   }

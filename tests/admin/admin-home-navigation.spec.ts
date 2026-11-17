@@ -36,7 +36,7 @@ async function expectItemOpens(
 
   await expect.soft(page, `${item} should open ${expectedPath}`).toHaveURL((url) => url.pathname === expectedPath);
   await appShell.expectLoggedIn();
-  await expect.soft(page.locator('body'), `${item} should load without errors`).not.toContainText(appShell.errorText);
+  await appShell.expectNoErrorPage({ soft: true, message: `${item} should load without errors` });
   // After a redirect the URL isn't in the menu, so the sidebar shows no section (see the spec).
   if (!redirects[item]) {
     expect.soft((await appShell.currentSidebarSection()).section, 'sidebar section').toBe(section);

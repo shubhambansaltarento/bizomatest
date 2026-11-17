@@ -82,14 +82,14 @@ for (const user of automationUsers) {
         const usersList = new UsersListPage(authedPage);
         const statusOf = async () => {
           const rows = (await usersList.visibleUsers()).filter((u) => u.username === user.username);
-          return Promise.all(rows.map((u) => u.row.locator('td').nth(UsersListPage.columns.indexOf('Status')).innerText()));
+          return Promise.all(rows.map((u) => UsersListPage.cell(u.row, 'Status').innerText()));
         };
 
         await test.step('ULIFE-05 Admin marks the user inactive', async () => {
           await editPage.goto(user.id);
           await editPage.expectLoadedFor(user);
           await editPage.saveActive(false);
-          await expect(usersList.flashMessage).toContainText('The user has been saved');
+          await usersList.expectUserSaved();
           await usersList.expectLoaded();
 
           await usersList.search(user.username);
@@ -109,7 +109,7 @@ for (const user of automationUsers) {
           await tabEditPage.expectLoadedFor(user);
           await expect(tabEditPage.activeCheckbox).not.toBeChecked();
           await tabEditPage.saveActive(true);
-          await expect(new UsersListPage(editTab).flashMessage).toContainText('The user has been saved');
+          await new UsersListPage(editTab).expectUserSaved();
           await editTab.close();
 
           await usersList.goto();

@@ -2,6 +2,8 @@ import { test as base, expect, type BrowserContext, type Page } from '@playwrigh
 import { LoginPage } from '../pages/LoginPage';
 import { AppShell } from '../pages/AppShell';
 import { roles, type RoleName } from '../data/roles';
+import { createTestUser, deactivateTestUser, type NewTestUserOptions, type TestUser } from './testUsers';
+import { ServerErrors } from './serverErrors';
 
 type AuthOptions = {
   /** Role `authedPage` logs in as. Defaults to admin; change with `test.use({ role: 'distributorManager' })`. */
@@ -28,6 +30,15 @@ type AuthFixtures = {
     username: string,
     password: string,
   ) => Promise<{ page: Page; loginPage: LoginPage; appShell: AppShell; nativeDialogs: string[] }>;
+  /**
+   * Creates an automation user (`e2e.…`) as the admin on `authedPage`. Every user created this way
+   * is deactivated after the test, pass or fail; no try/finally needed in the test.
+   *
+   *   const user = await newTestUser({ role: 'REPORT ADMIN' });
+   */
+  newTestUser: (options: NewTestUserOptions) => Promise<TestUser>;
+  /** 5xx responses on `authedPage` since the test started; check with `serverErrors.expectNone()`. */
+  serverErrors: ServerErrors;
 };
 
 export const test = base.extend<AuthOptions & AuthFixtures>({
@@ -70,6 +81,26 @@ export const test = base.extend<AuthOptions & AuthFixtures>({
       return { page, loginPage, appShell: new AppShell(page), nativeDialogs };
     });
     await Promise.all(contexts.map((c) => c.close()));
+  },
+
+  // Own time budget (not the test's), so users are still deactivated after a test times out.
+  newTestUser: [async ({ authedPage }, use) => {
+    const created: TestUser[] = [];
+    await use(async (options) => {
+      const user = await createTestUser(authedPage, options);
+      created.push(user);
+      return user;
+    });
+    // Try every user even if one fails, then report the failures.
+    const errors: unknown[] = [];
+    for (const user of created.reverse()) {
+      await deactivateTestUser(authedPage, user).catch((e) => errors.push(e));
+    }
+    if (errors.length) throw new Error(`Could not deactivate ${errors.length} test user(s): ${errors.map(String).join('; ')}`);
+  }, { timeout: 2 * 60_000 }],
+
+  serverErrors: async ({ authedPage }, use) => {
+    await use(new ServerErrors(authedPage));
   },
 });
 

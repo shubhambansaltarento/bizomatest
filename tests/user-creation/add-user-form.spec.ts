@@ -87,7 +87,7 @@ test.describe('Add user form', () => {
         await addUser.fillDetails({ password: user.password, name: existing.name });
         await addUser.selectRole(plainRole);
         await addUser.submit();
-        await expect(usersList.flashMessage).toContainText('User added successfully');
+        await usersList.expectUserAdded();
         await usersList.search(user.username);
         const found = (await usersList.visibleUsers()).find((u) => u.username === user.username);
         expect(found, `${user.username} in the list`).toBeTruthy();
@@ -228,11 +228,7 @@ test.describe('Add user form', () => {
     }
   });
 
-  test('UFORM-12 Add is refused when the role mapping cannot load', spec('UFORM-12'), async ({ authedPage }) => {
-    const serverErrors: string[] = [];
-    authedPage.on('response', (r) => {
-      if (r.status() >= 500 && !r.url().includes('/users/getidsforrole')) serverErrors.push(`${r.status()} ${r.url()}`);
-    });
+  test('UFORM-12 Add is refused when the role mapping cannot load', spec('UFORM-12'), async ({ authedPage, serverErrors }) => {
     await authedPage.route('**/users/getidsforrole/**', (route) => route.fulfill({ status: 500, body: '' }));
 
     const { addUser } = await openWithFreeUsername(authedPage);
@@ -241,7 +237,7 @@ test.describe('Add user form', () => {
     expect(await addUser.submitExpectingAlert()).toBe('Please select a Role details.');
     await expect(authedPage).toHaveURL(/\/users\/add$/);
     await expect(addUser.heading).toBeVisible();
-    expect(serverErrors, 'server errors').toEqual([]);
+    serverErrors.expectNone({ ignore: /\/users\/getidsforrole\// });
   });
 
   test('UFORM-13 User custom fields keep their configured order', spec('UFORM-13'), async () => {

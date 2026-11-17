@@ -6,6 +6,7 @@ import { env } from '../../config/env';
 import { UsersListPage } from '../../pages/UsersListPage';
 import { UserEditPage } from '../../pages/UserEditPage';
 import { UserAddPage } from '../../pages/UserAddPage';
+import { AppShell } from '../../pages/AppShell';
 
 // Spec: specs/users/users-list.md — one test per acceptance criterion. Read-only: nothing is changed.
 const spec = (id: string) => specFor('users/users-list', id);
@@ -151,7 +152,7 @@ test.describe('Users list', () => {
       await test.step(`Pjp of ${user.username} opens in a new tab`, async () => {
         const [tab] = await Promise.all([page.context().waitForEvent('page'), usersList.rowActions(user.row).pjp.click()]);
         await expect(tab).toHaveURL(new RegExp(`/pjps/pjpupdate/${user.id}$`));
-        await expect(tab.locator('body')).not.toContainText(appShell.errorText);
+        await new AppShell(tab).expectNoErrorPage();
         await tab.close();
       });
     }
@@ -161,7 +162,7 @@ test.describe('Users list', () => {
       await usersList.rowActions(user.row).map.click();
       await expect(page).toHaveURL(new RegExp(`/users/usermapview/${user.id}$`));
       await appShell.expectLoggedIn();
-      await expect(page.locator('body')).not.toContainText(appShell.errorText);
+      await appShell.expectNoErrorPage();
     });
 
     await test.step(`Edit of ${user.username}`, async () => {
@@ -209,15 +210,11 @@ test.describe('Users list', () => {
     }
   });
 
-  test('ULIST-10 No DataTables warning when the list loads, filters and clears', spec('ULIST-10'), async ({ authedPage: page }) => {
+  test('ULIST-10 No DataTables warning when the list loads, filters and clears', spec('ULIST-10'), async ({ authedPage: page, serverErrors }) => {
     const warnings: string[] = [];
-    const serverErrors: string[] = [];
     page.on('dialog', (d) => {
       warnings.push(d.message());
       d.dismiss().catch(() => {});
-    });
-    page.on('response', (r) => {
-      if (r.status() >= 500) serverErrors.push(`${r.status()} ${r.url()}`);
     });
 
     await usersList.goto();
@@ -229,16 +226,11 @@ test.describe('Users list', () => {
     expect((await usersList.readSummary()).total).toBe(total);
 
     expect(warnings, 'browser alerts').toEqual([]);
-    await expect(page.getByText(/DataTables warning/i)).toHaveCount(0);
-    expect(serverErrors, 'server errors').toEqual([]);
+    await expect(usersList.dataTablesWarning).toHaveCount(0);
+    serverErrors.expectNone();
   });
 
-  test('ULIST-11 /users and /users/dashboard open', spec('ULIST-11'), async ({ authedPage: page, appShell }) => {
-    const serverErrors: string[] = [];
-    page.on('response', (r) => {
-      if (r.status() >= 500) serverErrors.push(`${r.status()} ${r.url()}`);
-    });
-
+  test('ULIST-11 /users and /users/dashboard open', spec('ULIST-11'), async ({ authedPage: page, appShell, serverErrors }) => {
     await test.step('/users opens the users list', async () => {
       await page.goto('/users');
       await usersList.expectLoaded();
@@ -251,6 +243,6 @@ test.describe('Users list', () => {
       await appShell.expectLoggedIn();
     });
 
-    expect(serverErrors, 'server errors').toEqual([]);
+    serverErrors.expectNone();
   });
 });

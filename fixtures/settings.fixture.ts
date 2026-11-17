@@ -15,11 +15,6 @@ export type AppSettings = {
   setForCompany(name: SettingName, value: string): Promise<void>;
   /** Sets a setting for one user only (settings with level 'user'); restored after the test. */
   setForUser(name: SettingName, user: UserRef, value: string): Promise<void>;
-  /**
-   * Puts back everything changed so far, now instead of after the test. Call it before deactivating
-   * a user whose settings were changed: inactive users aren't listed on the settings page.
-   */
-  restoreNow(): Promise<void>;
 };
 
 /**
@@ -28,10 +23,14 @@ export type AppSettings = {
  *
  * Settings → All Settings (`/settings/allsettings`) is admin-only, so this opens its own browser
  * logged in as ADMIN, whatever role the test itself uses.
+ *
+ * Settings are put back before the users from `newTestUser` are deactivated: inactive users aren't
+ * listed on the settings page, so their own settings couldn't be restored afterwards. (Playwright
+ * tears a fixture down before the fixtures it uses, hence the dependency on `newTestUser`.)
  */
 export const test = base.extend<{ appSettings: AppSettings }>({
   // Own time budget (not the test's), so values are put back even after a test times out.
-  appSettings: [async ({ browser, baseURL }, use, testInfo) => {
+  appSettings: [async ({ browser, baseURL, newTestUser: _deactivatedAfterRestore }, use, testInfo) => {
     let context: BrowserContext | undefined;
     let settingsPage: SettingsPage | undefined;
     const restore: Array<() => Promise<void>> = [];
@@ -64,8 +63,6 @@ export const test = base.extend<{ appSettings: AppSettings }>({
     };
 
     await use({
-      restoreNow: restoreAll,
-
       async companyValue(name) {
         const settings = await asAdmin();
         await settings.goto();
