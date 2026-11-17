@@ -28,6 +28,13 @@ export class UsersListPage {
     'Actions',
   ];
 
+  /** Columns of the Download file (User_List_<date>.csv), seen 17 Nov 2026. */
+  static readonly downloadColumns = [
+    'ID', 'Name', 'Username', 'Employee Id', 'Date Of Birth', 'Email', 'Phone no', 'Address', 'Credit limit', 'Balance',
+    'Designation', 'Role', 'ZONE', 'WAREHOUSE', 'For', 'Status', 'InActive Date', 'Created', 'Modified', 'Reporting To',
+    'Reporting To Status', 'Business Units',
+  ];
+
   readonly heading: Locator;
   readonly table: Locator;
   readonly headers: Locator;

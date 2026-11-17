@@ -17,7 +17,8 @@ Planned framework changes live in `docs/framework-proposal.md`. They are **not i
 - Credentials come from `.env` only; never hard-code them.
 - **Config (settings) test cases:** app settings live on Settings → All Settings (`/settings/allsettings`), which **only an ADMIN can open**. A test that needs a setting changed uses the `appSettings` fixture (`fixtures/settings.fixture.ts`): it opens that page as admin in its own browser, edits the value, clicks **Review** then **Save**, and restores the original value after the test, pass or fail. Never change settings any other way. Known settings and whether they can be set for one user or only for the whole company are in `data/settings.ts`; prefer setting it for one automation user. Config tests live in a `config/` folder: `tests/config/` (specs in `specs/config/`), or a module's own `tests/<module>/config/` (e.g. `tests/user-creation/config/`). Any `config/` folder runs only in the config project (`npm run test:config`), one at a time, never alongside the normal suite.
 - **User creation module** (`specs/user-creation/`, `tests/user-creation/`): everything about an admin adding a user, runnable on its own. The QA sheet's cases for it and the criterion covering each are in `data/userCreationCases.ts`.
-- **Automation users:** every user the tests create has a username starting with `e2e.` and is an automation user, not a real person. They are listed in `data/automationUsers.ts` (one fixed account per role for the lifecycle tests); tests change their passwords and status. Create new test users with that prefix (`newUserData` in `data/userRoles.ts`).
+- **User block module** (`specs/user-block/`, `tests/user-block/`): progressive lockout. It switches the company-wide `Progressivelockout` on and waits for blocks to run out, so it has its own Playwright project and runs **only on its own** (`npm run test:user-block`), never with the normal suite or the config tests. Number of wrong passwords: `USER_BLOCK_ATTEMPTS` in `.env` (2 to 9); expected messages in `data/userBlock.ts`.
+- **Automation users:** every user the tests create has a username starting with `e2e.` and is an automation user, not a real person. They are listed in `data/automationUsers.ts` (one fixed account per role for the lifecycle tests); tests change their passwords and status. Create new test users with that prefix (`newUserData` in `data/userRoles.ts`); a test that needs a user of its own uses `createTestUser` / `deactivateTestUser` from `fixtures/testUsers.ts`.
 
 ## Commands
 
@@ -27,5 +28,7 @@ Planned framework changes live in `docs/framework-proposal.md`. They are **not i
 - `npm run test:config`: all config tests (every `config/` folder), one at a time; they change app settings and put them back
 - `npm run test:user-creation`: the user creation module (normal tests)
 - `npm run test:user-creation:config`: the user creation module's config tests (attendance images)
+- `npm run test:users:config`: the users module's config tests (designation column)
+- `npm run test:user-block`: the user block (progressive lockout) test, on its own; takes about USER_BLOCK_ATTEMPTS + 3 minutes
 - `npm run cleanup:e2e-users`: deactivate leftover automation users (`e2e.*`), keeping the fixed accounts in `data/automationUsers.ts`
 - `npm run report`: open the last HTML report

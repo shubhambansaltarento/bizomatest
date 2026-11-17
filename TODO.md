@@ -2,14 +2,21 @@
 
 Tracks what is covered and what is still to do. Tick an item when its test is in and green; link the criterion ID. New items go under the matching heading.
 
-Specs: [admin home & navigation](specs/admin/admin-home-navigation.md) · [users list](specs/users/users-list.md) · [add user](specs/user-creation/add-user.md) · [add user validation](specs/user-creation/add-user-validation.md) · [add user form](specs/user-creation/add-user-form.md) · [user images (config)](specs/user-creation/config/user-images.md)
+Specs: [admin home & navigation](specs/admin/admin-home-navigation.md) · [users list](specs/users/users-list.md) · [add user](specs/user-creation/add-user.md) · [add user validation](specs/user-creation/add-user-validation.md) · [add user form](specs/user-creation/add-user-form.md) · [user images (config)](specs/user-creation/config/user-images.md) · [edit user](specs/users/edit-user.md) · [user password & status](specs/users/user-password-status.md) · [designation column (config)](specs/users/config/user-designation-column.md) · [user details](specs/users/user-details.md) · [user block](specs/user-block/progressive-lockout.md)
 Role config for Add User: [`data/userRoles.ts`](data/userRoles.ts)
+Cases from the users sheet that belong to other modules: [`TODO-later-user-module.md`](TODO-later-user-module.md)
 Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/automationUsers.ts)
 
 ## App issues found (raise with product / dev)
 
 - [ ] **Blank username is sent to the server** (Add User, 16 Nov 2026): clear the username after the check and click Add; nothing in the browser stops it, and the server answers "Username already taken, please try with other name" on an emptied form. No user is created. Tested as a known issue (UFORM-03).
 - [ ] **Image limit shown too late** (Edit user, attendanceFaceVerification = 1, 16 Nov 2026): right after the 5th image the file input is still offered and "No more uploads allowed" is missing; it only shows when a 6th is tried or after reopening. Tested as a known issue (UIMG-05).
+- [ ] **Edit saves a blank name** (Edit user, 17 Nov 2026): clear Name (or enter only spaces) and Save; "The user has been saved" and the user has no name. Add User refuses it ("Name is a mandatory field"). Tested as a known issue (UEDIT-04).
+- [ ] **Role saved without its mapping when Save is quick** (Edit user → Edit Role, 17 Nov 2026): pick ZONE MANAGER and click Save before the ZONE dropdown has loaded (under a second); "The user has been saved" with no zone. Once the dropdown is shown, Save is refused ("Please select Role details"). The check should not depend on the dropdown being drawn. The test waits for the dropdown (UEDIT-05).
+- [ ] **Login / Logout Details not updated** (user details page, 17 Nov 2026): "Last Login Date Time" and "Last Logout Time" stay empty / "N/A" after a web login and logout; the main admin's still show 2026-08-28. The sheet's precondition is "Custom branch should be available": is the feature missing from devarun's build? Tested as a known issue (UVIEW-03/04).
+- [ ] **QA sheet vs app: progressive lockout** (17 Nov 2026): the sheet expects the first block at the 5th wrong password; devarun blocks from the 3rd ("blocked for next 3 minutes"), and wrong passwords tried while blocked still count. Ask QA which is right (UBLK-02).
+- [ ] **Designation can't be changed on Edit** (17 Nov 2026): the dropdown is disabled, also after Edit Role; it can only be set on Add User. Intended?
+- [ ] **QA sheet vs app (users, 17 Nov 2026):** TC8991 updates the username, but it is read-only on Edit; TC9512 expects "Please enter valid password!", the web shows "Password Not Valid"; TC9002 expects an "inactive user" message, the web shows "Invalid username or password."; TC10613/10614 need a user without a role, which the web doesn't allow. Ask QA to update the sheet or explain.
 - [ ] **Set Outlet Targets is broken** (Dashboard → Set Outlet Targets, `/outlettargets/settarget`, 10 Nov 2026): "jQuery is not defined", page has no navbar, sidebar or styles. Tested as a known issue (ADM-02); remove it from `sidebarKnownIssues` in `data/roles.ts` once fixed.
 - [ ] **New Scheme link redirects** (`/schemes/add` → `/schemes/addscheme`), and the sidebar then loses its section. Could link straight to the final URL.
 - [ ] **Username check accepts illegal characters**: "User name is Available" for `e2e bad#1`; only Add rejects it (UVAL-01).
@@ -77,10 +84,19 @@ Module **user-creation** (`npm run test:user-creation`, config: `npm run test:us
 - [x] Download gives `User_List_<date>.csv` (ULIST-07)
 - [x] New User opens the Add User form (ULIST-08)
 - [x] Edit → Change Password dialog opens (USR-03/04)
-- [ ] Download: check the CSV's columns and that its rows match the list
+- [x] Download: columns, and the users of each status filter (ULIST-09)
+- [x] No DataTables warning on load / search / clear (ULIST-10); /users and /users/dashboard open (ULIST-11)
+- [x] User details page: opens from the list, no 5xx on reload / Home (UVIEW-01/02); last login / logout time (UVIEW-03/04, known issue)
 - [ ] Sort by the other columns
 - [ ] "…[ + ]" in the For column shows all mappings
-- [ ] Edit a user: change name / phone / email / mapping and Save; check the list shows it
+- [x] Edit a user: name / email / address / employee ID saved and shown (UEDIT-01/02); invalid email refused (UEDIT-03); blank name refused (UEDIT-04, known bug)
+- [x] Edit Role: change role, missing mapping refused (UEDIT-05); DSM Reporting To kept (UEDIT-06)
+- [x] Admin Change Password: dialog opens clean, invalid password refused (UPST-01/02); inactive user can't log in (UPST-03)
+- [x] Designation column with attendance_audit off / on (UDES-01/02, config)
+- [ ] Settings → Form Settings → User Form: success message on Update (TC9563, TC9567). Needs `isusercustomized` = 1 (company-wide, off on devarun)
+- [x] Progressive lockout: wrong passwords 1–2, blocks from the 3rd, right password refused while blocked, login after the block (UBLK-01..04, `npm run test:user-block`)
+- [ ] 10th wrong password (blocked for good) and admin Unblock (TC10606, TC10595): needs `unblockuser`; left out on purpose (max 9 attempts)
+- [ ] Inactivate a user with duplicate IDs in the managed list (TC10612): steps unclear
 - [x] Deactivate a user from Edit → listed under Inactive (ULIFE-05)
 - [x] Reactivate from Inactive Users → username → details → Edit → active (ULIFE-06)
 - [ ] Active / Inactive counts change when a user is deactivated / reactivated

@@ -38,8 +38,8 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      // Config tests change app settings; they never run alongside the rest (see below).
-      testIgnore: '**/config/**',
+      // Config and user block tests change app settings; they never run alongside the rest (see below).
+      testIgnore: ['**/config/**', '**/user-block/**'],
     },
 
     /* Config tests (tests/config): change app settings through the `appSettings` fixture, some of them
@@ -51,6 +51,21 @@ export default defineConfig({
             name: 'config',
             use: { ...devices['Desktop Chrome'] },
             testMatch: 'config/**/*.spec.ts',
+            workers: 1,
+            fullyParallel: false,
+          },
+        ]
+      : []),
+
+    /* User block tests (tests/user-block): switch on the company-wide Progressivelockout setting and
+       wait for blocks to run out (up to ~15 minutes). Run on their own only: `npm run test:user-block`
+       (sets E2E_USER_BLOCK), never alongside other tests, which log in as the shared admin. */
+    ...(process.env.E2E_USER_BLOCK
+      ? [
+          {
+            name: 'user-block',
+            use: { ...devices['Desktop Chrome'] },
+            testMatch: 'user-block/**/*.spec.ts',
             workers: 1,
             fullyParallel: false,
           },

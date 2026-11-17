@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { test, expect } from '../../fixtures/auth.fixture';
 import { spec as specFor } from '../../fixtures/spec';
+import { readCsv } from '../../fixtures/csv';
 import { env } from '../../config/env';
 import { UsersListPage } from '../../pages/UsersListPage';
 import { UserEditPage } from '../../pages/UserEditPage';
@@ -184,5 +185,72 @@ test.describe('Users list', () => {
   test('ULIST-08 New User opens the Add User form', spec('ULIST-08'), async ({ authedPage: page }) => {
     await usersList.newUserButton.click();
     await new UserAddPage(page).expectLoaded();
+  });
+
+  test('ULIST-09 The download holds the users of the chosen filter', spec('ULIST-09'), async ({ authedPage: page }) => {
+    const counts = await usersList.statusCounts();
+    await expect(usersList.statusFilter.active, 'Active Users selected by default').toBeChecked();
+    const filters = [
+      { status: 'active', total: counts.active, statuses: ['Active'] },
+      { status: 'inactive', total: counts.inactive, statuses: ['InActive'] },
+      { status: 'all', total: counts.active + counts.inactive, statuses: ['Active', 'InActive'] },
+    ] as const;
+
+    for (const { status, total, statuses } of filters) {
+      await test.step(`${status} users: ${total} users in the file`, async () => {
+        if (status !== 'active') await usersList.showStatus(status);
+        expect((await usersList.readSummary()).total, 'list total').toBe(total);
+        const [download] = await Promise.all([page.waitForEvent('download'), usersList.downloadButton.click()]);
+        const rows = readCsv(await download.path());
+        expect(Object.keys(rows[0] ?? {}), 'columns').toEqual(UsersListPage.downloadColumns);
+        expect(new Set(rows.map((r) => r.ID)).size, 'different user IDs in the file').toBe(total);
+        expect([...new Set(rows.map((r) => r.Status))].sort(), 'Status values').toEqual([...statuses]);
+      });
+    }
+  });
+
+  test('ULIST-10 No DataTables warning when the list loads, filters and clears', spec('ULIST-10'), async ({ authedPage: page }) => {
+    const warnings: string[] = [];
+    const serverErrors: string[] = [];
+    page.on('dialog', (d) => {
+      warnings.push(d.message());
+      d.dismiss().catch(() => {});
+    });
+    page.on('response', (r) => {
+      if (r.status() >= 500) serverErrors.push(`${r.status()} ${r.url()}`);
+    });
+
+    await usersList.goto();
+    const { total } = await usersList.readSummary();
+    await usersList.search(env.username);
+    expect(await usersList.columnValues('User Name')).toContain(env.username);
+    await expect(usersList.summary).toContainText(`(filtered from ${total} total entries)`);
+    await usersList.search('');
+    expect((await usersList.readSummary()).total).toBe(total);
+
+    expect(warnings, 'browser alerts').toEqual([]);
+    await expect(page.getByText(/DataTables warning/i)).toHaveCount(0);
+    expect(serverErrors, 'server errors').toEqual([]);
+  });
+
+  test('ULIST-11 /users and /users/dashboard open', spec('ULIST-11'), async ({ authedPage: page, appShell }) => {
+    const serverErrors: string[] = [];
+    page.on('response', (r) => {
+      if (r.status() >= 500) serverErrors.push(`${r.status()} ${r.url()}`);
+    });
+
+    await test.step('/users opens the users list', async () => {
+      await page.goto('/users');
+      await usersList.expectLoaded();
+    });
+
+    await test.step('/users/dashboard opens', async () => {
+      const response = await page.goto('/users/dashboard');
+      expect(response?.status(), 'HTTP status').toBeLessThan(400);
+      await expect(page).toHaveURL(/\/users\/dashboard$/);
+      await appShell.expectLoggedIn();
+    });
+
+    expect(serverErrors, 'server errors').toEqual([]);
   });
 });

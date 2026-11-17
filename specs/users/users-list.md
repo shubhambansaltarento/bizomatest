@@ -100,9 +100,38 @@ USR-01/02 (`specs/users/user-change-password.md`) already cover the default page
 - **When** I click **New User**
 - **Then** I am on `/users/add` and the Username, Password and Name fields are shown
 
+### ULIST-09 The download holds the users of the chosen filter
+
+Sheet: TC8989, TC8999.
+
+- **Given** Active Users is selected by default
+- **When** I click **Download** with Active Users, then Inactive Users, then All Users selected
+- **Then** each file starts with the columns ID, Name, Username, Employee Id, Date Of Birth, Email, Phone no, Address, Credit limit, Balance, Designation, Role, ZONE, WAREHOUSE, For, Status, InActive Date, Created, Modified, Reporting To, Reporting To Status, Business Units
+- **And** the number of different user IDs in the file equals the list's total entries (Active Count, Inactive Count, and their sum for All Users)
+- **And** every row's Status is "Active" (Active Users), "InActive" (Inactive Users), or one of the two (All Users)
+
+> A user mapped to several warehouses / outlets has one row per mapping (seen 17 Nov 2026), so users are counted by ID, not by row.
+
+### ULIST-10 No DataTables warning when the list loads, filters and clears
+
+Sheet: TC9561, TC9562.
+
+- **When** I open the list, search for the logged-in admin's username, and clear the search
+- **Then** the table shows the filtered rows, then all entries again
+- **And** no "DataTables warning" is shown (neither as a browser alert nor on the page) and no server error (5xx) occurs
+
+### ULIST-11 /users and /users/dashboard open
+
+Sheet: TC8979.
+
+- **When** I open `/users`
+- **Then** I land on the users list (`/users/ajaxuserindex`)
+- **When** I open `/users/dashboard`
+- **Then** the dashboard opens (URL stays `/users/dashboard`), I am still logged in, and no server error (5xx) occurs
+
 ## Out of scope
 
 - Column contents beyond Status and User Name; sorting by other columns.
 - Expanding "…[ + ]" in the For column.
-- Contents of the downloaded CSV beyond its name (see `TODO.md`).
+- Comparing each downloaded row's fields with the list's columns.
 - Editing, activating or deactivating users (see `TODO.md`, "Manage user").

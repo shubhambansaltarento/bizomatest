@@ -71,6 +71,16 @@ export const appSettings = {
     devValue: '0',
     about: "Shows User Attendance Verification Images (3–5) on the user's Add / Edit form (seen 16 Nov 2026)",
   },
+  Progressivelockout: {
+    level: 'company',
+    devValue: '0',
+    about: 'Blocks a user for n minutes after n wrong passwords (from the 3rd on devarun, 17 Nov 2026); blocked for good after the 10th',
+  },
+  attendance_audit: {
+    level: 'user',
+    devValue: '0',
+    about: 'Enables the attendance audit facility (also settable per role or designation)',
+  },
 } as const satisfies Record<string, { level: SettingLevel; devValue: string; about: string }>;
 
 export type SettingName = keyof typeof appSettings;

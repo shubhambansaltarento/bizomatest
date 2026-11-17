@@ -27,6 +27,11 @@ When behaviour changes, update the spec first, then the test.
 | [User creation: form fields](user-creation/add-user-form.md) (sheet cases in `data/userCreationCases.ts`) | UFORM | Implemented |
 | [User creation: attendance images (config)](user-creation/config/user-images.md) (`npm run test:user-creation:config`) | UIMG | Implemented |
 | [User lifecycle: login, password change, deactivate / reactivate](users/user-lifecycle.md) (users in `data/automationUsers.ts`) | ULIFE | Implemented |
+| [Edit user](users/edit-user.md) | UEDIT | Implemented |
+| [Admin sets a user's password; inactive users can't log in](users/user-password-status.md) | UPST | Implemented |
+| [Users list: Designation column with attendance_audit (config)](users/config/user-designation-column.md) (`npm run test:users:config`) | UDES | Implemented |
+| [User details page](users/user-details.md) | UVIEW | Implemented |
+| [User block: progressive lockout](user-block/progressive-lockout.md) (`npm run test:user-block`, on its own; attempts via `USER_BLOCK_ATTEMPTS`) | UBLK | Implemented |
 | [Login settings (config)](config/login-settings.md) (`npm run test:config`; settings in `data/settings.ts`) | LCFG | Implemented |
 
 Open work for these modules is tracked in [`TODO.md`](../TODO.md).

@@ -1,14 +1,34 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { multiselectButton, pickInMultiselect } from './multiselect';
 
 /** Edit user form at /users/edit/<id>. */
 export class UserEditPage {
+  readonly heading: Locator;
+  /** Read-only on this page: a username can't be changed. */
   readonly usernameInput: Locator;
+  readonly nameInput: Locator;
+  readonly emailInput: Locator;
+  readonly addressInput: Locator;
+  readonly employeeIdInput: Locator;
+  /** Shown but disabled on this page (seen 17 Nov 2026), also after Edit Role. */
+  readonly designationButton: Locator;
+  /** The user's current role as text ("Role * ZONE MANAGER"); replaced by the Role dropdown after Edit Role. */
+  readonly currentRole: Locator;
+  readonly editRoleLink: Locator;
+  /** Role dropdown, shown after Edit Role. */
+  readonly roleButton: Locator;
+  /** "Select Reporting To" dropdown, shown after Edit Role for roles that report to someone. */
+  readonly reportingToButton: Locator;
   /** Changes the password of the user being edited (not the navbar item, which is your own). */
   readonly changePasswordButton: Locator;
   readonly passwordDialog: Locator;
   readonly newPasswordInput: Locator;
   readonly confirmPasswordInput: Locator;
   readonly submitPasswordButton: Locator;
+  /** Line at the top of the Password Change dialog: "All form fields are required.", then the error. */
+  readonly passwordTips: Locator;
+  /** What the new password still misses, e.g. "Minimum 6 Characters requires, 1 Digit Needed, ...". */
+  readonly passwordRules: Locator;
   readonly alertDialog: Locator;
   /** "active" checkbox: unticked and saved, the user becomes inactive. */
   readonly activeCheckbox: Locator;
@@ -25,7 +45,17 @@ export class UserEditPage {
   readonly validationAlert: Locator;
 
   constructor(private readonly page: Page) {
+    this.heading = page.locator('h5.form-title').filter({ hasText: 'Edit User' });
     this.usernameInput = page.locator('#UserUsername');
+    this.nameInput = page.locator('#UserName');
+    this.emailInput = page.locator('#UserEmail');
+    this.addressInput = page.locator('#UserAddress');
+    this.employeeIdInput = page.locator('#employeeid');
+    this.designationButton = multiselectButton(page, 'UserDesignationId');
+    this.currentRole = page.locator('#editUserrole');
+    this.editRoleLink = page.locator('#editRoleLink');
+    this.roleButton = multiselectButton(page, 'UserRole');
+    this.reportingToButton = multiselectButton(page, 'ReportingUser');
     // Not #changepwdlink: the app reuses that id for "Remove Picture & Location".
     this.changePasswordButton = page.locator('#formUserAdd').getByRole('link', { name: 'Change Password' });
     // :visible because each click on Change Password adds another copy of the dialog to the page.
@@ -33,6 +63,8 @@ export class UserEditPage {
     this.newPasswordInput = this.passwordDialog.locator('#changepwd');
     this.confirmPasswordInput = this.passwordDialog.locator('#changepwdcnf');
     this.submitPasswordButton = this.passwordDialog.getByRole('button', { name: 'Change Password' });
+    this.passwordTips = this.passwordDialog.locator('#validateTips');
+    this.passwordRules = this.passwordDialog.locator('#password_strength');
     this.alertDialog = page.locator('.ui-dialog').filter({ has: page.locator('.alert') });
     this.activeCheckbox = page.locator('#UserActive');
     this.saveButton = page.locator('#addsubmit');
@@ -41,6 +73,45 @@ export class UserEditPage {
     this.uploadedImages = page.locator('#imageUploadContainer .uploaded-file');
     this.imageLimitMessage = page.locator('#imageLimitMessage');
     this.validationAlert = page.locator('.ui-dialog:visible').filter({ has: page.locator('.ui-dialog-title', { hasText: /^Alert$/ }) });
+  }
+
+  /** Clicks Edit Role: the Role dropdown and the role's mapping dropdowns (already filled in) appear. */
+  async editRole() {
+    await this.editRoleLink.click();
+    await expect(this.roleButton).toBeVisible();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** After Edit Role: picks another role and waits until its mapping dropdowns (empty) are loaded. */
+  async selectRole(label: string) {
+    // waitForLoadState('networkidle') returns at once on an idle page, so wait for the Ajax call itself.
+    const mappingLoaded = this.page.waitForResponse((r) => r.url().includes('/users/getidsforrole/'));
+    await pickInMultiselect(this.roleButton, label, { exact: true });
+    await expect(this.roleButton).toHaveText(label);
+    await mappingLoaded;
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** Label of the mapping dropdown "Select <field>" (e.g. 'ZONE') shown after Edit Role. */
+  mappingLabel(field: string): Locator {
+    return this.page.locator('#formUserAdd label').filter({ hasText: new RegExp(`^\\s*Select ${field}\\s*\\*?\\s*$`, 'i') });
+  }
+
+  /** After Edit Role: picks `option` in the mapping dropdown labelled "Select <field>" (e.g. 'ZONE'). */
+  async selectMapping(field: string, option: string) {
+    const label = this.mappingLabel(field);
+    await expect(label, `"Select ${field}" dropdown`).toBeVisible({ timeout: 15_000 });
+    const selectId = await label.first().evaluate((l) => l.parentElement!.querySelector('select')!.id);
+    const button = multiselectButton(this.page, selectId);
+    await pickInMultiselect(button, option);
+    await expect(button).toContainText(option);
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** After Edit Role: picks the user's reporting manager (option text, e.g. "50 - E2E SALES MANAGER"). */
+  async selectReportingTo(option: string) {
+    await pickInMultiselect(this.reportingToButton, option);
+    await expect(this.reportingToButton).toHaveText(option);
   }
 
   /** Opens the collapsed "User Attendance Verification Images" section. */
@@ -129,6 +200,15 @@ export class UserEditPage {
     }).toPass({ timeout: 45_000 });
     await expect(this.passwordDialog).toHaveCount(0);
     return banner;
+  }
+
+  /** Types a new password (and its confirmation) in the open Password Change dialog. */
+  async enterNewPassword(password: string, confirmation = password) {
+    // Typed, not filled: the rule list under the field is updated on each key.
+    await this.newPasswordInput.clear();
+    await this.newPasswordInput.pressSequentially(password);
+    await this.confirmPasswordInput.clear();
+    await this.confirmPasswordInput.pressSequentially(confirmation);
   }
 
   /** Submits the Password Change dialog and dismisses the success alert. */
