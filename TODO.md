@@ -44,7 +44,7 @@ Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/auto
 
 ## 2. Add user
 
-Module **user-creation** (`npm run test:user-creation`, config: `npm run test:user-creation:config`). QA sheet cases (web only, no API / mobile) and the criterion for each: [`data/userCreationCases.ts`](data/userCreationCases.ts); open ones in `openCases`.
+Module **user-creation** (`npm run test:user-creation`, config: `npm run test:user-creation:config`). QA sheet cases and the criterion for each: [`data/userModuleCases.ts`](data/userModuleCases.ts) (area "User creation"); status per case: [`docs/user-module/user-module-test-coverage.xlsx`](docs/user-module/user-module-test-coverage.xlsx).
 
 - [x] All 29 web cases of the sheet have a test (UADD, UVAL, UFORM, UIMG); 2 are known app bugs (UFORM-03, UIMG-05)
 - [ ] User custom fields order (UFORM-13, TC9442/TC9443): needs user custom fields on devarun (Settings → Form Settings → User Form)

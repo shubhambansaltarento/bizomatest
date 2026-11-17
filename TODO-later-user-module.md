@@ -1,6 +1,6 @@
 # TODO later: cases from the user sheet that belong to other modules
 
-These 7 web cases are in the users QA sheet (`docs/TestCases_11-11-26-07_45_22.csv`) but test other modules. They are parked here, not in the user module, and will be picked up when those modules are automated. Coverage per case: `docs/test-case-coverage.csv` (Area "Not about users").
+These 7 web cases are in the users QA sheet (`docs/TestCases_11-11-26-07_45_22.csv`) but test other modules. They are parked here, not in the user module, and will be picked up when those modules are automated. They are in `data/userModuleCases.ts` as area "Other module"; coverage per case: `docs/user-module/user-module-test-coverage.xlsx` (`npm run coverage:users`).
 
 Parked on 17 Nov 2026.
 

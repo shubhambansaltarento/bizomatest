@@ -9,6 +9,7 @@
     "test:auth": "playwright test tests/auth --headed",
     "test:ui": "playwright test --ui",
     "spec:check": "node scripts/spec-check.mjs",
+    "coverage:users": "node --disable-warning=ExperimentalWarning scripts/user-coverage.mjs",
     "test:users": "playwright test tests/users --headed",
     "test:users:config": "E2E_CONFIG=1 playwright test --project=config tests/users/config",
     "test:user-creation": "playwright test tests/user-creation",
@@ -27,6 +28,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.64.1",
-    "@types/node": "^26.6.5"
+    "@types/node": "^26.6.5",
+    "exceljs": "^4.4.0"
   }
 }

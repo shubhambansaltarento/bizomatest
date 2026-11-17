@@ -6,7 +6,7 @@
 | ID prefix   | `UFORM`                                                       |
 | Status      | Implemented (criteria awaiting team review)                   |
 | Tests       | `tests/user-creation/add-user-form.spec.ts`                   |
-| Source      | QA sheet `docs/TestCases_11-11-26-07_45_22.csv` (case codes per criterion); index in `data/userCreationCases.ts` |
+| Source      | QA sheet `docs/TestCases_11-11-26-07_45_22.csv` (case codes per criterion); index in `data/userModuleCases.ts` |
 | Environment | `BASE_URL` from `.env` (dev: devarun), checked 16 Nov 2026    |
 
 ## Purpose
