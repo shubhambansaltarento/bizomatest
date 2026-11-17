@@ -1,6 +1,6 @@
 # bizom-e2e
 
-Playwright end-to-end tests for Bizom, built spec-first. See `specs/README.md` for the full workflow.
+Playwright end-to-end tests for Bizom, built spec-first. See `specs/README.md` for the full workflow, and `CONTRIBUTING.md` for the step-by-step guide for new contributors (keep it in step when the rules or fixtures below change).
 
 Planned framework changes live in `docs/framework-proposal.md`. They are **not implemented**: keep the current structure until the user decides to move, and record decisions in that file's decision log.
 
