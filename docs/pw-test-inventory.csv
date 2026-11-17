@@ -1,0 +1,247 @@
+#,Source file,Test,Title (short),Target module,Target spec (specs/...),Proposed criterion,Action,Note
+1,tests/login.spec.ts,Valid Login,Should allow login with valid credentials,auth,auth/login-logout.md,AUTH-01,MERGE,Already covered by AUTH-01 (stronger: banner + landing page). Tag AUTH-01 @smoke.
+2,tests/sanity.spec.ts,Sanity,App is reachable and login lands on dashboard,auth,auth/login-logout.md,AUTH-01,MERGE,"Expects /users/dashboard, which the app no longer reaches (lands on /users/ajaxuserindex). AUTH-01 already checks the right page."
+3,tests/_verify.spec.ts,verify TC1 steps 1-3,Debug scratch test for staggered QPS form,,,,DROP,Leftover debug test; runs in the full suite by accident.
+4,e2e/example.spec.js,has title,Playwright scaffold,,,,DROP,Playwright template; never runs.
+5,e2e/example.spec.js,get started link,Playwright scaffold,,,,DROP,Playwright template; never runs.
+6,tests/state.spec.ts,TC1,Navigate to States page,states,states/states.md,STATE-01,MERGE,With TC2: list loads with its columns.
+7,tests/state.spec.ts,TC2,States table headers,states,states/states.md,STATE-01,FIX,"Check exact header list and order, not substrings."
+8,tests/state.spec.ts,TC3,Page size 10/25/50,states,states/states.md,STATE-02,FIX,"Assert row count changes, not only the select value."
+9,tests/state.spec.ts,TC4,Search ANDAMAN AND NICOBAR ISLANDS,states,states/states.md,STATE-03,KEEP,Replace waitForTimeout with DataTable redraw wait.
+10,tests/state.spec.ts,TC5,Download button,states,states/states.md,STATE-04,FIX,Download failure is swallowed today; assert file name and columns.
+11,tests/state.spec.ts,TC6,India link under Country,states,states/states.md,STATE-05,KEEP,
+12,tests/state.spec.ts,TC7,View and Edit links,states,states/states.md,STATE-05,KEEP,
+13,tests/state.spec.ts,TC8,Create state 1234 / TestingState / India,states,states/states.md,STATE-06,FIX,URL regex also matches /states/add: passes when save fails. Unique code/name per run; find it in the list.
+14,tests/state.spec.ts,TC9,Edit state: toggle Is Active,states,states/states.md,STATE-07,FIX,Assert the saved Is Active value; act on the state this test created.
+15,tests/state.spec.ts,TC11,View state → List Districts,states,states/states.md,STATE-08,KEEP,
+16,tests/state.spec.ts,TC12,Edit state: toggle Is Active (again),states,states/states.md,STATE-07,DROP,Exact copy of TC9 (toggles back). Restore inside STATE-07 instead.
+17,tests/state.spec.ts,TC13,Create state 5678 / StateAgain,states,states/states.md,STATE-06,MERGE,Same behaviour as TC8.
+18,tests/state.spec.ts,TC14,New State: click Country dropdown,states,states/states.md,STATE-06,MERGE,"Asserts nothing after the click. Fold in as ""Country lists the countries""."
+19,tests/state.spec.ts,TC15,New State → List District,states,states/states.md,STATE-08,KEEP,
+20,tests/state.spec.ts,TC16,New State → List Countries,states,states/states.md,STATE-08,KEEP,
+21,tests/state.spec.ts,TC17,Create state 6696 / TestingState / South Africa,states,states/states.md,STATE-06,MERGE,Same behaviour as TC8 with another country; reuses TC8 name.
+22,tests/cities.spec.ts,TC1,Create TestingCity (state + district),cities,cities/cities.md,CITY-01,FIX,"Weak URL check; state set via jQuery, not the widget; fixed name."
+23,tests/cities.spec.ts,TC2,View → Edit → toggle Is Active,cities,cities/cities.md,CITY-02,FIX,Assert saved value.
+24,tests/cities.spec.ts,TC3,List Edit → toggle Is Active,cities,cities/cities.md,CITY-02,MERGE,Same behaviour as TC2 from another entry point: one test.step each.
+25,tests/cities.spec.ts,TC4,Download,cities,cities/cities.md,CITY-04,FIX,Download not checked today.
+26,tests/cities.spec.ts,TC5,State link → India link,cities,cities/cities.md,CITY-05,FIX,India click has no assertion.
+27,tests/cities.spec.ts,TC6,Page size 10/25/50/100,cities,cities/cities.md,CITY-06,FIX,Assert row count.
+28,tests/cities.spec.ts,TC7,New City → List City,cities,cities/cities.md,CITY-07,FIX,Assertion cannot fail (regex matches the add page).
+29,tests/cities.spec.ts,TC8,Edit: change State/District,cities,cities/cities.md,CITY-03,FIX,Assert saved state/district.
+30,tests/cities.spec.ts,TC9,State filter: Select all,cities,cities/cities.md,CITY-08,FIX,No assertion at all; assert the filter changes rows.
+31,tests/cities.spec.ts,TC10,Navigate and close browser,cities,cities/cities.md,CITY-06,DROP,Tests nothing beyond list load.
+32,tests/districts.spec.ts,TC1,Navigate to Districts,districts,districts/districts.md,DIST-01,KEEP,Add column check (missing vs states).
+33,tests/districts.spec.ts,TC3,Page size 10/25/50,districts,districts/districts.md,DIST-02,FIX,Assert row count.
+34,tests/districts.spec.ts,TC4,Search DELHI,districts,districts/districts.md,DIST-03,KEEP,
+35,tests/districts.spec.ts,TC5,Download,districts,districts/districts.md,DIST-04,FIX,Download not checked.
+36,tests/districts.spec.ts,TC6,State link,districts,districts/districts.md,DIST-05,KEEP,Depends on ANDHRA PRADESH being on page 1.
+37,tests/districts.spec.ts,TC7,View and Edit links,districts,districts/districts.md,DIST-05,KEEP,
+38,tests/districts.spec.ts,TC8,Create district 1234 / TestingDistrict,districts,districts/districts.md,DIST-06,FIX,Weak URL check; state picked by index; same codes as states.
+39,tests/districts.spec.ts,TC10,View → New State → List State,districts,districts/districts.md,DIST-07,KEEP,
+40,tests/districts.spec.ts,TC11,View → List State,districts,districts/districts.md,DIST-07,MERGE,Subset of TC10.
+41,tests/districts.spec.ts,TC13,Create district 5678 / DistrictAgain,districts,districts/districts.md,DIST-06,MERGE,Same as TC8.
+42,tests/districts.spec.ts,TC14,New District: click State dropdown,districts,districts/districts.md,DIST-06,MERGE,No assertion after click.
+43,tests/districts.spec.ts,TC15,New District → List State,districts,districts/districts.md,DIST-07,KEEP,
+44,tests/districts.spec.ts,TC16,New District → List District,districts,districts/districts.md,DIST-07,FIX,Assertion cannot fail.
+45,tests/districts.spec.ts,TC17,"Create district 6696, other state",districts,districts/districts.md,DIST-06,MERGE,Same as TC8.
+46,tests/headquarters.spec.ts,TC1,Add HEAD QUARTER opens form,headquarters,headquarters/headquarters.md,HQ-01,KEEP,
+47,tests/headquarters.spec.ts,TC2,Create headquarter,headquarters,headquarters/headquarters.md,HQ-02,FIX,Nothing asserted after Submit; find it in the list.
+48,tests/headquarters.spec.ts,TC3,New user assigned the new HQ,headquarters,headquarters/headquarters.md,HQ-03,FIX,Assertion always true; uses latest unassigned HQ not the one created. Rebuild on createTestUser (e2e. prefix) and check the HQ on Edit user.
+49,tests/warehouseType.spec.ts,TC1,List page visible,warehouse-types,warehouse-types/warehouse-types.md,WHT-01,KEEP,Scope the table locator.
+50,tests/warehouseType.spec.ts,TC2,Page size 10/20/50/100,warehouse-types,warehouse-types/warehouse-types.md,WHT-02,FIX,Assert row count.
+51,tests/warehouseType.spec.ts,TC3,New Warehouse Type link,warehouse-types,warehouse-types/warehouse-types.md,WHT-03,KEEP,
+52,tests/warehouseType.spec.ts,TC4,Name + Is Active (no submit),warehouse-types,warehouse-types/warehouse-types.md,WHT-04,MERGE,Step of TC5.
+53,tests/warehouseType.spec.ts,TC5,Create warehouse type,warehouse-types,warehouse-types/warehouse-types.md,WHT-04,FIX,Weak URL check; find it in the list.
+54,tests/warehouseType.spec.ts,TC6,Search → View → Edit,warehouse-types,warehouse-types/warehouse-types.md,WHT-05,KEEP,
+55,tests/warehouseType.spec.ts,TC7,"Edit: toggle Active, Submit",warehouse-types,warehouse-types/warehouse-types.md,WHT-05,FIX,Assert saved value; act on own record.
+56,tests/warehouseType.spec.ts,TC8,Edit → List Warehousetypes,warehouse-types,warehouse-types/warehouse-types.md,WHT-06,FIX,Assertion cannot fail.
+57,tests/warehouseType.spec.ts,TC9,Edit: click Active (no submit),warehouse-types,warehouse-types/warehouse-types.md,WHT-05,DROP,"Subset of TC7, no assertion."
+58,tests/warehouseType.spec.ts,TC10,"Edit: toggle Active, Submit (again)",warehouse-types,warehouse-types/warehouse-types.md,WHT-05,DROP,Exact copy of TC7.
+59,tests/warehouseType.spec.ts,TC11,Delete,warehouse-types,warehouse-types/warehouse-types.md,WHT-07,FIX,"Deletes the first ""Testingwarehouse"" match, not its own; assert the row is gone."
+60,tests/warehouseType.spec.ts,TC12,Create → View → List,warehouse-types,warehouse-types/warehouse-types.md,WHT-06,MERGE,"Views first match, not the new record."
+61,tests/outletType.spec.ts,TC1,List page visible,outlet-types,outlet-types/outlet-types.md,OTYP-01,FIX,Only checks body is visible.
+62,tests/outletType.spec.ts,TC2,New Outlet Type opens Add form,outlet-types,outlet-types/outlet-types.md,OTYP-02,KEEP,
+63,tests/outletType.spec.ts,TC3,Enter Name (no submit),outlet-types,outlet-types/outlet-types.md,OTYP-03,MERGE,No assertion; step of TC5.
+64,tests/outletType.spec.ts,TC4,Fill form + Biws Status (no submit),outlet-types,outlet-types/outlet-types.md,OTYP-03,MERGE,No assertion; step of TC5.
+65,tests/outletType.spec.ts,TC5,Create outlet type,outlet-types,outlet-types/outlet-types.md,OTYP-03,FIX,Weak URL check; fixed name/ERP; positional selectors.
+66,tests/outletType.spec.ts,TC6,Search DemoOutletType,outlet-types,outlet-types/outlet-types.md,OTYP-04,FIX,No assertion.
+67,tests/outletType.spec.ts,TC7,Page size 10/25/50/100,outlet-types,outlet-types/outlet-types.md,OTYP-05,FIX,No assertion; selector uses brands table id.
+68,tests/outletType.spec.ts,TC8,View → Edit → Submit,outlet-types,outlet-types/outlet-types.md,OTYP-06,FIX,No assertion; nothing changed.
+69,tests/outletType.spec.ts,TC9,View → Back,outlet-types,outlet-types/outlet-types.md,OTYP-07,FIX,No assertion.
+70,tests/outletType.spec.ts,TC10,List page visible (again),outlet-types,outlet-types/outlet-types.md,OTYP-01,DROP,Exact copy of TC1.
+71,tests/outletType.spec.ts,TC11,Download,outlet-types,outlet-types/outlet-types.md,OTYP-08,KEEP,Only download test that really waits for the file; also check name.
+72,tests/outletCategory.spec.ts,TC1,/settings visible,outlet-categories,outlet-categories/outlet-categories.md,OCAT-01,MERGE,Trivial; step of OCAT-01.
+73,tests/outletCategory.spec.ts,TC2,Click Outlet Categories,outlet-categories,outlet-categories/outlet-categories.md,OCAT-01,FIX,Asserts the link it just clicked.
+74,tests/outletCategory.spec.ts,TC3,Add New Outlet Category opens,outlet-categories,outlet-categories/outlet-categories.md,OCAT-02,FIX,No assertion.
+75,tests/outletCategory.spec.ts,TC4,Create category (no Active),outlet-categories,outlet-categories/outlet-categories.md,OCAT-03,FIX,No assertion; fixed name/ERP OC_999.
+76,tests/outletCategory.spec.ts,TC5,Create category (Active),outlet-categories,outlet-categories/outlet-categories.md,OCAT-03,MERGE,Same as TC4 with Active ticked; same ERP id.
+77,tests/outletCategory.spec.ts,TC6,"Create again, then Edit: toggle Active",outlet-categories,outlet-categories/outlet-categories.md,OCAT-04,FIX,Repeats TC5 create; no assertion; strict-mode risk.
+78,tests/outletCategory.spec.ts,TC7,Edit → Close,outlet-categories,outlet-categories/outlet-categories.md,OCAT-02,MERGE,No assertion.
+79,tests/skuCreation.spec.ts,TC1,Add Product form displayed,products,products/sku.md,SKU-01,KEEP,Cleanest pw module: page object can be ported almost as is.
+80,tests/skuCreation.spec.ts,TC2,Empty Submit not saved,products,products/sku.md,SKU-02,FIX,Also assert the validation message.
+81,tests/skuCreation.spec.ts,TC3,"Create SKU, required fields",products,products/sku.md,SKU-03,KEEP,Run id must survive retries (createTestSku helper).
+82,tests/skuCreation.spec.ts,TC4,"Create SKU, all fields",products,products/sku.md,SKU-04,FIX,Checks 2 of ~20 fields; image from node_modules.
+83,tests/skuCreation.spec.ts,TC5,List shows Mrp/Price/Units per case,products,products/sku.md,SKU-05,KEEP,Depends on TC3: make it create its own SKU.
+84,tests/skuCreation.spec.ts,TC6,Edit price,products,products/sku.md,SKU-06,KEEP,Depends on TC3.
+85,tests/skuCreation.spec.ts,TC7,Filter by category / active,products,products/sku.md,SKU-07,KEEP,Depends on TC3.
+86,tests/skuCreation.spec.ts,TC8,Page size,products,products/sku.md,SKU-08,KEEP,
+87,tests/skuCreation.spec.ts,TC9,Add Product → Products menu,products,products/sku.md,ADM-02,MERGE,Admin sidebar already opens Products (ADM-02).
+88,tests/pops.spec.ts,TC1,Pop list visible,pops,pops/pops.md,POP-01,KEEP,
+89,tests/pops.spec.ts,TC2,Add Pop opens form,pops,pops/pops.md,POP-02,FIX,Only body visible today.
+90,tests/pops.spec.ts,TC3,Create Pop (IMAGE),pops,pops/pops.md,POP-03,FIX,Save not verified; fixed name; upload from node_modules.
+91,tests/pops.spec.ts,TC4,Show Active filter,pops,pops/pops.md,POP-04,FIX,Only body visible.
+92,tests/pops.spec.ts,TC5,Show All filter,pops,pops/pops.md,POP-04,MERGE,Same criterion as TC4.
+93,tests/pops.spec.ts,TC6,Search,pops,pops/pops.md,POP-05,FIX,Only body visible.
+94,tests/pops.spec.ts,TC7,Edit: rename,pops,pops/pops.md,POP-06,FIX,Not verified.
+95,tests/pops.spec.ts,TC8,Page size 10/25/50/100,pops,pops/pops.md,POP-07,FIX,Only body visible.
+96,tests/pops.spec.ts,TC9,Deactivate / Show Inactive,pops,pops/pops.md,POP-08,FIX,"POP: toggles and back, not verified; failed in last run."
+97,tests/pops.spec.ts,TC10,Create Pop (VIDEO),pops,pops/pops.md,POP-03,MERGE,Data row of the create criterion. File is C:/Users/hanumesh/...: add a small file to data/files/.
+98,tests/pops.spec.ts,TC11,Create Pop (PDF),pops,pops/pops.md,POP-03,MERGE,Same; C:/Users/hanumesh/... PDF.
+99,tests/pops.spec.ts,TC12,Create Pop (Thumbnail),pops,pops/pops.md,POP-03,MERGE,Data row of the create criterion.
+100,tests/collaterals.spec.ts,TC1,Collateral list visible,collaterals,collaterals/collaterals.md,COLL-01,KEEP,
+101,tests/collaterals.spec.ts,TC2,Add Collateral opens form,collaterals,collaterals/collaterals.md,COLL-02,KEEP,
+102,tests/collaterals.spec.ts,TC3,Create Collateral (IMAGE),collaterals,collaterals/collaterals.md,COLL-03,FIX,Save not verified; fixed name; upload from node_modules.
+103,tests/collaterals.spec.ts,TC4,Show Active filter,collaterals,collaterals/collaterals.md,COLL-04,FIX,Only body visible.
+104,tests/collaterals.spec.ts,TC5,Show All filter,collaterals,collaterals/collaterals.md,COLL-04,MERGE,Same criterion as TC4.
+105,tests/collaterals.spec.ts,TC6,Search,collaterals,collaterals/collaterals.md,COLL-05,FIX,Only body visible.
+106,tests/collaterals.spec.ts,TC7,Edit: rename,collaterals,collaterals/collaterals.md,COLL-06,FIX,Not verified; edit link not filtered by row: can rename another record.
+107,tests/collaterals.spec.ts,TC8,Page size 10/25/50/100,collaterals,collaterals/collaterals.md,COLL-07,FIX,Only body visible.
+108,tests/collaterals.spec.ts,TC9,Deactivate / Show Inactive,collaterals,collaterals/collaterals.md,COLL-08,FIX,Title expects an inactive record but nothing deactivates it.
+109,tests/collaterals.spec.ts,TC10,Create Collateral (VIDEO),collaterals,collaterals/collaterals.md,COLL-03,MERGE,Data row of the create criterion. File is C:/Users/hanumesh/...: add a small file to data/files/.
+110,tests/collaterals.spec.ts,TC11,Create Collateral (PDF),collaterals,collaterals/collaterals.md,COLL-03,MERGE,Same; C:/Users/hanumesh/... PDF.
+111,tests/collaterals.spec.ts,TC12,Create Collateral (Thumbnail),collaterals,collaterals/collaterals.md,COLL-03,MERGE,Data row of the create criterion.
+112,tests/Disclaimer.spec.ts,TC1,Disclaimers list,disclaimers,disclaimers/disclaimer-form.md,DISC-01,KEEP,
+113,tests/Disclaimer.spec.ts,TC2,New Disclaimer opens Add,disclaimers,disclaimers/disclaimer-form.md,DISC-01,KEEP,
+114,tests/Disclaimer.spec.ts,TC3,Source = Web,disclaimers,disclaimers/disclaimer-form.md,DISC-02,MERGE,"TC3–TC10 are cumulative copies: one journey test, one test.step per field."
+115,tests/Disclaimer.spec.ts,TC4,Action = Login,disclaimers,disclaimers/disclaimer-form.md,DISC-02,MERGE,
+116,tests/Disclaimer.spec.ts,TC5,Entity Type = Role,disclaimers,disclaimers/disclaimer-form.md,DISC-02,MERGE,
+117,tests/Disclaimer.spec.ts,TC6,Role = WAREHOUSE MANAGER,disclaimers,disclaimers/disclaimer-form.md,DISC-02,FIX,Assertion proves nothing (helper force-sets the hidden select).
+118,tests/Disclaimer.spec.ts,TC7,Start date = today,disclaimers,disclaimers/disclaimer-form.md,DISC-02,FIX,Helper never fails; may match a prefilled date.
+119,tests/Disclaimer.spec.ts,TC8,Frequency = Daily,disclaimers,disclaimers/disclaimer-form.md,DISC-02,MERGE,
+120,tests/Disclaimer.spec.ts,TC9,Name,disclaimers,disclaimers/disclaimer-form.md,DISC-02,FIX,Reads back what it typed.
+121,tests/Disclaimer.spec.ts,TC10,Content,disclaimers,disclaimers/disclaimer-form.md,DISC-02,FIX,Reads back what it typed.
+122,tests/Disclaimer.spec.ts,TC11,Submit saves,disclaimers,disclaimers/disclaimer-form.md,DISC-03,FIX,Not proven: submit() navigates to the list itself. Unique name; find the row.
+123,tests/Disclaimer.spec.ts,TC12,Reset clears form,disclaimers,disclaimers/disclaimer-form.md,DISC-04,KEEP,
+124,tests/Disclaimer.spec.ts,TC13,List → Last page shows it,disclaimers,disclaimers/disclaimer-form.md,DISC-03,MERGE,Read-back step of DISC-03.
+125,tests/Disclaimer.spec.ts,TC14,"Log out, log in as DM",disclaimers,disclaimers/disclaimer-acceptance.md,DACC-01,MERGE,Use loginAs fixture; clearCookies is not a logout.
+126,tests/Disclaimer.spec.ts,TC15,DM accepts the disclaimer popup,disclaimers,disclaimers/disclaimer-acceptance.md,DACC-01,FIX,Any popup passes: check it is our disclaimer and content.
+127,tests/Disclaimer.spec.ts,TC16,Toggle Enabled,disclaimers,disclaimers/disclaimer-acceptance.md,DACC-04,FIX,"Toggle never verified or restored; failed last run. Make it ""disabled disclaimer is not shown""."
+128,tests/Disclaimer.spec.ts,TC17,Edit → Update,disclaimers,disclaimers/disclaimer-form.md,DISC-05,FIX,Changes nothing; assertion cannot fail.
+129,tests/Disclaimer.spec.ts,TC18,Click all Disabled buttons on last page,disclaimers,disclaimers/disclaimer-acceptance.md,DACC-04,DROP,"Disables every disclaimer on the page (shared data), never restored. Replace with own-record toggle."
+130,tests/Disclaimer.spec.ts,TC19,Entries 10 → 25,disclaimers,disclaimers/disclaimer-form.md,DISC-06,KEEP,
+131,tests/Disclaimer.spec.ts,TC20,"Disclaimer on place-order page, DM accepts",disclaimers,disclaimers/disclaimer-acceptance.md,DACC-02,FIX,Save not verified; check content shown to DM.
+132,tests/Disclaimer.spec.ts,TC21,Approved Disclaimers filters + view content,disclaimers,disclaimers/disclaimer-acceptance.md,DACC-03,FIX,Only URL asserted; filters skipped silently; timed out last run.
+133,tests/reasons.spec.ts,TC1,Reasons page visible,reasons,reasons/reasons.md,RSN-01,FIX,Only body visible.
+134,tests/reasons.spec.ts,TC2,New Reason opens Add,reasons,reasons/reasons.md,RSN-01,KEEP,
+135,tests/reasons.spec.ts,TC3,"Add reason (Damage claims, Claimable)",reasons,reasons/reasons.md,RSN-02,KEEP,"Good test: unique name, saved banner, found in list."
+136,tests/reasons.spec.ts,TC4,Add → List Reasons,reasons,reasons/reasons.md,RSN-08,KEEP,
+137,tests/reasons.spec.ts,TC5,List → Last page,reasons,reasons/reasons.md,RSN-05,KEEP,
+138,tests/reasons.spec.ts,TC6,Edit newest reason: toggle Claimable,reasons,reasons/reasons.md,RSN-03,FIX,Depends on TC3; new value not checked.
+139,tests/reasons.spec.ts,TC7,Deactivate newest active reason,reasons,reasons/reasons.md,RSN-04,FIX,Can deactivate real reasons: act only on a reason the test created.
+140,tests/reasons.spec.ts,TC8,Last → Previous,reasons,reasons/reasons.md,RSN-05,MERGE,
+141,tests/reasons.spec.ts,TC9,Last → Previous → Next,reasons,reasons/reasons.md,RSN-05,MERGE,
+142,tests/reasons.spec.ts,TC10,Activate newest inactive reason,reasons,reasons/reasons.md,RSN-04,FIX,Not guaranteed to undo TC7.
+143,tests/reasons.spec.ts,TC11,Search by category,reasons,reasons/reasons.md,RSN-06,FIX,Checks first row only.
+144,tests/reasons.spec.ts,TC12,"Show 50, search, sort by Created",reasons,reasons/reasons.md,RSN-07,FIX,Sort order never checked.
+145,tests/reasons.spec.ts,TC13,"DM places order, admin rejects with reason",reasons,reasons/reasons.md,RSN-09,FIX,No final assertion; rejects the FIRST order on /orders (maybe someone else's). Needs own order id. Uses a second admin password for the same user (likely stale).
+146,tests/reasons.spec.ts,TC14,Add → List Reasons (again),reasons,reasons/reasons.md,RSN-08,DROP,Exact copy of TC4.
+147,tests/reasons.spec.ts,TC15,List Reasoncategories → New Reason,reasons,reasons/reason-categories.md,RCAT-01,KEEP,Final URL regex accepts either page.
+148,tests/reasons.spec.ts,TC16,List Reasoncategories → List Payments,reasons,reasons/reason-categories.md,RCAT-01,FIX,Very loose /payment/ regex.
+149,tests/reasons.spec.ts,TC17,Reason categories → Next,reasons,reasons/reason-categories.md,RCAT-02,KEEP,
+150,tests/reasons.spec.ts,TC18,Next → Previous,reasons,reasons/reason-categories.md,RCAT-02,MERGE,
+151,tests/reasons.spec.ts,TC19,View → List Reasoncategories,reasons,reasons/reason-categories.md,RCAT-03,KEEP,
+152,tests/reasons.spec.ts,TC20,Create (Asset audit) then edit to Primary sale return,reasons,reasons/reasons.md,RSN-03,FIX,Create part = RSN-02 data row; edited values not checked in list.
+153,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_001,Login as admin and open Add Scheme,admin-schemes,admin-schemes/scheme-create.md,SCHC-01,KEEP,
+154,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_002,Create Qty slab scheme,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,FIX,Saved banner only: stored slab values never read back.
+155,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_003,Assign scheme to ZONE / South,admin-schemes,admin-schemes/scheme-assign.md,SCHA-01,FIX,"No assignment-success assertion; ""already assigned"" only logged."
+156,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_004,End scheme after create + assign,admin-schemes,admin-schemes/scheme-end.md,SCHX-01,FIX,Nothing confirms the scheme ended. 002 already ended it: chain is inconsistent.
+157,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_005,Qty slab with save cash ceiling,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,MERGE,Data row. Saved banner only: stored slab values never read back.
+158,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_006,End the scheme,admin-schemes,admin-schemes/scheme-end.md,SCHX-01,MERGE,Ends a scheme 005 already ended.
+159,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_007,Qty slab with free SKU only,admin-schemes,admin-schemes/scheme-create.md,SCHC-03,FIX,Title says free SKU only; data also sets cash + discount.
+160,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_008,Multiple SKUs in free SKU box,admin-schemes,admin-schemes/scheme-create.md,SCHC-03,MERGE,Data row.
+161,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_009,Free SKUs as AND type,admin-schemes,admin-schemes/scheme-create.md,SCHC-03,MERGE,Data row.
+162,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_010,Qty single slab on individual SKU case,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,MERGE,Data row (apply on).
+163,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_011,Qty single slab on group of SKU cases,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,MERGE,Data row (apply on).
+164,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_012,Qty single slab on kg,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,MERGE,Data row (apply on).
+165,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_013,Qty slab with two slabs,admin-schemes,admin-schemes/scheme-create.md,SCHC-02,MERGE,Data row.
+166,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_014,"Qty prorated, save cash only",admin-schemes,admin-schemes/scheme-create.md,SCHC-04,FIX,Title says save cash only; data also sets discount + ceiling.
+167,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_015,"Qty prorated, free SKU only",admin-schemes,admin-schemes/scheme-create.md,SCHC-04,MERGE,Data row.
+168,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_016,"Qty prorated 2 slabs, free SKU on both",admin-schemes,admin-schemes/scheme-create.md,SCHC-04,FIX,"Free SKU only on slab 1, unlike title."
+169,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_017,Value prorated with For Every,admin-schemes,admin-schemes/scheme-create.md,SCHC-05,KEEP,
+170,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_018,"Value slab: save cash, ceiling, discount, free SKU",admin-schemes,admin-schemes/scheme-create.md,SCHC-05,FIX,Says slab but uses Prorated.
+171,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_019,Value slab (default apply type),admin-schemes,admin-schemes/scheme-create.md,SCHC-05,MERGE,Data row.
+172,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_020,"Qty scheme, entity category, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+173,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_022,"Qty scheme, entity subcategory, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+174,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_023,"Qty scheme, entity brand, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,"NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA. 023 has no assign step, so the scheme cannot apply."
+175,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_024,"Qty scheme, entity sub brand, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+176,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_025,"Qty scheme, entity variant, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+177,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_026,"Qty scheme, entity ERP groups, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+178,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_027,"Qty scheme, entity size, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-01,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+179,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_028,"Value scheme, entity category, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+180,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_029,"Value scheme, entity subcategory, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA. Blocked by WTC-2561 per data note.
+181,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_030,"Value scheme, entity brand, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+182,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_031,"Value scheme, entity sub brand, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+183,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_032,"Value scheme, entity variant, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+184,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_033,"Value scheme, entity ERP groups, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+185,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_034,"Value scheme, entity size, assign, DM sale",admin-schemes,admin-schemes/scheme-sale.md,SCHS-02,FIX,NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA.
+186,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_035,Assign Qty scheme to holder: sub zone,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+187,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_036,Assign Qty scheme to holder: warehouse/distributor,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+188,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_037,Assign Qty scheme to holder: area,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+189,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_038,Assign Qty scheme to holder: outlet,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+190,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_039,Assign Qty scheme to holder: outlet category,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+191,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_040,Assign Qty scheme to holder: outlet type,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+192,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_041,Assign Qty scheme to holder: warehouse category (runs WAREHOUSE TYPE),admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,FIX,Title wrong: 041 runs WAREHOUSE TYPE.
+193,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_042,Assign Qty scheme to holder: warehouse category,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+194,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_043,Assign Qty scheme to holder: warehouse type → outlet category,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+195,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_044,Assign Qty scheme to holder: warehouse type → warehouse type,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+196,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_045,Assign Qty scheme to holder: warehouse type → outlet type,admin-schemes,admin-schemes/scheme-assign.md,SCHA-02,MERGE,Data row of SCHA-02; no assignment-success check today.
+197,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_046,"Qty single slab, DM sale cases 4",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,FIX,"Titles say KG, data applies on unit. NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA."
+198,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_047,"Qty single slab, DM sale cases 8",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,FIX,"Titles say KG, data applies on unit. NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA."
+199,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_048,"Qty single slab, DM sale cases 6",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,FIX,"Titles say KG, data applies on unit. NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA."
+200,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_049,"Qty single slab, DM sale units 6",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,FIX,"Titles say KG, data applies on unit. NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA."
+201,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_050,"Qty single slab, DM sale units 8",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,FIX,"Titles say KG, data applies on unit. NO discount / free qty asserted: only that the SKU row exists. Must assert the benefit. Sale qty 3 is below the slab (4) and the sale SKU is often in exclude list: confirm intent with QA."
+202,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_051,"Qty single slab, DM sale units 6",admin-schemes,admin-schemes/scheme-sale.md,SCHS-03,DROP,Identical to 049; data note suspects it should be 4 units. Ask QA.
+203,tests/adminSchemes.spec.ts (data/adminSchemesData.json),st_AD_SCH_021,(missing in data),,,,GAP,"No case 021; manual TC coverage is continuous, so nothing lost."
+204,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_001,"QPS1 flat slab, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+205,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_002,"QPS2 flat slab, return 2 of 3",staggered-qps,staggered-qps/staggered-qps.md,QPS-04,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+206,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_003,"""QPS4"" (really 2-SKU QpsProd3+4), full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+207,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_004,"QPS4 two slabs, sale only",staggered-qps,staggered-qps/staggered-qps.md,QPS-01,DROP,"Subset of 005 (same scheme, stops after sale); creates a 2nd QPS4."
+208,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_005,QPS4 two slabs + return + ledger (repeat of 004),staggered-qps,staggered-qps/staggered-qps.md,QPS-01,FIX,Rename scheme (QPS4 used 3×); substring scheme/outlet matching (QPS1 ⊂ QPS10).
+209,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_006,"QPS5 two SKUs, one sold",staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+210,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_007,"QPS7 % slabs, return 15 of 24",staggered-qps,staggered-qps/staggered-qps.md,QPS-04,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+211,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_008,"QPS8 10%, return 1 of 3",staggered-qps,staggered-qps/staggered-qps.md,QPS-04,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+212,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_009,QPS9 create + assign only (duplicate slab rows),staggered-qps,staggered-qps/staggered-qps.md,QPS-01,FIX,No sale/return/ledger check; duplicate slab rows in data.
+213,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_010,QPS10 two % slabs,staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+214,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_011,"QPS11 two SKUs, ledger only logged",staggered-qps,staggered-qps/staggered-qps.md,QPS-01,FIX,Ledger only logged: add numeric expectation.
+215,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_012,QPS12 cash + %,staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+216,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_013,QPS13 two SKUs cash + %,staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+217,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_014,QPS14 cash + % two slabs,staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+218,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_015,QPS15 two SKUs,staggered-qps,staggered-qps/staggered-qps.md,QPS-01,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+219,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_016,"QPS16 prorated, return 1 of 3",staggered-qps,staggered-qps/staggered-qps.md,QPS-04,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+220,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_017,QPS16 second return (clawback),staggered-qps,staggered-qps/staggered-qps.md,QPS-05,FIX,"The real staggered rule (clawback ""scheme note 2.00"") is only logged. Needs 016 invoice: make it one journey with 016."
+221,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_018,"QPS18 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+222,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_019,"QPS19 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+223,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_020,"QPS20 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+224,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_021,"QPS21 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+225,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_022,"QPS22 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+226,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_023,"QPS23 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+227,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_024,"QPS24 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies). Sale total only logged: add expectedTotal."
+228,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_025,"QPS25 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies). Sale total only logged: add expectedTotal."
+229,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_026,"QPS26 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies). Sale total only logged: add expectedTotal."
+230,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_027,"QPS27 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+231,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_028,"QPS28 prorated, full return",staggered-qps,staggered-qps/staggered-qps.md,QPS-02,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies). Sale total only logged: add expectedTotal."
+232,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_029,QPS29 value-based prorated,staggered-qps,staggered-qps/staggered-qps.md,QPS-03,MERGE,"Data row: one generic test body (90% of the 3,773 lines are copies)."
+233,tests/staggeredQps.spec.ts (data/staggeredQpsData.json),st_AD_QPS_030,"QPS30 value-based, slabs out of order",staggered-qps,staggered-qps/staggered-qps.md,QPS-03,FIX,Ledger only logged: add numeric expectation.
+234,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_001,ForQPS1: apply on unit / For Every unit,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+235,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_002,ForQPS2: apply on unit / For Every case,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+236,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_003,ForQPS3: apply on unit / For Every Unitcase,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+237,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_004,ForQPS4: apply on individual SKU case / unit,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-02,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+238,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_005,ForQPS5: apply on individual SKU case / case,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-02,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+239,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_006,ForQPS6: apply on individual SKU case / Unitcase,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-02,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+240,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_007,ForQPS7: apply on kg / unit,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-03,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+241,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_008,ForQPS8: apply on kg / case,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-03,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+242,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_009,ForQPS9: apply on kg / Unitcase,forevery-qps,forevery-qps/forevery-qps.md,FEQPS-03,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+243,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_010,"ForQPS10: apply on two SKUs, unit / unit",forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+244,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_011,"ForQPS11: apply on two SKUs, unit / case",forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+245,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_012,"ForQPS12: apply on two SKUs, unit / Unitcase",forevery-qps,forevery-qps/forevery-qps.md,FEQPS-01,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
+246,tests/foreveryStaggeredQps.spec.ts (data/foreveryStaggeredQpsData.json),for_AD_QPS_013,"ForQPS13: apply on two SKUs, individual SKU case / unit",forevery-qps,forevery-qps/forevery-qps.md,FEQPS-02,BLOCKED,"58 TODO_LOCATOR placeholders (converted from Java), distributor login not set. Write the spec from QA, then build fresh."
