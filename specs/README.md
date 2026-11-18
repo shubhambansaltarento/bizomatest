@@ -33,5 +33,7 @@ When behaviour changes, update the spec first, then the test.
 | [User details page](users/user-details.md) | UVIEW | Implemented |
 | [User block: progressive lockout](user-block/progressive-lockout.md) (`npm run test:user-block`, on its own; attempts via `USER_BLOCK_ATTEMPTS`) | UBLK | Implemented |
 | [Login settings (config)](config/login-settings.md) (`npm run test:config`; settings in `data/settings.ts`) | LCFG | Implemented |
+| [Add outlet (admin): open Add / Edit Outlet by URL and menu](add-outlet/admin/navigation.md) (data in `data/addOutlet.ts`) | AONAV | Implemented |
+| [Add outlet (distributor manager): open Add / Edit Outlet by URL and menu](add-outlet/dm/navigation.md) (data in `data/addOutlet.ts`) | DONAV | Implemented |
 
 Open work for these modules is tracked in [`TODO.md`](../TODO.md).

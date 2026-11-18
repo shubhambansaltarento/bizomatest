@@ -232,7 +232,7 @@ What matters here:
   - `fixtures/auth.fixture.ts` for normal tests (gives `authedPage`, `loginPage`, `appShell`, `loginAs`)
   - `fixtures/settings.fixture.ts` for config tests (adds `appSettings`, see 3.8)
 - **The title starts with the ID**, and `spec('<module>/<flow>', '<ID>')` is the second argument. This tags the test `@OUT-01`.
-- **Use `authedPage`** for anything behind login. It logs in as admin before the test and logs out afterwards.
+- **Use `authedPage`** for anything behind login. It logs in as admin before the test and logs out afterwards. Tabs the test opened (pages that open in a new tab, such as Organisation → Add OUTLET) are closed before the logout.
 - **Use web-first assertions** (`await expect(locator).toBeVisible()`, `toHaveText`, `toHaveURL`). They wait and retry.
 - **Never use `page.waitForTimeout(...)`** or wait for "network idle". Wait for the thing you need to see. If the app is slow to react, wrap the check in `await expect(async () => { … }).toPass({ timeout })`.
 - **A long journey** whose criteria depend on each other (create → edit → delete) can be one test with one `test.step('OUT-05 …')` per criterion. Pass every ID to `spec()`: `spec('OUT-05', 'OUT-06', 'OUT-07')`.

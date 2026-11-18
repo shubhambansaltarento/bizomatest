@@ -7,6 +7,32 @@ Role config for Add User: [`data/userRoles.ts`](data/userRoles.ts)
 Cases from the users sheet that belong to other modules: [`TODO-later-user-module.md`](TODO-later-user-module.md)
 Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/automationUsers.ts)
 
+## Framework clean-up: reuse of triggers and assertions (in progress, 18 Nov 2026)
+
+Goal: every action (trigger) and every check (assertion) used by more than one test lives in one place, a page object or a fixture, and tests only call it. Counts come from a review of `tests/` on 18 Nov 2026.
+
+**Duplicated flows**
+
+- [ ] **One way to create a test user.** `withNewUser` ([`tests/config/login-settings.spec.ts`](tests/config/login-settings.spec.ts)) and `withImageUser` ([`tests/user-creation/config/user-images.spec.ts`](tests/user-creation/config/user-images.spec.ts)) copy the Add User flow instead of calling `createTestUser`. Both copies miss its retry for the users list's first Ajax load, and `withImageUser` doesn't wait for `expectLoaded()` at all, which makes them a likely source of flaky config tests. Replace both with `createTestUser`.
+- [ ] **`testUser` fixture with automatic clean-up.** There are 10 `try { … } finally { deactivateTestUser(…) }` blocks in 5 files. A fixture that creates the user and deactivates it on teardown removes them. It must deactivate only after `appSettings` has restored, because inactive users aren't listed on the settings page.
+- [ ] **`serverErrors` fixture.** The `response.status() >= 500` listener is written 7 times in 6 files. Make it one fixture so any test can check "no server errors" in one line.
+- [ ] **Page objects from fixtures.** Test files contain 63 `new XxxPage(authedPage)` calls in 15 files. Inject the page objects instead (`async ({ usersList, editPage }) => …`).
+- [ ] **`spec()` boilerplate.** All 13 test files declare `const spec = (...ids) => specFor('<module>/<flow>', ...ids)`. Derive the spec path from the test file's path so tests call `spec('UEDIT-01')` directly. `npm run spec:check` must keep working.
+
+**Shared assertions to add to the page objects**
+
+- [ ] `usersList.expectSaved()`: the "The user has been saved" flash message (checked 12 times in 6 files)
+- [ ] `appShell.expectLoggedOut()`: user menu gone and login page shown (`userMenuToggle` count 0 is checked 6 times in 3 files)
+- [ ] `appShell.expectNoErrorPage()`: page body without `errorText` (3 times in 2 files)
+- [ ] URL checks built inline with `new RegExp(…)` (8 times in 5 files): move them to `expectOpen…` methods on the page objects
+
+**Code hygiene**
+
+- [ ] Remove the leftover note in AUTH-01 ([`tests/auth/login-logout.spec.ts`](tests/auth/login-logout.spec.ts))
+- [ ] Fix the strict-type error in `UsersListPage.pickRandomUser`: the default `where` is typed as always returning `true`, and `tests/sales/dm-direct-sale.spec.ts` passes a real filter
+- [ ] Replace `.find(…)!` (11 times in 8 files) with a helper that fails with a clear message ("user X not in the list") instead of a `TypeError`
+- [ ] Add `tsconfig.json` (strict), ESLint with `eslint-plugin-playwright` (catches a missing `await`) and Prettier: gaps G2 / G3 in [`docs/framework-proposal.md`](docs/framework-proposal.md)
+
 ## App issues found (raise with product / dev)
 
 - [ ] **Blank username is sent to the server** (Add User, 16 Nov 2026): clear the username after the check and click Add; nothing in the browser stops it, and the server answers "Username already taken, please try with other name" on an emptied form. No user is created. Tested as a known issue (UFORM-03).
@@ -26,6 +52,8 @@ Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/auto
 - [ ] Wrong-password message differs by user: "Invalid User credentials.." for the main admin, "Invalid request url." for e2e users.
 - [ ] Empty password gives "Please add User Password", but typing then clearing it gives "Please Enter a Valid password" (UVAL-03).
 
+- [ ] **Distributor manager can't edit outlets** (18 Nov 2026): `/outlets/edit/<id>` sends `pricing.distributor` back to the outlet view with "You do not have sufficient permission to edit an OUTLET.", and the view has no Edit Outlet icon. The add-outlet module expects a DM to add **and edit** outlets. Is the DM's URL permission (`/urlpermissions/addpermissions`) off on devarun, or is it by design? Tested as known issues (DONAV-04/05, `editKnownIssue` in `data/addOutlet.ts`).
+- [ ] **DM can open Add Outlet for another warehouse's area** (18 Nov 2026): `pricing.distributor` opens `/outlets/add/3` (RR Nagar _ Area, not one of their warehouses) without being refused. Check whether submitting is refused.
 - [ ] **Login error banner gone** (seen 10 Nov 2026, after the dev server's maintenance window): a wrong password or unknown user now shows the message only under the form ("Invalid User credentials.."), not in the top `#flash_message` banner, so AUTH-03/04 fail. Confirm whether this is intended, then update `specs/auth/login-logout.md` and `LoginPage.errorMessage`.
 
 ## 1. Admin login redirection assertion
@@ -122,6 +150,19 @@ Module **user-creation** (`npm run test:user-creation`, config: `npm run test:us
 - [ ] Date of birth in the future ("Date should not be greater than today date")
 - [ ] Username longer than 191 characters (field max length)
 - [ ] Two users submitted with the same username at once (server-side duplicate check)
+
+## 6. Add outlet
+
+Module **add-outlet** (`npm run test:add-outlet`), two sections: `admin/` and `dm/` (distributor manager). Test data: [`data/addOutlet.ts`](data/addOutlet.ts).
+
+- [x] Admin opens Add Outlet by URL (`/outlets/add`, `/outlets/add/<areaId>`) and from Organisation → area → Add OUTLET (AONAV-01..03)
+- [x] Admin opens Edit Outlet by URL and from Organisation → area → outlet → Edit Outlet (AONAV-04/05)
+- [x] DM opens Add Outlet by URL and from the menu (DONAV-01..03)
+- [ ] DM opens Edit Outlet (DONAV-04/05): known issue, DM has no permission (see App issues)
+- [ ] Map the admin QA sheet (`docs/Bizom QA Automation modules(AD-Add_Outlets).csv`, 126 cases, no case codes yet) to criteria; the DM sheet is still to come
+- [ ] Sheet cases that change URL permissions (`/urlpermissions/addpermissions`) or form definitions (`/formdefinitions/add/outletadd`) are config tests: they need a fixture like `appSettings` that restores the value, under `tests/add-outlet/<section>/config/`
+- [ ] Outlets created by tests: name prefix (like `e2e.` for users) and clean-up (deactivate), so dev data doesn't fill up
+- [ ] DM sees only their own zones / areas in Organisation and in Add Outlet's Select Area
 
 ## 5. Login test sheet (`docs/login test cases.xlsx`)
 

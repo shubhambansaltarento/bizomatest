@@ -49,6 +49,9 @@ export const test = base.extend<AuthOptions & AuthFixtures>({
 
     await use(page);
 
+    // Tabs the test opened (pages that open in a new tab) share this session; close them first, or
+    // their late requests can keep the session alive after logout (seen 18 Nov 2026, AONAV-05).
+    await Promise.all(page.context().pages().filter((p) => p !== page).map((p) => p.close()));
     await appShell.logout();
     await loginPage.expectVisible();
   },

@@ -1,0 +1,696 @@
+Module Name,Title,Description,Precondition,Steps,ExpectedResult
+AD_Add_outlet,Verify that admin can able to access the add outlet page if the permission is enabled for admin in /urlpermissions/addpermissions,"<p>This test case verifies that the admin can access the add outlet page if permission is enabled in /urlpermissions/addpermissions, ensuring proper access control.</p>",1. Login to Bizom web as Admin2. Proceed to /urlpermissions/addpermissions and enable outlet_add for admin,1. Proceed to /outlets/add,Admin should able to access the add outlet page if the permission is enabled for admin in /urlpermissions/addpermissions
+AD_Add_outlet,Verify that admin can't able to access the add outlet page if the permission is disabled for admin in /urlpermissions/addpermissions,<p>This test case verifies that an admin is restricted from accessing the add outlet page if permission is disabled in /urlpermissions/addpermissions. It ensures proper access control measures are in place for admins.</p>,1. Login to Bizom web as Admin2. Proceed to /urlpermissions/addpermissions and disable outlet_add for admin,1. Proceed to /outlets/add,Admin shouldn't able to access the add outlet page if the permission is disabled for admin in /urlpermissions/addpermissions
+AD_Add_outlet,Verify that name field is shown as mandatory if it made mandatory in form definitions,"<p>This test case validates that the ""name"" field is marked as mandatory in a form by verifying that a user cannot proceed without filling it out, based on form definitions.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1. Proceed to /outlets/add
+2. Observe the outletname fields if it is marked as mandatory","Admin should able to Proceed to outlets add page
+Name field should be shown as mandatory if it made mandatory in form definitions"
+AD_Add_outlet,Verify that admin enter's the name field which is made as mandatory and outlet is saved,"<p>This test case verifies that when an admin enters a name in a mandatory field, the outlet is successfully saved, ensuring proper data input validation.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1. Proceed to /outlets/add
+2. Enter the outlet name and fill all other details and click on submit button","Admin should able to Proceed to outlets add page
+Outlet should be created after filling the mandatory name field"
+AD_Add_outlet,Verify that outlet is not saved if Admin doesn't enter mandatory name field,"<p>This test case verifies that when an Admin does not enter a mandatory name field for an outlet, the outlet is not saved to ensure data integrity and adherence to required information.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1. Proceed to /outlets/add
+2. Do not enter the outlet name and fill all other details and click on submit button","Admin should able to Proceed to outlets add page
+Outlet should not saved if Admin doesn't enter mandatory name field and error message "" Please fill name"" should be displayed"
+AD_Add_outlet,Verify that user can able to enter the same name which is already existing in the company,"<p>This test case verifies if the system prevents users from adding a duplicate name that already exists in the company, ensuring data integrity and preventing redundancy.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1. Proceed to /outlets/add
+2. Enter the name which is already existing in the system
+3. Fill other details in the add outlet page and click on submit button","Admin should able to Proceed to outlets add page
+User should enter the name which is already existing in the system
+User should able to enter the same name which is already existing in the company"
+AD_Add_outlet,Verify user can create the outlet with space in starting for outlet name,"<p>This test case verifies that the system allows users to create an outlet with a name containing a space at the beginning, ensuring proper functionality and flexibility in naming conventions.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1.Go to ""...outlets/add"" page
+2.Fill the data for outlet name as few space in starting then name
+3.Fill other required details and Click on Submit button","Admin should able to Proceed to outlets add page
+User should able to enter the name starting with space
+It should not allow to create the outlet with space i.e System should through error validation message for space in starting for outlet name"
+AD_Add_outlet,Verify user can create the outlet with space in ending for outlet name,"<p>This test case verifies that the user is able to successfully create an outlet with a name that includes a space at the end, ensuring that the system can handle and store outlet names with trailing spaces accurately.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlet name as Mandatory,"1.Go to ""...outlets/add"" page
+2.Fill the data for outlet name as name and then few space in ending
+3.Fill other required details and Click on Submit","Admin should able to Proceed to outlets add page
+User should Fill the data for outlet name as name and then few space in ending
+User should able to create an outlet"
+AD_Add_outlet,Verify user can create the outlet with the outlet name as except alphanumeric when basic outlet form is restricted for outlet name as regex ^[a-zA-Z0-9]*$,"<p>This test case verifies that a user is able to successfully create an outlet by inputting a name that includes alphanumeric characters only, in accordance with the regex ^[a-zA-Z0-9]*$.</p>","1.Open the bizom URL2.Login as Admin3.Go to ""..../settings/basicoutletform"" url4.Search as name5. Search regex column6. Enter the restrict as regex ^[a-zA-Z0-9]*$7.Click on update","1.Go to ""...outlets/add"" page
+2.Fill the data for outlet name as any special charecter or other data
+3.Fill other required details and Click on Submit","Admin should able to Proceed to outlets add page
+User should Fill the data for outlet name as any special charecter or other data
+System should not allow the user to enter the data apart from alphanumeric or it should not allow to submit."
+AD_Add_outlet,Verify user can update the outlet with the outlet name as execpt alphanumeric when basic outlet form is restricted for outlet name as regex ^[a-zA-Z0-9]*$,<p>Verify that the user is unable to update the outlet with an outlet name containing any special characters or spaces when the basic outlet form restricts outlet names to alphanumeric characters only (using regex ^[a-zA-Z0-9]*$).</p>,"1.Open the bizom URL2.Login as Admin3.Go to ""..../settings/basicoutletform"" url4.Search as name5. Search regex column6. Enter the restrict as regex ^[a-zA-Z0-9]*$7.Click on update","1.Go to ""...outlets/edit/index"" page
+2. Edit the outlet name as any special charecter or other data
+3. Fill all other required fields and click on submit button","Admin should able to Proceed to outlets add page
+User should Edit the outlet name as any special charecter or other data
+System should not allow the user to enter the data apart from alphanumeric or it should not allow to submit"
+AD_Add_outlet,Verify that user can able to access and select the required states from the dropdown,"<p>This test case aims to verify if a user can successfully access and select specific states from a dropdown menu, ensuring functionality and correct state selection in the application.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and select the required states from it","Admin should able to Proceed to outlets add page
+User should Enter the outlet name in name text box
+User should able to access and select the required states from the dropdown"
+AD_Add_outlet,Verify that admin can able to search the required states in the search box and results to be displayed accordingly,"<p>This test case verifies that as an admin, you can search for specific states in the search box and ensure that accurate results are displayed based on the search query entered.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and search box is present
+4. Do the valid search like ""AND"" and observe the results shown","Admin should able to Proceed to outlets add page
+User should able to enter the outlet name in name text box
+User should able to click on state dropdown
+Admin should able to search the required states in the search box and results to be displayed based on the search made"
+AD_Add_outlet,Verify that results are not displayed for the invalid search made in state dropdown,"<p>This test case verifies that no results are displayed when an invalid search is made in the state dropdown, ensuring that the system handles and communicates errors appropriately.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and search box is present
+4. Do the invalid search like ""AAA"" and observe the results shown","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should able to click on state dropdown
+No results should be displayed for the invalid search made in state dropdown"
+AD_Add_outlet,Verify that district dropdown appears in the add outlet page once Admin selects the state,<p>This test case verifies that a district dropdown menu appears on the add outlet page after the Admin selects a state. It ensures proper functionality and user experience in selecting districts for the outlet.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and select the required states from it
+4. Observe if user can see the district dropdown","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should able click on state dropdown and select the required states
+District dropdown should appear in the add outlet page once Admin selects the state"
+AD_Add_outlet,Districts from the selected state to be shown in district dropdown and no other state's district is shown,"<p>This test case verifies that only districts from the selected state are displayed in the dropdown menu, ensuring accuracy in district selection and preventing any other state's districts from being shown.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and select the required states from it
+4. Click on the district dropdown and observe only districts from the selected state is shown","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should able to click on state dropdown and select the required states from it
+Districts from the selected state should be shown in district dropdown and no other state's district is shown"
+AD_Add_outlet,Verify that admin can able to access and select the required district from the district dropdown,"<p>This test case verifies that an admin user can successfully access and select a specific district from the dropdown menu on the platform, ensuring accurate district selection and functionality.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Click on state dropdown and select the required states from it
+4. Click on the district dropdown and select the required state from the dropdown","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should able to click on state dropdown and select the required states from it
+Admin should able to access and select the required district from the district dropdown"
+AD_Add_outlet,Verify that cities dropdown will show blank if the cities are not mapped to the selected state & district,"<p>This test case verifies that the cities dropdown remains blank if no cities are mapped to the selected state and district, ensuring accurate data presentation in the application.</p>","1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Disable setting ""enableDistrictMapping"" in settings/allsettings page4. Do not map the city to one of the state and district","1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select same state and district to which city is not mapped
+4. Click on city dropdown and observe","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should select same state and district to which city is not mapped
+Cities dropdown should show blank if the cities are not mapped to the selected state & district"
+AD_Add_outlet,Verify that cities to be appear in cities dropdown if the cities are mapped to the selected state and district,"<p>This test case verifies that only cities mapped to the selected state and district appear in the cities dropdown, ensuring accurate city selection for users.</p>","1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Enable setting ""enableDistrictMapping"" in settings/allsettings page4. Map the city to the state and district that user selects while creating the outlet","1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select same state and district to which city is mapped
+4. Click on city dropdown and observe","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should select same state and district to which city is mapped
+Cities should appear in cities dropdown if the cities are mapped to the selected state and district"
+AD_Add_outlet,Verify that user can able to select the required cities from the city dropdown,<p>This test case verifies that the user can navigate the city dropdown and successfully select the desired cities from the available options. It ensures the functionality of the city selection feature on the platform.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Map the city to the state and district that user selects while creating the outlet,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select same state and district to which city is mapped
+4. Click on city dropdown and select the required city","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should select same state and district to which city is mapped
+User should able to select the required cities from the city dropdown"
+AD_Add_outlet,Verify that admin can able to search the cities in the cities dropdown,"<p>This test case aims to validate that the admin user is able to effectively search for and select cities from a dropdown menu on the platform, ensuring efficient navigation and usability for managing city-specific data and functions.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Map the city to the state and district that user selects while creating the outlet,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select same state and district to which city is mapped
+4. Click on city dropdown and search the city in search box","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should select same state and district to which city is mapped
+Admin should able to search the city and results should be displayed based on the search made"
+AD_Add_outlet,Verify that admin can't able to create the outlet without selecting city,"<p>This test case verifies that an admin is unable to create a new outlet without selecting a city, ensuring proper data validation and preventing incomplete outlet creation.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Map the city to the state and district that user selects while creating the outlet,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select state and district from the dropdown
+4. Do not select any city","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+Asdmin should select state and district from the dropdown
+Admin shouldn't able to create the outlet without selecting city"
+AD_Add_outlet,Verify district and city selection is reset when a different state is selected.,"<p>This test case verifies that when a different state is selected, the district and city selection options are reset to ensure accurate and relevant location data entry.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make state as editable3. Map the city to the state and district that user selects while creating the outlet,"1. Proceed to /outlets/add
+2. Enter the outlet name in name text box
+3. Select state and district from the dropdown and select any city
+4. Now select any other state and observe the district and city selection","Admin should able to Proceed to outlets add page
+User should able to enter outlet name
+User should select state and district from the dropdown and select any city
+District and city selection should be reset when a different state is selected."
+AD_Add_outlet,Verify that user can able to enter only numerics in Pin code field,"<p>This test case verifies that the user is able to enter only numeric characters in the Pin code field, ensuring that any non-numeric inputs are not accepted in the field.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make PIN as editable,"1. Proceed to /outlets/add
+2.Click on PIN field and enter Numerics
+3. Also Try to enter non numerics like alphabets and special characters","Admin should able to Proceed to outlets add page
+User should able to enter numerics in PIN field
+User should not able to enter non numerics like special characters and alphabets in PIN field"
+AD_Add_outlet,Verify that Phone No field is shown as mandatory if it made mandatory in form definitions,<p>This test case verifies that the Phone No field is marked as mandatory in a form based on the defined requirements. It ensures that users are prompted to fill out the phone number field to proceed.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory,"1. Proceed to /outlets/add
+2. Observe the phone No field if it is marked as mandatory","Admin should able to Proceed to outlets add page
+Phone No field should be shown as mandatory if it made mandatory in form definitions"
+AD_Add_outlet,Verify that user can able to enter numerics in Phone No field,"<p>This test case aims to ensure that users are able to input numeric characters accurately in the Phone No field without any restrictions or errors, verifying the functionality of the input field for accepting only numerical values.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory,"1. Proceed to /outlets/add
+2. Click on the phone number field and enter some numerics","Admin should able to Proceed to outlets add page
+User should able to enter numerics in Phone No field"
+AD_Add_outlet,Verify that user can't able to enter alphabets in Phone No field,"<p>This test case verifies that the phone number field properly restricts user input to numbers only, preventing entry of alphabets or special characters to ensure data integrity and proper formatting.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory,"1. Proceed to /outlets/add
+2. Click on the phone number field and enter some alphabets","Admin should able to Proceed to outlets add page
+User shouldn't able to enter alphabets in Phone No field"
+AD_Add_outlet,Verify that default country and code is shown by default as it is set in setting supported Countries,<p>This test case verifies whether the default country and code are displayed as per the setting supported countries in the application. It ensures that the correct default values are shown to users upon accessing the service.</p>,"1. Login to Bizom web as Admin2. Proceed to /settings/allsettings and enter ""In"" in setting ""supportedCountries""3. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory","1. Proceed to /outlets/add
+2.Observe the default country and country code selected in Phone No field","Admin should able to Proceed to outlets add page
+Default country and code should be shown by default as it is set in setting supported Countries"
+AD_Add_outlet,Verify that default dial code is shown in add outlet as it is set in setting defaultdialcode,"<p>This test case ensures that the default dial code, as pre-set in the settings, is displayed correctly in the ""Add Outlet"" section for user verification.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsettings and enter ""91"" in setting ""defaultdialcode ""","1. Proceed to /outlets/add
+2.Observe if '91' is selected as default dial code in Phone No field","Admin should able to Proceed to outlets add page
+Default dial code should be shown in add outlet as it is set in setting defaultdialcode"
+AD_Add_outlet,Verify phone number field does not accept less than 10 digits if India is selected in the dropdown,"<p>This test case verifies that the phone number field does not accept inputs with less than 10 digits when the country ""India"" is selected in the dropdown, ensuring accurate validation for phone numbers specific to India.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsettings and enter ""In"" in setting ""supportedCountries""3. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory","1. Proceed to /outlets/add
+2. Click on the phone number field and India is selected by default
+3. Enter 8 digits number and fill other details
+4. Click on submit button","Admin should able to Proceed to outlets add page
+User should click on the phone number field and India is selected by default
+User should enter 8 digits number and filled other details
+User should not able to create the outlet with less than 10 digits if India is selected"
+AD_Add_outlet,Verify phone number field does not accept more than 10 digits if India is selected in the dropdown,"<p>This test case title ensures that the phone number field does not accept more than 10 digits specifically when India is selected in the dropdown, validating country-specific validation for phone numbers.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsettings and enter ""In"" in setting ""supportedCountries""3. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory","1. Proceed to /outlets/add
+2. Click on the phone number field and India is selected by default
+3. Enter 11 digits number and fill other details
+4. Click on submit button","Admin should able to Proceed to outlets add page
+User should click on the phone number field and India is selected by default
+User should enter 11 digits number and fill other details
+User should not able to create the outlet with more than 10 digits if India is selected"
+AD_Add_outlet,Verify that Phone number field will accept 10 digit number if India code is selected in dropdown,"<p>This test case validates that the phone number field only accepts a 10-digit number when the selected country code is India in the dropdown menu, ensuring accurate formatting and functionality for users in India.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsettings and enter ""In"" in setting ""supportedCountries""3. Proceed to /formdefinitions/add/outletadd and make phone No as Mandatory","1. Proceed to /outlets/add
+2. Click on the phone number field and India is selected by default
+3. Enter 10 digits number and fill other details
+4. Click on submit button","Admin should able to Proceed to outlets add page
+User should click on the phone number field and India is selected by default
+User should enter 10 digits number and fill other details
+Phone number field should accept 10 digit number if India code is selected in dropdown and success message ""valid"" should be displayed"
+AD_Add_outlet,"Verify outlets with same phone numbers can be deactivated individually, through UI","<p>This test case verifies if outlets with the same phone numbers can be individually deactivated through the user interface, ensuring that functionality works as expected for each outlet.</p>",1. Setting: checkforuniqueoutletmobilenumber = 02. Two active outlets should have the same phone number.3. Both the outlets should be in active state.,"1. Pick one of the two outlets whose phone no are same.
+2. Go to outlets/edit/X
+3. Select ""Inactive"" from order state drop down.
+4. Click Submit button
+5. Click OK in the pop up. "" Do you want to remove from beats.""","User should pick one of the two outlets whose phone no are same.
+Admin should able to Proceed to outlets add page
+User should select inactive checkbox
+User should able to click on submit button
+1. Page must redirect to, outlets/view/X. With a message. ""Outlet editied successfully.
+2. In page, outlets/view/X, the oultet state must be ""Inactive"""
+AD_Add_outlet,Verify all outlets with same phone numbers can be deactivated individually (inactivate atleast 2),<p>This test case aims to verify that multiple outlets sharing the same phone number can be individually deactivated. The objective is to ensure that each outlet's deactivation status is independent.</p>,1. Setting: checkforuniqueoutletmobilenumber = 02. Two outlets should have the same phone number.3. Both the outlets should be in active state.,"1. Pick one of the two outlets whose phone no are same.
+2. Go to outlets/edit/X
+3. Select ""Inactive"" from order state drop down.
+4. Click Submit button
+5. Click OK in the pop up. "" Do you want to remove from beats.""
+In page, outlets/view/X, the oultet state must be ""Inactive""
+6. Repeat steps 1-5 with the other outlet.","User should pick one of the two outlets whose phone no are same.
+Admin should able to Proceed to outlets add page
+User should select inactive checkbox
+User should click on submit button
+User should able to click on in the popup
+?In page, outlets/view/X, the oultet state must be ""Inactive"" for both the outlets."
+AD_Add_outlet,"Verify inactive outlets with same phone numbers can be activated individually, through UI.","<p>This test case verifies the ability to activate individual inactive outlets with the same phone numbers through the user interface, ensuring proper functionality and unique activation.</p>",1. Setting: checkforuniqueoutletmobilenumber = 02. Two outlets should have the same phone number.3. Both the outlets should be in inactive state.,"1. Pick one of the two outlets whose phone no are same.
+2. Go to outlets/edit/X
+3. Select ""active"" from order state drop down.
+4. Slect the ""beat"" from beats drop down.
+5. Click submit button","User should pick one of the two outlets whose phone no are same.
+Admin should able to Proceed to outlets add page
+User should select ""active"" from order state drop down.
+User should select the ""beat"" from beats drop down.
+1. Page must redirect to, outlets/view/X. With a message. ""Outlet editied successfully.
+2. In page, outlets/view/X, the oultet state must be ""active"""
+AD_Add_outlet,"Verify inactive outlets with same phone numbers can be activated individually, through UI. (activate atleast 2 )","<p>This test case verifies if multiple inactive outlets can be individually activated with the same phone numbers through the user interface, ensuring proper functionality and distinguishing between each outlet.</p>",1. Setting: checkforuniqueoutletmobilenumber = 02. Two outlets should have the same phone number.3. Both the outlets should be in inactive state.,"1. Pick one of the two outlets whose phone no are same.
+2. Go to outlets/edit/X
+3. Select ""active"" from order state drop down.
+4. Select the ""Beat"" from beats drop down.
+5. Click Submit.
+in page, outlets/view/X, the outlet state must be ""active""
+6. Repeat steps 1-5 with the other outlet.","User should pick one of the two outlets whose phone no are same.
+Admin should able to Proceed to outlets edit page
+User should select ""active"" from order state drop down.
+User should select the ""Beat"" from beats drop down.
+User should able to click on submit button
+1.In page, outlets/view/X, the outlet state must be ""active"" for both the outlets."
+AD_Add_outlet,Verify that outlet type dropdown is shown blank if no outlet type are created in /outletTypes,<p>This test case verifies that the outlet type dropdown appears blank on the interface if no outlet types are created in the /outletTypes section of the application.</p>,"1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlettype as editable3. Proceed to /outletTypes page and make sure no outlet types are created, inactive the outlet types if present","1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet type dropdown and check if any outlet type is present","Admin should able to Proceed to outlets add page
+User should able to enter name, select state, district, city and Enter phone No.
+Outlet type dropdown should be shown blank if no outlet type are created in /outletTypes"
+AD_Add_outlet,Verify that outlet type are shown in dropdown as it is created in /outletTypes page,"<p>This test case verifies if outlet types created in /outletTypes page are accurately displayed in a dropdown on the respective page, ensuring proper functionality and alignment between the backend creation and frontend representation.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlettype as editable3. Proceed to /outletTypes page and add some outlet types,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet type dropdown and check if any outlet type is present","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Outlet type should be shown in dropdown as it is created in /outletTypes page."
+AD_Add_outlet,Verify that admin can able to search the outlet type in search field and results to be displayed accordingly,"<p>This test case verifies that the admin can successfully search for outlet types in the search field, with relevant results displayed as expected.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlettype as editable3. Proceed to /outletTypes page and add some outlet types,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet type dropdown, click on the search box and do the valid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Admin should able to search the outlet type in search field and results should be displayed accordingly"
+AD_Add_outlet,Verify that no results are displayed for the invalid search made in outlet type search field,"<p>This test case validates that when an invalid search query is entered into the outlet type search field, no results should be displayed on the webpage, ensuring an appropriate response to invalid inputs.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlettype as editable3. Proceed to /outletTypes page and add some outlet types,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet type dropdown, click on the search box and do the invalid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+No results should displayed for the invalid search made in outlet type search field"
+AD_Add_outlet,Verify that user should able to select the outlet type from the dropdown,"<p>This test case verifies the functionality of selecting outlet type from a dropdown menu, ensuring users can successfully choose the desired outlet type on the platform.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outlettype as editable3. Proceed to /outletTypes page and add some outlet types,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet type dropdown and select the required outlet types from the dropdown","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select the outlet type from the dropdown"
+AD_Add_outlet,Verify that areas are shown in dropdown as it is created in /areas page,<p>Verify that areas are displayed accurately in the dropdown menu as added on the /areas page to ensure proper visibility and functionality of the selection options.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable3. Proceed to /areas page and add some new areas,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on area dropdown and check if area created is present","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Area should be shown in dropdown as it is created in /areas page"
+AD_Add_outlet,Verify that first created area is shown by default in area field,"<p>This test case verifies that the first area created in the system is displayed as default in the area field, ensuring proper functionality and user convenience.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Observe which area is shown by default in area field","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+First created area should be shown by default in area field"
+AD_Add_outlet,Verify that only active areas are shown in area dropdown,<p>This test case verifies that the area dropdown menu displays only active areas. Inactive areas should not be listed to ensure an accurate and user-friendly selection process.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable3. Proceed to /areas page and inactive some areas,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on area dropdown and check if inactive area is present","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Only active areas should be shown in area dropdown"
+AD_Add_outlet,Verify that area field is not shown if admin proceeds to add outlet through organisation page,"<p>This test case ensures that the area field is not displayed when an admin adds an outlet through the organization page, verifying a streamlined user experience and proper data entry for outlet creation.</p>","1. Login to Bizom web as Admin2. Proceed to /companies/dashboard and select the Zone, subzone, warehouse and area3. Click on Go button to proceed to add outlet page","1. User lands on /outlets/add/X
+2. Enter name, select state, district, city and Enter phone No.
+3. Observe if Area field is present in the page","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Area field should not be shown if admin proceeds to add outlet through organisation page"
+AD_Add_outlet,Verify that admin can able to search the area in search field and results to be displayed accordingly,"<p>This test case verifies that the admin user can successfully search for an area using the search field, and that the results displayed are accurate and correspond to the searched area.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on area dropdown, click on search box and do the valid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Admin should able to search the area in search field and results to be displayed accordingly"
+AD_Add_outlet,Verify that no results are displayed for the invalid search made in area search field,"<p>This test case aims to validate the behavior of the system when an invalid search is conducted in the area search field, ensuring that no search results are displayed. It is essential to verify the system's error-handling capabilities and user experience in handling such scenarios.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on area dropdown, click on search box and do the invalid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+No results should be displayed for the invalid search made in area search field"
+AD_Add_outlet,Verify that user can able to select the area from the dropdown,"<p>This test case verifies that the user can successfully select an area from the dropdown list on a web page, ensuring the functionality and usability of the selection feature.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make areas as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on area dropdown and select the required area from the dropdown","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select the required area from the dropdown"
+AD_Add_outlet,Verify that admin can able to select only 1 area if setting multipleoutletsforarea is disabled in add outlet page,"<p>This test case verifies that when setting multiple outlets for an area is disabled, the admin should only be able to select one area in the Add Outlet page. This ensures proper configuration and adherence to system settings.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and disable setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area in area dropdown","Admin should able to Proceed to outlets add page
+Admin should able to select only 1 area if setting ""multipleoutletsforarea"" is disabled in add outlet page"
+AD_Add_outlet,Verify that admin can able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 1 in add outlet page,"<p>This test case verifies that an admin can select multiple areas from different warehouses when ""multipleoutletsforarea"" is set to 1 in the add outlet page settings.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 1 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from diff warehouse in area dropdown","Admin should able to Proceed to outlets add page
+Admin should able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 1 in add outlet page"
+AD_Add_outlet,Verify that admin can't able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 1 in add outlet page,"<p>This test case verifies that an admin cannot select multiple areas from the same warehouse if the setting ""multipleoutletsforarea"" is set to 1 in the add outlet page.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 1 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from same warehouse in area dropdown","Admin should able to Proceed to outlets add page
+Admin shouldn't able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 1 in add outlet page and alert message ""area1 and area 2 are selected from warehouse/distributor"" should be displayed"
+AD_Add_outlet,Verify that admin can able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 2 in add outlet page,"<p>Verify that an admin can select multiple areas from the same warehouse if the setting ""multipleoutletsforarea"" is set to 2 in the add outlet page.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 2 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from same warehouse in area dropdown","Admin should able to Proceed to outlets add page
+?Admin should able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 2 in add outlet page"
+AD_Add_outlet,Verify that admin can't able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 2 in add outlet page,"<p>This test case verifies that an admin cannot select multiple areas from different warehouses if the setting ""multipleoutletsforarea"" is limited to 2 in the add outlet page.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 2 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from different warehouse in area dropdown","Admin should able to Proceed to outlets add page
+Admin shouldn't able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 2 and alert message ""Area being selected is in different warehouse/distributor from previously selected areas"" should be displayed"
+AD_Add_outlet,Verify that admin can able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 3 in add outlet page,"<p>This test case verifies that an admin can select multiple areas from the same warehouse if the setting ""multipleoutletsforarea"" is set to 3 in the add outlet page, ensuring proper functionality and adherence to configuration settings.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 3 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from same warehouse in area dropdown","Admin should able to Proceed to outlets add page
+Admin should able to select multiple area from same warehouse if setting multipleoutletsforarea is given as 3 in add outlet page"
+AD_Add_outlet,Verify that admin can able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 3 in add outlet page,"<p>This test case verifies whether an admin can select multiple areas from different warehouses when the setting ""multipleoutletsforarea"" is set to 3 in the add outlet page.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 3 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area from different warehouse in area dropdown","Admin should able to Proceed to outlets add page
+Admin should able to select multiple area from diff warehouse if setting multipleoutletsforarea is given as 3 in add outlet page"
+AD_Add_outlet,Verify that admin can able to view all the areas mapped in the outlets view page,"<p>This test case will verify that the admin user is able to access and view all mapped areas in the outlets view page, ensuring comprehensive visibility of all assigned locations for effective management and monitoring.</p>","1. Login to Bizom Web as admin2. Proceed to /settings/allsettings and enter value as 3 for setting ""multipleoutletsforarea""","1. Proceed to url /outlets/add
+2. Try to select multiple area in area dropdown and save it
+3. In the same outlets view page, check if the areas mapped are shown","Admin should able to Proceed to outlets add page
+User should select multiple area in area dropdown and save it
+Admin should able to view all the areas mapped in the outlets view page"
+AD_Add_outlet,Verify that beat field is shown as mandatory if it made mandatory in form definitions,"<p>This test case verifies that the ""beat"" field is displayed as mandatory on the form when specified as mandatory in the form definitions, ensuring accurate data entry.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as Mandatory,"1. Proceed to /outlets/add
+?2. Observe the beat field if it is marked as mandatory","Admin should able to Proceed to outlets add page
+Beat field should be shown as mandatory if it made mandatory in form definitions"
+AD_Add_outlet,Verify that beat field is not shown as mandatory if it is not made as required in form definitions,"<p>This test case aims to confirm that the ""beat"" field is not marked as mandatory in form submissions if it has not been specified as required in the form definitions. This ensures the correct behavior of the form based on field specifications.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and do not make beat as Mandatory,"1. Proceed to /outlets/add
+2. Observe the beat field if it is marked as mandatory","Admin should able to Proceed to outlets add page
+Beat field should not be shown as mandatory if it is not made as required in form definitions"
+AD_Add_outlet,Verify that newly created beat are shown in dropdown as it is created in pjp page,"<p>This test case aims to confirm that any newly created beats are correctly displayed in the dropdown menu as soon as they are added in the PJP page, ensuring real-time synchronization and usability for users.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area which is mapped to the zone that beat is created from the dropdown
+4. Click on beat dropdown and observe is create beat is shown","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should select the area which is mapped to the zone that beat is created from the dropdown
+Newly created beat should be shown in dropdown as it is created in pjp page"
+AD_Add_outlet,Verify that admin can able to search the beat in search field and results to be displayed accordingly,"<p>This test case verifies that the admin can search for a specific beat in the search field, and the results displayed align with the search query. It ensures that the search functionality is working as expected for admins on the platform.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area which is mapped to the zone that beat is created from the dropdown
+4. Click on beat dropdown, click on search box and do the valid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should select the area which is mapped to the zone that beat is created from the dropdown
+Admin should able to search the beat in search field and results to be displayed accordingly"
+AD_Add_outlet,Verify that no results are displayed for the invalid search made in beat search field,"<p>This test case aims to confirm that when an invalid search term is entered in the beat search field, no results should be displayed on the screen, ensuring that the system handles erroneous input effectively.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area which is mapped to the zone that beat is created from the dropdown
+4. Click on beat dropdown, click on search box and do the invalid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should select the area which is mapped to the zone that beat is created from the dropdown
+No results should be displayed for the invalid search made in beat search field"
+AD_Add_outlet,Verify that if beat is made mandatory field then admin can not able to create outlet without selecting a beat,<p>This test case verifies that an admin cannot create an outlet without selecting a beat by making the beat field mandatory. This ensures proper data entry and adherence to required parameters.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable and mandatory3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area which is mapped to the zone that beat is created from the dropdown
+4. Do not select any beat from the dropdown and click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should select the area which is mapped to the zone that beat is created from the dropdown
+If beat is made mandatory field then admin should not able to create outlet without selecting a beat"
+AD_Add_outlet,Verify that user can able to select the beat from the dropdown,"<p>This test case aims to verify that users can successfully select a beat from a dropdown menu on the platform, ensuring functionality and usability for users.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable and mandatory3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area which is mapped to the zone that beat is created from the dropdown
+4. Select any beat from the dropdown and fill other details and Click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should select the area which is mapped to the zone that beat is created from the dropdown
+?User should able to select the beat from the dropdown"
+AD_Add_outlet,Verify beat dropdown has only beats which belong to the zone and area to which the outlet is getting created.,"<p>This test case verifies that the beat dropdown menu in outlet creation only displays beats that correspond to the selected zone and area, ensuring accurate beat selection for the new outlet.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable and mandatory3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select the area from the dropdown
+4. Click on beat dropdown and observe if the beats are shown which belong to the area selected","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should Select the area from the dropdown
+User should only be able to see beats that belong to the zone and area that the outlet is going to get created."
+AD_Add_outlet,Verify beats choosen while adding the outlets are getting saved.,"<p>This test case ensures that selected beats are successfully saved when adding outlets, confirming proper functionality and data retention.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make beat as editable and mandatory3. Proceed to /pjps/pjpupdate/2 and create a new beat for the required zone,"1. Go to page, ""outlets/add/x"", fill all the necessary fields, to create an outlet.
+2. choose the beat field that is mandatory and create an outlet.
+3. go to page /pjps/pjpupdate/X and choose Active / inactive beat.
+4. Click "" View"", against the beat choosen in step 2","Admin should able to Proceed to outlets add page
+Beat is selected and outlet should be created
+User should inactive the beat
+Outlet should be present in the list of outlets (""beats/view/1"")"
+AD_Add_outlet,Verify that outlet category field is shown as mandatory if it made mandatory in form definitions,"<p>Verify that the outlet category field displays as mandatory in the form if configured as mandatory in the form definitions, ensuring proper validation.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory,"1. Proceed to /outlets/add
+2. Observe the outlet category field if it is marked as mandatory","Admin should able to Proceed to outlets add page
+Outlet category field should be shown as mandatory if it made mandatory in form definitions"
+AD_Add_outlet,Verify that outlet category dropdown is shown blank if no outlet categories are created in settings page,"<p>This test case verifies if the outlet category dropdown remains blank if no outlet categories are configured in the settings page, ensuring proper functionality and user experience.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Make sure no outlet categories is created or inactive the existing outlet categories if present,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet category dropdown and check if any outlet category is present","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Outlet category dropdown should shown blank if no outlet categories are created in settings page"
+AD_Add_outlet,Verify that outlet categories are shown in dropdown as it is created in settings page,<p>This test case verifies that outlet categories are displayed accurately in the dropdown menu as per the categories created in the settings page for seamless selection by users.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Create some outlet categories,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet category dropdown and check if outlet categories are present that are created in settings page","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Outlet categories should be shown in dropdown as it is created in settings page"
+AD_Add_outlet,Verify that admin can able to search the outlet categories in search field and results to be displayed accordingly,<p>This test case verifies admin's ability to search outlet categories in search field. It checks if search function displays results correctly.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Create some outlet categories,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet category dropdown and and click on the search box and do the valid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Admin should able to search the outlet categories in search field and results should be displayed accordingly"
+AD_Add_outlet,Verify that no results are displayed for the invalid search made in outlet categories search field,"<p>This test verifies that entering an invalid search query in the outlet categories search field yields no results displayed on the page, ensuring accurate handling of invalid inputs.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Create some outlet categories,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet category dropdown and and click on the search box and do the invalid search","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+No results should be displayed for the invalid search made in outlet categories search field"
+AD_Add_outlet,Verify that if Outlet Category is made mandatory field then admin can not able to create outlet without selecting a category.,"<p>This test case verifies that an admin cannot create an outlet without selecting a category if Outlet Category is a mandatory field, ensuring data integrity and proper categorization of outlets.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Create some outlet categories,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Do not select any outlet category and add all other required fields and Click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+If Outlet Category are made mandatory field then admin should not able to create outlet without selecting a category."
+AD_Add_outlet,Verify that user should able to select the outlet categories from the dropdown,"<p>This test case aims to ensure that users can successfully choose outlet categories from a dropdown menu on the platform, confirming the functionality and usability of this feature.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletcategory as Mandatory3. Proceed to /settings and click on outlet categories tab. Create some outlet categories,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet categories dropdown and select the required category from the dropdown","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select the outlet categories from the dropdown"
+AD_Add_outlet,"Verify ""outlet level"", is present in formdefinition, ""formdefinitions/add/outletadd"", and user can enable it and verify the ""outlet level"" field is present in, ""outlets/add/x""","<p>This test case validates the presence of outlet level field in formdefinition, formdefinitions/add/outletadd, its enablement, and verification in outlets/add/x.</p>","1. User should be logged in as admin2. User should be able to access the following pages, ""formdefinitions/add/outletadd"" and ""outlets/add/x""","1. Go to page, ""formdefinitions/add/outletadd"".
+2. Enable, ""outletlevel"" as editable.","Admin should able to Proceed to /formdefinitions/add/outletadd page
+1. In page, outlets/add/X, ""outlet level"", drop down should be present. And user should be abel to choose one of those options."
+AD_Add_outlet,"Verify user can disable, ""outlet level"", form fromdefinition, ""formdefinitions/add/outletadd"", and the ""outlet level"" field is not present in,""outlets/add/x""","<p>This test aims to confirm the system allows disabling outlet level forms from formdefinitions/add/outletadd, ensuring outlet level field is absent in outlets/add/x form, validating user control over form customization.</p>","1. User should be logged in as admin2. User should be able to access the following pages, ""formdefinitions/add/outletadd"" and ""outlets/add/x""","1. Go to page, ""formdefinitions/add/outletadd"".
+2. Uncheck, editable check box for, ""outletlevel"".","Admin should able to Proceed to /formdefinitions/add/outletadd page
+?1. In page, outlets/add/X, ""outlet level"", drop down should not be present."
+AD_Add_outlet,Verify that admin can able to select outlet level as cash,"<p>This test case verifies if the admin user has the capability to choose cash as the payment method at the outlet level, ensuring proper functionality and access permissions within the system.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select other mandatory fields in the outlets add page
+4. Click on outlet level dropdown and select ""cash""","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should enter other mandatory fields in the outlets add page
+Admin should able to select outlet level as cash"
+AD_Add_outlet,Verify that admin can able to select outlet level as credit,"<p>This test case verifies if an admin has the capability to select the payment method as credit specifically at the outlet level within the system, ensuring the functionality is accurately configured and functioning as intended.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Admin should able to select outlet level as credit"
+AD_Add_outlet,Verify that on selecting credit as outlet level credit limit and credit days field appears in the page,"<p>This test case verifies that selecting ""credit"" as the payment option at the outlet level causes the credit limit and credit days fields to appear on the page for further information input.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""
+5. Observe if credit limit and credit days fields appears in the page","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+Admin should able to select outlet level as credit
+On selecting credit as outlet level credit limit and credit days field should appear in the page"
+AD_Add_outlet,Verify that Credit Limit is a mandatory field and outlet can't be saved without entering if admin selects outlet level as credit,"<p>This test case ensures that the Credit Limit field is mandatory while saving an outlet with credit selected at the admin level, preventing saving without entering this crucial information.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""
+4. Credit limit and credit days field appears but do not enter anything for credit limit and Click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select credit from the dropdown
+Admin should not able to save outlet without entering credit limit and alert message ""Please enter Outlet Credit limit."" should be displayed"
+AD_Add_outlet,Verify that credit limit fields accepts only numerics,"<p>This test case ensures that the credit limit fields on the application only accept numeric values, verifying user input validation for ensuring data accuracy and system functionality.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""
+4. Click on credit limit field and enter some numerics","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select credit from the dropdown
+Credit limit fields should accepts only numerics"
+AD_Add_outlet,Verify that credit limit field does not accept alphabets or special characters,"<p>This test case verifies that the credit limit field only accepts numerical input and does not allow alphabets or special characters, ensuring data integrity and proper validation in the application.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+?3. Click on outlet level dropdown and select ""credit""
+4. Click on credit limit field and enter some special characters or alphabets","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select credit from the dropdown
+Credit limit field should not accept alphabets or special characters"
+AD_Add_outlet,Verify that Credit days is a mandatory field and outlet can't be saved without entering if admin selects outlet level as credit,"<p>This test case aims to ensure that the ""Credit days"" field is mandatory when an outlet is selected as credit at the admin level, preventing the saving of the outlet without entering this required information.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""
+4. Credit limit and credit days field appears but do not enter anything for credit days and click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select creidt from the dropdown
+Admin should not able to save outlet without entering credit days and alert message ""Please enter Outlet Credit limit days."" should be displayed"
+AD_Add_outlet,Verify that credit days fields accepts only numerics,"<p>This test case validates whether the credit days field in a form only accepts numeric values, ensuring accurate data entry and preventing input errors.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+4. Click on outlet level dropdown and select ""credit""
+5. Click on credit days field and enter some numerics","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select credit from the dropdown
+Credit days fields should accepts onl numerics"
+AD_Add_outlet,Verify that credit days field does not accept alphabets or special characters,"<p>This test case aims to validate that the credit days field in a system does not allow entry of alphabets or special characters, ensuring data integrity and accurate information processing.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make outletlevel as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet level dropdown and select ""credit""
+4. Click on credit days field and enter some special characters or alphabets","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should able to select credit from the dropdown
+Credit days field should not accept alphabets or special characters"
+AD_Add_outlet,Verify that admin can able to see error message in red text if invalid email is entered ,<p>Verify that the admin user is able to see an error message displayed in red text when attempting to enter an invalid email address during the verification process.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make email as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet contact persons dropdown
+4. In email field enter ""test@gmail""","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should click on outlet contact persons dropdown
+Admin should able to error message ""Invalid email id"""
+AD_Add_outlet,Verify that admin can able to enter the valid email id and success message is shown in green text,"<p>This test case verifies that an admin can successfully enter a valid email ID, with a confirmation message displayed in green text upon successful submission.</p>",1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make email as editable,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Click on outlet contact persons details dropdown
+4. In email field enter ""test@gmail.com""","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should click on outlet contact persons details dropdown
+Admin should able to enter the valid email id and success message ""valid"" is shown in green text"
+AD_Add_outlet,Verify that admin can able to create the outlet by entering all the mandatory and required fields,<p>This test case aims to verify that an admin user can successfully create a new outlet by providing all necessary information and ensuring all mandatory fields are filled out correctly in the system.</p>,1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make the required fields editable and mandatory,"1. Proceed to /outlets/add
+2. Enter name, select state, district, city and Enter phone No.
+3. Select other mandatory fields in the outlets add page
+4. Click on submit button","Admin should able to Proceed to outlets add page
+User should enter name, select state, district, city and Enter phone No.
+User should enter all the mandatory fields in the add outlet page
+Admin should able to create the outlet by entering all the mandatory and required fields"
+AD_Add_outlet,Verify that admin can able to view the outlets that are created and can able to view the fields that are given while creating an outlet,"<p>This test case verifies that the admin can view the created outlets and their associated fields, ensuring proper functionality of outlet management system.</p>","1. Login to Bizom web as Admin2. Proceed to /formdefinitions/add/outletadd and make the required fields editable and mandatory3. Proceed to /outlets/add4. Enter name, select state, district, city and Enter phone No.5. Select other mandatory fields in the outlets add page6. Click on submit button","1. Proceed to outlets/view/X
+2. Verify all the fields that are given while creating an outlet","Admin should able to Proceed to outlets view page
+Admin should able to view the outlets that are created and should able to view the fields that are given while creating an outlet"
+AD_Add_outlet,Verify that add outlet option appears after selecting area in organisation page if permission is given for admin in setting addoutletpermissionid,"<p>This test case verifies if the ""add outlet"" option appears in the organization page after selecting an area, given that the admin has permission via the addoutletpermissionid setting.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 1 to give permission for admin role and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe if add outlet option is present for the subsequent area","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Add outlet option should appear after selecting area in organisation page if permission is given for admin in setting addoutletpermissionid"
+AD_Add_outlet,Verify that add outlet option doesn't appears after selecting area in organisation page if permission is not given for admin in setting addoutletpermissionid,"<p>This test case aims to ensure that the ""add outlet"" option does not appear on the organization page after selecting an area if the admin does not have permission specified in the setting addoutletpermissionid.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 2 to give permission for other role than admin and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe if add outlet option is present for the subsequent area","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Add outlet option shouldn't appear after selecting area in organisation page if permission is not given for admin in setting addoutletpermissionid"
+AD_Add_outlet,Verify that user can able to add outlets through organisations page,<p>This test case aims to validate the functionality of adding outlets through the organisations page. It ensures that users can seamlessly create new outlets within their organization's account.</p>,"1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 1 to give permission for admin role and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe add outlet option is present for the subsequent area and Click on Go button","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Add outlet page should be opened and User should able to add outlets through organisations page"
+AD_Add_outlet,"Verify that state, districts, city are auto selected based on the selected area if user add the outlets through the organisation page","<p>This test case ensures that when adding outlets through the organization page, the state, district, and city are automatically selected based on the chosen area, to streamline data entry and minimize errors.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 1 to give permission for admin role and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe add outlet option is present for the subsequent area and Click on Go button to add outlet for the required area
+4. Observe the fields state, district and city according the area selected","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Admin should able to Proceed to outlets add page
+State, districts, city should be auto selected based on the selected area if user add the outlets through the organisation page"
+AD_Add_outlet,Verify that admin can able to create outlet for the required areas,"<p>This test case verifies that an admin user can successfully create outlets in specified areas, ensuring efficient management and allocation of resources to different locations.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 1 to give permission for admin role and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe add outlet option is present for the subsequent area and Click on Go button to add outlet for the required area
+4. Fill all the fields and click on submit button","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Admin should able to Proceed to outlets add page
+Admin should able to create outlet for the required areas"
+AD_Add_outlet,Verify that admin can able to see the created outlets mapped to the areas that are selected,"<p>This test case aims to confirm that the admin can view the outlets they've created and ensure they are accurately mapped to the selected areas, verifying the functionality of the system in managing and displaying outlet-location relationships.</p>","1. Login to Bizom web as Admin2. Proceed to /settings/allsetting and search setting ""addoutletpermissionid""3. Enter 1 to give permission for admin role and save it","1. Proceed to /companies/dashboard
+2. Click on zone dropdown and select required zone, subzone and warehouse/distributor
+3. Observe add outlet option is present for the subsequent area and Click on Go button to add outlet for the required area
+4. Fill all the fields and click on submit button
+5. Now again in the organisations page select the same zone, subzone and warehouse
+6. Click on area name which outlet is created","Admin should proceed to /companies/dashboard
+Admin should click on zone dropdown and select required zone, subzone and warehouse/distributor
+Admin should able to Proceed to outlets add page
+Admin should able to create a outlet
+Admin should able to proceed to organisations page and zone, subzone and warehouse is selected
+Outlet should be mapped to the area and the same has to be displayed at the right side when admin clicks on area name"
+AD_Add_outlet,Verify that only specific roles can able to edit the outlet fields as set in form definitions,"<p>This test case verifies that only users with specified roles can edit outlet fields as per form definitions, ensuring proper access control and data integrity.</p>",1. Login to Bizom web as Admin2. Proceed to url /formdefinitions/add/outletedit3. For some fields select the required roles to edit in roles ACL column,"1. Login to Bizom web from the same roles which is selected
+2. Proceed to url /outlets/add and for the same fields try to add","User should Login to Bizom web from the same roles which is selected
+Only specific roles should able to edit the outlet fields as set in form definitions"
+AD_Add_outlet,Verify that other roles can not able to edit the outlet fields if it is not set in form definitions,"<p>This test case verifies that users with roles other than the designated role cannot edit outlet fields that are not set in form definitions, ensuring data integrity and security.</p>",1. Login to Bizom web as Admin2. Proceed to url /formdefinitions/add/outletedit3. For some fields select the required roles to edit in roles ACL column,"1. Login to Bizom web from the roles which is not select in form definitions
+2. Proceed to url /outlets/add and for the same fields try to add","Diff user Login to Bizom web from the role which is not select in form definitions
+Other roles should not able to edit the outlet fields if it is not set in form definitions"
+AD_Add_outlet,Verify that admin can able to view area in the outlet view page even if it is inactive,"<p>This test case verifies that the admin can successfully view an inactive area in the outlet view page, ensuring all areas are visible for monitoring and management purposes.</p>",1. Login to Bizom web as Admin2. Inactive any area that is mapped to an outlet,"1. Proceed to /outlets/view/xx
+2. Check if the inactive area is shown in the view outlets page","Admin should able to Proceed to outlets view page
+Admin should able to view area in the outlet view page even if it is inactive"
+AD_Add_outlet,Verify that admin can not able to view area in the outlet edit page even if it is inactive,"<p>This test case verifies that an admin cannot view an inactive area in the outlet edit page, ensuring restricted access to inactive areas.</p>",1. Login to Bizom web as Admin2. Inactive any area that is mapped to an outlet,"1. Proceed to /outlets/edit/xx
+2. Check if the inactive area is shown in the view outlets page","Admin should able to Proceed to outlets edit page
+Admin should not able to view area in the outlet edit page even if it is inactive"
+AD_Add_outlet,Verify that total outlet count is matched when dowloaded at company level and warehouse level,"<p>This test case will verify if the total number of outlets downloaded matches between the company level and warehouse level, ensuring accurate data consistency across different organizational levels.</p>",1. Login to Bizom web as Admin2. proceed to url /companies/dashboard#,"1. Click on download outlet button, outlets on comapny level is dowloaded
+2. Click on any warehouse dropdown and click on download outlet button
+3. In the outlets downloaded at company level. filter with the same warehouse
+4. Verify the total number of outlets for the warehouse is same in company level downloaded outlet sheet","User should able to download outlets on company level
+User should able to download outlets on warehouse level
+User should able to filter outlets with the same warehouse
+Total outlet count should be matched when dowloaded at company level and warehouse level"
+AD_Add_outlet,"Verify that if setting "" outletMultilevelApproval"" is enabled and no approval sequence is set, then outlets are auto approved","<p>This test case verifies that when outletMultilevelApproval is enabled with no approval sequence set, outlets are automatically approved, ensuring proper functionality and user experience in the approval process.</p>","1. Login to Bizom web as Admin2. Proceed to url /settings/allsettings3. Search setting ""outletMultilevelApproval"" and enable it4. Do not set any outlet approval sequence","1. Create an outlet from web/app
+2, Check weather the outlet is approved or not","Outlet should be created from web
+If setting "" outletMultilevelApproval"" is enabled and no approval sequence is set, then outlets should be auto approved"
+AD_Add_outlet,Verify that admin can able to download the outlets on company level,"<p>This test case verifies that an admin user is able to successfully download a list of outlets on a company level, ensuring that the functionality works as intended and enables efficient management of outlets within the organization.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on download outlets button","Admin should able to Proceed to companies dashboard page
+Admin should able to download the .csv file containing all the outlets at company level and the file should contain all details given for the outlet
+correctly"
+AD_Add_outlet,Verify that downloaded file to be named as company outlets if it is downloaded on company level,"<p>This test case verifies that any file downloaded at the company level is named as ""company outlets"" to ensure proper organization and identification of company-specific data and resources.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on download outlets button
+3. Check the name of the downloaded file","Admin should proceed to /companies/dashboard page
+User should able to download outlets on company level
+Downloaded file should be named as company outlets if it is downloaded on company level"
+AD_Add_outlet,Verify that admin can able to download the outlets on zone level,"<p>This test case verifies that an admin user can successfully download a list of outlets on a specific zone level, ensuring accurate data retrieval and functionality.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown
+3. Click on download outlets button","Admin should able to proceed to /companies/dashboard page
+User should able to download outlets on zone level
+Admin should able to download the .csv file containing all the outlets at zone level and the downloaded file should have the given information
+of the outlets correctly"
+AD_Add_outlet,Verify that outlets under the selected zone should be present in the downloaded file,"<p>This test case aims to confirm that all outlets within a specified zone are correctly included in the downloaded file, ensuring data accuracy and completeness for the specific geographic area.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown
+3. Click on download outlets button
+4. Check the outlets present in the downloaded file and search with the outlet name that are mapped to the different zone","Admin should proceed to /companies/dashboard page
+Admi should able to click on zone dropdown
+User should able to download outlets on zone level
+Outlets under the selected zone should be present in the downloaded file"
+AD_Add_outlet,Verify that downloaded file to be named as zone name if it is downloaded on zone level,"<p>This test case aims to verify that a downloaded file is automatically named after the zone it was downloaded from, ensuring proper organization and identification of files at the zone level.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown
+3. Click on download outlets button
+4, Check the name of the downloaded file","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone dropdown
+User should able to download outlets on zone level
+Downloaded file should be named as zone name if it is downloaded on zone level"
+AD_Add_outlet,Verify that admin can able to download the outlets on sub zone level,"<p>This test case verifies that an admin user can successfully download a list of outlets at a sub zone level, ensuring proper functionality of the download feature for detailed data analysis and management.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown and click on sub zone dropdown
+3. Click on download outlets button","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone and subzone dropdown
+Admin should able to download the .csv file containing all the outlets at sub zone level"
+AD_Add_outlet,Verify that only the outlets under the selected sub zone should be present in the downloaded file,"<p>This test case ensures that the downloaded file contains only the outlets belonging to the selected sub zone, confirming accurate data filtering and sub zone selection functionality.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown and click on subzone dropdown
+3. Click on download outlets button
+4. Check the outlets present in the downloaded file and search with the outlet name that are mapped to the diff sub zone","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone and subzone dropdown
+User should able to download outlets on sub zone level
+Only the Outlets under the selected sub zone should be present in the downloaded file"
+AD_Add_outlet,Verify that downloaded file to be named as sub zone name if it is downloaded on sub zone level,"<p>This test case verifies that when a file is downloaded on a subzone level, it should be automatically named after the subzone it belongs to in order to ensure correct file identification and organization.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown and click on subzone dropdown
+3. Click on download outlets button
+4, Check the name of the downloaded file","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone and sub zone dropdown
+User should able to download outlets on sub zone level
+Downloaded file should be named as sub zone name if it is downloaded on sub zone level"
+AD_Add_outlet,Verify that admin can able to download the outlets on warehouse level,"<p>This test case verifies that the admin user has the capability to download a list of outlets assigned to a specific warehouse, ensuring efficient management and accessibility of data at a granular level.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone, sub zone and required warehouse dropdown
+3. Click on download outlets button","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone, sub zone and warehouse dropdown
+Admin should able to download the .csv file containing all the outlets at warehouse level"
+AD_Add_outlet,Verify that only the outlets under the selected warehouse should be present in the downloaded file,"<p>This test case verifies that the downloaded file only contains outlets associated with the selected warehouse, ensuring data accuracy and alignment with warehouse management.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone, sub zone and required warehouse dropdown
+3. Click on download outlets button
+4. Check the outlets present in the downloaded file and search with the outlet name that are mapped to the diff warehouse","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone, sub zone and warehouse dropdown
+User should able to download outlets on warehouse level
+Only the Outlets under the selected warehouse should be present in the downloaded file"
+AD_Add_outlet,Verify that downloaded file to be named as warehouse name if it is downloaded on warehouse level,"<p>This test case aims to validate that when a file is downloaded at the warehouse level, it is automatically named after the respective warehouse to ensure accuracy and efficiency in file management.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone, sub zone and required warehouse dropdown
+3. Click on download outlets button
+4, Check the name of the downloaded file","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone, sub zone and warehouse dropdown
+User should able to download outlets on warehouse level
+Downloaded file should be named as warehouse name if it is downloaded on warehouse level"
+AD_Add_outlet,Verify the details present in the downloaded file is same as the details while creating the outlet,"<p>This test case verifies if the information in the downloaded file matches the details entered while creating an outlet, ensuring data accuracy and consistency.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown
+3. Click on download outlets button
+4. Pick any two random outlets and check the details present in the downloaded file","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone dropdown
+User should able to download outlets on zone level
+Details present in the downloaded file should be same as the details while creating the outlet"
+AD_Add_outlet,Verify that if the fields are not entered while creating an outlet then same fields is kept blank in the downloaded file,"<p>This test case verifies that if mandatory fields are not entered during outlet creation, the corresponding fields remain blank in the downloaded file to ensure accurate data representation and consistency.</p>",1. Login to Bizom web as Admin2. Outlets to be present in the portal and mapped to different zones ,"1. Proceed to /companies/dashboard page
+2. Click on the zone dropdown
+3. Click on download outlets button
+4. Open the file and check the fields that are not entered while creating an outlet is kept blank","Admin should proceed to /companies/dashboard page
+Admin should able to click on zone dropdown
+User should able to download outlets on zone level
+If the fields are not entered while creating an outlet then same fields should be kept blank in the downloaded file"
+AD_Add_outlet,"Verify user is able to access the URL, companies/outletDensityonMap and directed to relevant page.","<p>This test case verifies that users can successfully access the specific URL ""companies/outletDensityonMap"" and are directed to the correct page displaying outlet density on a map.</p>",1. User should be logged in as admin,1. go to page /companies/outletDensityonMap,"1. User should land in a page,with tiltle, "" OUTLET DENSITY MAP."""
+AD_Add_outlet,"Verify the functionality of, ""Select type"" and select drop down",<p>This test case verifies the functionality of selecting a type from a dropdown menu. It ensures that the selected type is reflected accurately on the page.</p>,1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap,"1. choose zone subzone warehouse etc from the, ""Select_Type"" dropdown.
+2. Choose, the particular zone/subzone/warehouse/Area/Beat from ""select"" drop down. after choosing from, ""Select_Type"" dropdown.
+(Verify for all the options under ""Select_Type"", dropdown.)","1. User should be able to select (Ex Zone.)
+2. Appropriate zone names must be listed under ""select"" drop down. And user should be allowed to choose it."
+AD_Add_outlet,"Verify the inactive entites are not listed under the, ""select"" dropdown, after choosing a ""Select_type"" - Repeat for all the select types.",<p>This test case aims to ensure that inactive entities are not displayed in the select dropdown options after choosing a select type. The test will be repeated for all select types to verify consistent results.</p>,"1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. There should be at the least one, inactive entity, with respect to each ""Select_type"" entity.","1. choose zone from the, ""Select_Type"" dropdown.
+2. Click and browse the results of ""Select"", drop down.
+(This has to be repeated for all the entities under ""Slelect_type"")","User should able to select zone from ""Select_Type"" dropdown
+The inactive zone, should not be listed under the ""Select"", dropdown."
+AD_Add_outlet,"Verify upon choosing zone and subzones, only outlets are shown in the map and available for search from the search field. When the option include distributor is unchecked.","<p>Validate that when selecting a zone and subzone, only outlets are displayed on the map and accessible for searching in the search field. This should occur when the ""include distributor"" option is unticked.</p>","1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have active warehouse / distributors, whose locations are verified.","1. choose zone from the, ""Select_Type"" dropdown.
+3. Type and search the name of an active distributor, whose location is verified.","User should able to choose zone from ""Select_Type"" dropdown
+1. Distributor should not have a pin in the map.
+2. Distributor should not be available as part of search result."
+AD_Add_outlet,"Verify upon choosing zone and subzones, distributors are also shown in the map and available for search from the search field. When the option include distributor is checked.","<p>This test case verifies that when selecting a zone and subzone, distributors are displayed on the map and can be searched, with the ""include distributor"" option checked.</p>","1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have active warehouse / distributors, whose locations are verified.","1. choose zone from the, ""Select_Type"" dropdown.
+3. Type and search the name of an active distributor, whose location is verified.","User should able to choose zone from ""Select_Type"" dropdown
+1. Distributor should have a pin in the map.
+2. Distributor should be available as part of search result."
+AD_Add_outlet,"Verify ""include distributor"" checkbox, is not available, when the select type entity is choosen as ""Warehouse"", ""Area"" or ""Beat""","<p>This test case verifies that the ""Include distributor"" checkbox is not visible when selecting Warehouse, Area, or Beat as the entity type to ensure functionality aligns with specified parameters.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose Warehouse / distributor from the, ""Select_Type"" dropdown.
+2. choose a Warehouse / distributor.
+(Repeat it for Beats and Area)","User should able to choose warehouse/distributor from ""Select_Type"" dropdown
+1. Include distributor check box should be graded out and be unavilable to check and uncheck."
+AD_Add_outlet,"""Verify View stats"", button displays,Total Outlets,Total Outlets with Geo Tags,Total Outlets without Geo Tags""","<p>This test case aims to verify that the ""View stats"" button is displayed on the page, and accurately shows the total number of outlets, outlets with geo tags, and outlets without geo tags. This ensures proper functionality of the stats feature for monitoring outlet distribution.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose zone from the, ""Select_Type"" dropdown.
+2. Click on stats, button.
+(Verify for all the options under ""Select_Type"", dropdown.)","User should able to choose zone from ""Select_Type"" dropdown
+Total Outlets
+Total Outlets with Geo Tags
+Total Outlets without Geo Tags
+all the above three stats should display on screen with appropriate numbers.(Make use of reports to validate this. )"
+AD_Add_outlet,"Verify user is able to search by outlet name, using the search field, and search for the outlets, depending upon the ""Select type"" and select option choosen.","<p>This test case verifies the functionality of searching by outlet name using different Select type and select options, ensuring accurate results are displayed in the search field.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose zone from the, ""Select_Type"" dropdown.
+2. In the search field. Type the name of the outlet, that is active and has location info.
+3. Choose the necessary outlet and click on search.
+(Verify for all the options under ""Select_Type"", dropdown.)","User should able to choose zone from ""Select_Type"" dropdown
+User should Type the name of the outlet, that is active and has location info.
+1. Map view should change and a pin should be dropped on the location of the particular outlet choosen."
+AD_Add_outlet,"Verify outlets for which outlet location(lat / long) is not provided, and are in active state, is not present in the search result.","<p>This test case validates that outlets with missing location data, in an active state, should not appear in search results, ensuring accuracy and completeness of the outlet listings.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose zone from the, ""Select_Type"" dropdown.
+2. In the search field.Type the name of the outlet, that is active and but do not have location info.
+
+
+(Verify for all the options under ""Select_Type"", dropdown.)","User should able to choose zone from ""Select_Type"" dropdown
+Search list should not include the outlet, without locaiton info."
+AD_Add_outlet,"Verify outlets that have location info but are inactive, are not present in the search result.","<p>This test case will verify that outlets with location info labeled as inactive do not appear in the search results, ensuring accurate and up-to-date listings for users.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose zone from the, ""Select_Type"" dropdown.
+2. In the search field.Type the name of the outlet, that is active and but do not have location info.
+
+
+(Verify for all the options under ""Select_Type"", dropdown.)","Admin should able to choose zone from the, ""Select_Type"" dropdown.
+Search list should not include the outlet, that are inactive."
+AD_Add_outlet,"Verify outlets that do not have location and also inactive, are not present in the search result.","<p>This test case verifies that in search results, outlets without a location specified and marked as inactive are not displayed, ensuring accuracy and relevancy for users.</p>",1. User should be logged in as admin2. User should be in page /companies/outletDensityonMap3. The entity that user chooses should have list of active elements.,"1. choose zone from the, ""Select_Type"" dropdown.
+2. In the search field.Type the name of the outlet, that is inactive and do not have location info.
+
+
+(Verify for all the options under ""Select_Type"", dropdown.)","User should able to choose zone from ""Select_Type"" dropdown
+Search list should not include the outlet, that are inactive and do not have location info."
+AD_Add_outlet,Verify system acceptance of phone numbers starting with 110–119 during outlet creation,"<p>""Verify acceptance of phone numbers starting with 110-119 during outlet creation to ensure proper handling and validation of specific number ranges.""</p>",1.Login as Admin,"1.Navigate /outlets/add
+2.Type all fields
+3.Type phone number starts with 110-119
+4.Click Submit Button","Admin should able to Proceed to outlets add page
+Admin should able to fill all the fields
+User should type phone number starts with 110 - 119
+The system should validate and save the phone number without any errors."
+AD_Add_outlet,"Verify Update Outlet MDM functionality for phone numbers starting with 83 in Democratic Republic of the Congo. Test that system accurately accepts valid phone numbers and does not flag them as invalid, ensuring correct phone number support for the region.",<p>Test if the Outlet MDM system in Democratic Republic of the Congo can accurately process phone numbers starting with 83 without flagging valid numbers as invalid.</p>,"The system is configured to validate phone numbers based on country code standards, with specific restrictions for phone numbers starting with '83' for outlets in the Democratic Republic of the Congo.","1. Login with the user
+2. go to the URL /mdms/upload/29
+3. Add all the details and create the outlet.
+4. Go to the URL /outlets/add/5
+5. Observe the phone number","Login successful — The user logs into the Bizom web portal without any authentication or permission issues.
+MDM upload page loads properly — The URL /mdms/upload/29 opens successfully, displaying the outlet upload template.
+Outlet creation successful — After filling in all required details, the outlet is created without validation or format errors.
+Outlet add page opens correctly — The URL /outlets/add/5 loads without delay or data sync issues.
+Verify that after clearing the cache, users can successfully add and update outlets, users, and warehouses with phone numbers starting with +243 83 in the Democratic Republic of the Congo. Specifically, verify that the phone number +243 831102003 is now accepted as valid."
+AD_Add_outlet,Verify that all products should display under 'Update Discount' menu in view page of an outlet,"<p>Title: Verify all products display correctly under 'Update Discount' menu in outlet view page Description: This test case ensures that all products within a specific outlet are correctly displayed and accessible under the 'Update Discount' menu on the view page, guaranteeing accurate pricing updates for each product in the system.</p>","
+Login to Bizom web as Admin
+Create a discount for some skunits to outlet level","1.Go to outlets/view/x that discount is created
+2.Click on 'Update Discount' from side menu
+3.Check all the skunits are displaying or not","Admin should able to Proceed to outlets view page
+User should Click on 'Update Discount' from side menu
+All skunits should display in the page"
+AD_Add_outlet,"Verify that editing an outlet type should trigger an approval flow, and the request should be visible under users/approveEditRequest for approvers","<p>Test case title: ""Verify approval flow triggered when editing outlet type, request visible under users/approveEditRequest"" Description: Ensure that editing an outlet type initiates an approval flow, and the request is listed under users/approveEditRequest for approvers to review and approve, maintaining a streamlined process for changes to outlet types.</p>",1.Login as admin2.Edit approval fuctionality should be configured for admin,"1.Login as user in web
+2.Navigate to any outlet
+3.Edit the outlet type.
+4.Login as admin
+5.Check users/approveEditRequest for the approval/rejection request.","Admin should able to login to Bizom web
+Admin should able to Proceed to outlets view page
+User should able to edit outlet type
+Admin should able to login to Bizom web
+Editing an outlet type should trigger an approval flow, and the request should be visible under users/approveEditRequest for approvers"
