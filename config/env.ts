@@ -1,10 +1,8 @@
-import fs from 'node:fs';
 import path from 'node:path';
+import dotenv from 'dotenv';
 
-const envFile = path.resolve(__dirname, '..', '.env');
-if (fs.existsSync(envFile)) {
-  process.loadEnvFile(envFile);
-}
+// Same .env as the discovery framework (config/ConfigLoader.ts). Existing environment variables win.
+dotenv.config({ path: path.resolve(__dirname, '..', '.env'), quiet: true });
 
 function required(name: string): string {
   const value = process.env[name];
@@ -15,7 +13,8 @@ function required(name: string): string {
 }
 
 export const env = {
-  baseURL: process.env.BASE_URL ?? '',
+  /** BIZOM_BASE_URL (BASE_URL is the old name, still read). */
+  baseURL: process.env.BIZOM_BASE_URL ?? process.env.BASE_URL ?? '',
   loginPath: process.env.LOGIN_PATH ?? '/users/login',
   get username() {
     return required('BIZOM_USERNAME');

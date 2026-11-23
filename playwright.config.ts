@@ -39,7 +39,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
       // Config and user block tests change app settings; they never run alongside the rest (see below).
-      testIgnore: ['**/config/**', '**/user-block/**'],
+      testIgnore: ['**/config/**', '**/user-block/**', '**/discovery/**'],
     },
 
     /* Config tests (tests/config): change app settings through the `appSettings` fixture, some of them
@@ -68,6 +68,24 @@ export default defineConfig({
             testMatch: 'user-block/**/*.spec.ts',
             workers: 1,
             fullyParallel: false,
+          },
+        ]
+      : []),
+
+    /* Discovery framework tests (tests/discovery): configuration validation, login and read-only
+       navigation of the routes in config/discovery-config.json. Run only when asked for:
+       `npm run discovery:validate` / `npm run discovery:auth-nav` (set E2E_DISCOVERY). The tests
+       launch their own browser (HEADLESS from .env). Trace, video and screenshots are off so the
+       login is never recorded; discovery writes its own screenshots to the configured output. */
+    ...(process.env.E2E_DISCOVERY
+      ? [
+          {
+            name: 'discovery',
+            testMatch: 'discovery/**/*.spec.ts',
+            workers: 1,
+            fullyParallel: false,
+            retries: 0,
+            use: { trace: 'off' as const, video: 'off' as const, screenshot: 'off' as const },
           },
         ]
       : []),

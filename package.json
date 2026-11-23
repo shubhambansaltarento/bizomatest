@@ -20,7 +20,10 @@
     "test:config": "E2E_CONFIG=1 playwright test --project=config",
     "test:user-block": "E2E_USER_BLOCK=1 playwright test --project=user-block",
     "cleanup:e2e-users": "E2E_CLEANUP=1 playwright test tests/maintenance --reporter=list",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "discovery:validate": "E2E_DISCOVERY=1 playwright test --project=discovery tests/discovery/config-validation.spec.ts --reporter=list",
+    "discovery:auth-nav": "E2E_DISCOVERY=1 playwright test --project=discovery tests/discovery/auth-navigation.spec.ts --reporter=list",
+    "discovery:test": "E2E_DISCOVERY=1 playwright test --project=discovery --reporter=list"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
+    "dotenv": "^17.4.2",
     "exceljs": "^4.4.0"
   }
 }

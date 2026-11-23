@@ -23,6 +23,7 @@ Automation users (every `e2e.*` username): [`data/automationUsers.ts`](data/auto
 - [ ] **SALESMAN can't log in to the web app**: "Invalid request url." even with the right password (also for the existing `Raghav.Salesman`). Confirm it's by design (mobile only). If so, keep it as `refused` in `data/automationUsers.ts`.
 - [ ] **ERP API User login loops** between `/users/dashboard` and `/users/customroledashboard` (too many redirects). Tested as a known issue (ULIFE-02).
 - [ ] User menu → **Change Password** opens as a bare, unstyled page (`/users/changepwddialog`) when clicked before the page's scripts are ready (seen on several landing pages); the tests retry. A slow page makes this visible to real users too.
+- [ ] **Successful login leaves an "Invalid request url." flash** (23 Nov 2026, discovery): after a correct admin login, the first page opened shows the red "Invalid request url." banner (`#flash-message`) although it loads fine. In a session reused for a while the same banner kept showing on every page, including `/users/ajaxuserindex` and `/users/dashboard`. Discovery records it as an app message, not a page error.
 - [ ] Wrong-password message differs by user: "Invalid User credentials.." for the main admin, "Invalid request url." for e2e users.
 - [ ] Empty password gives "Please add User Password", but typing then clearing it gives "Please Enter a Valid password" (UVAL-03).
 

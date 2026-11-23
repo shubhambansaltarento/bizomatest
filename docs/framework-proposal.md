@@ -231,3 +231,4 @@ Record decisions here as they are made.
 | 19 Oct 2026 | Spec-first workflow: Markdown spec with criterion IDs before tests | Keeps tests traceable to agreed behaviour |
 | 19 Oct 2026 | Login/logout shared through a fixture | Every module needs it; one place to fix |
 | 20 Oct 2026 | Keep the current structure until product knowledge improves; this proposal guides the later restructure | Avoid locking in an architecture before the product is understood |
+| 23 Nov 2026 | Add a configuration-driven discovery framework beside the e2e suite: `config/discovery-config.json` + `.env` read only through `ConfigLoader`; `SessionManager` (saved login, manual/MFA), `RouteDiscoveryEngine` (read-only navigation); env var `BASE_URL` renamed `BIZOM_BASE_URL` (old name still read by `config/env.ts`); dotenv replaces `process.loadEnvFile` | Discovery must run against any environment and route list without code changes; the existing suite is left as is for now |

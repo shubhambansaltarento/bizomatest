@@ -1,0 +1,169 @@
+{
+  "$comment": "Discovery framework configuration. Base URL and credentials are NOT here: they come from .env (BIZOM_BASE_URL, BIZOM_USERNAME, BIZOM_PASSWORD). HEADLESS and LOGIN_TIMEOUT in .env override browser.headless and authentication.loginTimeoutMs. Paths are relative to the bizom-e2e folder. Loaded and validated by config/ConfigLoader.ts.",
+
+  "application": {
+    "name": "Bizom",
+    "environment": "dev"
+  },
+
+  "browser": {
+    "headless": true,
+    "viewport": { "width": 1440, "height": 900 }
+  },
+
+  "authentication": {
+    "$comment": "mode 'auto' types BIZOM_USERNAME / BIZOM_PASSWORD; without them it falls back to manual login when fallbackToManual is true and the browser is visible (HEADLESS=false). mode 'manual' always waits for a person to log in.",
+    "loginRoute": "/users/login",
+    "mode": "auto",
+    "fallbackToManual": true,
+    "loginTimeoutMs": 60000,
+    "selectors": {
+      "usernameInput": "input[name=\"User[username]\"]",
+      "passwordInput": "input[name=\"User[password]\"]",
+      "submitButton": "#loginBtn",
+      "loggedInIndicator": ".navbar-right-content a[href=\"/users/logout\"]",
+      "loginErrorMessages": [
+        "#flash_message:visible",
+        "text=/Invalid (User credentials|request url|username or password)/i"
+      ]
+    },
+    "mfa": {
+      "$comment": "When indicatorSelector appears after the password is submitted, a person completes the second step in the visible browser within timeoutMs. With enabled false, or a headless browser, an MFA prompt stops the login with an error.",
+      "enabled": true,
+      "indicatorSelector": "input[autocomplete=\"one-time-code\"], input[name*=\"otp\" i]",
+      "timeoutMs": 300000
+    },
+    "session": {
+      "$comment": "storageStatePath holds live session cookies: keep it git-ignored. A saved session older than maxAgeMinutes, or one that lands on the login page when validationRoute is opened, is treated as expired and replaced.",
+      "saveStorageState": true,
+      "reuseStorageState": true,
+      "storageStatePath": ".auth/discovery-session.json",
+      "maxAgeMinutes": 240,
+      "validationRoute": "/users/dashboard"
+    }
+  },
+
+  "readOnly": {
+    "$comment": "Must stay enabled. During discovery every request using a blocked method is aborted unless it matches an entry of allowedRequests (requests that only read data, e.g. a table loaded by POST): its path must match pathPattern and, when bodyPattern is given, its body must match bodyPattern. Every request whose path matches blockedUrlPatterns is aborted whatever its method. Routes may not point at a blocked URL.",
+    "enabled": true,
+    "blockedMethods": ["POST", "PUT", "PATCH", "DELETE"],
+    "allowedRequests": [
+      {
+        "pathPattern": "^/formdefinitions/index$",
+        "bodyPattern": "(^|&)draw=\\d+(&|$)",
+        "reason": "Form Definitions list: DataTables loads its rows by POST (draw, columns, start, length). Seen 23 Nov 2026."
+      }
+    ],
+    "blockedUrlPatterns": [
+      "/users/logout",
+      "/delete(/|$)",
+      "/remove(/|$)",
+      "/deactivate(/|$)"
+    ]
+  },
+
+  "discovery": {
+    "discoveryTypes": {
+      "url-permissions": { "description": "URL permission matrix per role (Settings -> URL Permissions)" },
+      "settings-table": { "description": "Company / role / user settings table (Settings -> All Settings)" },
+      "form-definitions": { "description": "Configurable form definitions and their fields" },
+      "settings-index": { "description": "Settings landing page and the configuration sections it links to" }
+    },
+    "navigation": {
+      "$comment": "After the page loads, discovery waits for the network to be idle (up to networkIdleTimeoutMs, 0 = don't wait), then for the route's readySelector, then until no loadingSelectors element is visible. A route fails when it shows an error text, or, with failOnBlockedRequests, when read-only mode blocked a request while it loaded (the page is then incomplete).",
+      "waitUntil": "load",
+      "timeoutMs": 60000,
+      "networkIdleTimeoutMs": 20000,
+      "loadingSelectors": [
+        "td:text-is(\"Loading...\")",
+        ".dt-processing:visible",
+        ".dataTables_processing:visible"
+      ],
+      "failOnBlockedRequests": true,
+      "$comment_flash": "Bizom's flash banner (red bar under the navbar) can show a message left in the session by an earlier request (seen 23 Nov 2026: 'Invalid request url.' on pages that loaded correctly). Its text is recorded as appMessages and logged, but not matched against errorTextPatterns.",
+      "flashMessageSelectors": ["#flash-message", "#flash_message"],
+      "errorTextPatterns": [
+        "Invalid request url",
+        "Missing Controller",
+        "Missing Method",
+        "Fatal error",
+        "Internal Server Error",
+        "Page Not Found",
+        "Invalid Access",
+        "Unauthori[sz]ed access"
+      ]
+    },
+    "limits": {
+      "maxRoutesPerRun": 50,
+      "maxRetriesPerRoute": 1,
+      "delayBetweenRoutesMs": 1000,
+      "runTimeoutMs": 900000
+    },
+    "routes": [
+      {
+        "id": "url-permissions",
+        "name": "URL Permissions",
+        "path": "/urlpermissions/addpermissions",
+        "discoveryType": "url-permissions",
+        "enabled": true,
+        "$comment": "Permissions show only after choosing a module and then a filter (#entities); navigation checks the module list is there, the url-permissions discovery module will make the choices.",
+        "readySelector": "#modules option >> nth=1",
+        "readyState": "attached"
+      },
+      {
+        "id": "all-settings",
+        "name": "All Settings",
+        "path": "/settings/allsettings",
+        "discoveryType": "settings-table",
+        "enabled": true,
+        "$comment": "The settings rows load by GET /settings/allsettings/1/1 after the page; about 1300 rows, so no full-page screenshot.",
+        "readySelector": "#comapanysettings tbody tr td",
+        "fullPageScreenshot": false
+      },
+      {
+        "id": "form-definitions",
+        "name": "Form Definitions",
+        "path": "/formdefinitions/",
+        "discoveryType": "form-definitions",
+        "enabled": true,
+        "readySelector": "#formTable tbody tr td"
+      },
+      {
+        "id": "settings-index",
+        "name": "Settings",
+        "path": "/settings",
+        "discoveryType": "settings-index",
+        "enabled": true,
+        "$comment": "The first tab (Features Settings) loads by GET /settings/configfeatures?partial=1 after the page; its fields are in collapsed sections, so attached, not visible. Other tabs load when clicked (discovery module).",
+        "readySelector": "[name^=\"data[Setting]\"]",
+        "readyState": "attached"
+      }
+    ]
+  },
+
+  "output": {
+    "rootDir": "discovery-output",
+    "snapshotsDir": "discovery-output/snapshots",
+    "screenshotsDir": "discovery-output/screenshots",
+    "reportsDir": "discovery-output/reports",
+    "stateDir": "discovery-output/state"
+  },
+
+  "snapshot": {
+    "enabled": true,
+    "format": "json",
+    "includeHtml": false
+  },
+
+  "resume": {
+    "$comment": "Applies to full discovery runs only. Navigation checks always visit every enabled route.",
+    "enabled": true,
+    "skipCompleted": true
+  },
+
+  "screenshots": {
+    "enabled": true,
+    "fullPage": true,
+    "onFailure": true
+  }
+}

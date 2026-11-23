@@ -9,3 +9,7 @@ node_modules/
 
 # Env
 .env
+
+# Discovery: saved login session (live cookies) and run output
+/.auth/
+/discovery-output/
